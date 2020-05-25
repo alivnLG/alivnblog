@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle: ''
-description: ''
-keywords:
-author: John Doe
-language: en
-timezone: ''
+title: alivn-blog
+subtitle: '越学习，越发现自己的无知。不断尝试，不断积累，不断进步。'
+description: '个人技术博客，包括前端、计算机网络等。'
+keywords: '技术文档'
+author: alivn
+language: zh-CN
+timezone: 'Asia/Shanghai'
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: https://www.alivn.top
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
