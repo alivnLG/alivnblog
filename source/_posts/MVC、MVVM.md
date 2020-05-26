@@ -15,7 +15,7 @@ MVC为标准的设计模式，是官方推荐的权威的规范模式。
 
 而根据Apple的文档，model应包括数据和操作数据的业务逻辑。所以在我们在写Model部分的时候一定要注意，不是每个Controller只能对应一个Model，减少在Controller的业务逻辑，加重Model的量级。
 
-![1812138-d40081a44b179a6a.png](http://note.youdao.com/yws/res/5163/WEBRESOURCE0e52753ee20f04ffcf0e06dc131a077c)
+![1812138-d40081a44b179a6a.png](http://alivnram-test.oss-cn-beijing.aliyuncs.com/1812138-d40081a44b179a6a.png)
 
 如图所示，这是一个基本的MVC模式示意图。在MVC1中，Controller和其他部分之间的通信都是双向的。而View和model之间没有任何通信关系。
 #### 二、MVVM
@@ -28,7 +28,7 @@ MVVM:分别所指Model、View | Controller、ViewModel。
 
 在MVVM 中，view 和 view controller正式联系在一起，我们把它们视为一个组件
 
-![1812138-bb679a47bf38d814.png](http://note.youdao.com/yws/res/5172/WEBRESOURCE7782b0b46064efee86b331dc379d5310)
+![1812138-bb679a47bf38d814.png](http://alivnram-test.oss-cn-beijing.aliyuncs.com/1812138-bb679a47bf38d814.png)
 
 如图所示，这是一个基本的MVVM模式示意图。从图中我们可以得知
 *ViewModel和Model之间的通信是双向的。
