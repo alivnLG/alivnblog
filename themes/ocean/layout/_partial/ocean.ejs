@@ -2,11 +2,11 @@
   <div class="video">
     <% if (theme.ocean.overlay) { %>
       <div class="video-frame">
-        <img src="<%- theme.ocean.path %>overlay-hero.png" alt="Decorative image frame">
+        <img no-lazy src="<%- theme.ocean.path %>overlay-hero.png" alt="Decorative image frame">
       </div>
     <% } %>
     <div class="video-media">
-      <video playsinline="" autoplay="" loop="" muted="" data-autoplay=""
+      <video no-lazy playsinline="" autoplay="" loop="" muted="" data-autoplay=""
              poster="<%- theme.ocean.path %>ocean.png" x5-video-player-type="h5">
         <source src="<%- theme.ocean.path %>ocean.mp4" type="video/mp4">
         <source src="<%- theme.ocean.path %>ocean.ogv" type="video/ogg">
@@ -18,7 +18,7 @@
     <div class="video-inner text-center text-white">
       <h1><a href="<%- url_for() %>"><%= config.title %></a></h1>
       <p><%= config.subtitle %></p>
-      <div><img src="<%- theme.ocean.brand %>" class="brand" alt="<%= config.title %>"></div>
+      <div><img no-lazy src="<%- theme.ocean.brand %>" class="brand" alt="<%= config.title %>"></div>
     </div>
     <div class="video-learn-more">
       <a class="anchor" href="#landingpage"><i class="fe fe-mouse"></i></a>
