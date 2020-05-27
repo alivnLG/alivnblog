@@ -2,8 +2,11 @@
 menu:
   主页: /
   归档: /archives
+  分类: /categories
+  标签: /tags
   相册: /gallery
   关于: /about
+  友情连接: /links
 rss: /atom.xml
 
 # Miscellaneous
@@ -21,7 +24,7 @@ ocean:
 excerpt_link: 阅读全文...
 
 # Tags
-show_count: false
+show_count: true
 
 # Toc
 toc: true
