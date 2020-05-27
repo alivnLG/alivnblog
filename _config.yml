@@ -114,6 +114,7 @@ feed:
   content_limit: 140
   content_limit_delim: ' '
   order_by: -date
+# 配置图片懒加载
 lazyload:
   enable: true
   onlypost: false
