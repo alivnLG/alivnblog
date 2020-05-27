@@ -10,7 +10,7 @@ git clone https://github.com/alivnLG/alivnblog.git
 ```
 npm install 
 ```
-or
+或者
 ```
 yarn install
 ```
