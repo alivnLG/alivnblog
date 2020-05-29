@@ -5,7 +5,7 @@ tags:
 - GitHub
 - 镜像
 categories:
-- 计算机网路
+- 计算机网络
 ---
 ##### 1.GitHub地址 下载
 https://github.com/git-for-windows/git/releases/

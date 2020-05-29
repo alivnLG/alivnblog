@@ -28,7 +28,7 @@ Web服务器 约等于 HTTP服务器 + 其他服务
 电脑连网，实际上只做了两件事情：接收别人发来的数据，给别人发送数据。这些数据都是由 0 和 1 组成的二进制的数据，如：1011010100001101......，你所看到的视频，文字，网页等等一切在做网络中都会转换为 0 和 1，当然，这部分后面介绍 http 头信息时会详细介绍。
 既然要接收信息和寄出信息，那么就需要一个地址。每一台连网的计算机都会有一个 IP 地址。计算机连接公司的网线上网，就使用公司的 IP 地址 IP1，计算机连接家里的网线，就使用家里的 IP 地址 IP2。
 
-![webserver001.png](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webserver001.png)
+![webserver001.png](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webserver001.jpg)
 
 计算机 IP 地址  
 
@@ -39,7 +39,7 @@ Web服务器 约等于 HTTP服务器 + 其他服务
 ##### 内网 IP
 通常在家里，会安装一个路由器，然后用你的计算机和移动设备去连接路由器，此时路由器的 IP 是公网 IP，而路由器会自动创建子 IP 分别给你的计算机或者手机使用，由路由器分配的子 IP 就叫做内网 IP。可以通过在 DOS 窗口 敲入 ipconfig 获取，格式如：192.168.1.101，其中，前面 192.168.1 是固定格式，最后一位是随动的。
 
-![webserver002.png](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webserver002.png)
+![webserver002.png](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webserver002.jpg)
 
 通常本机 IP 是不固定的。如果你使用公司网络上网会是一个 IP 地址，而回到家里使用家里的网络又会是另一个 IP 地址。因此规定 127.0.0.1 或者 localhost 特指本机的 IP。
 
@@ -53,7 +53,7 @@ Web服务器 约等于 HTTP服务器 + 其他服务
 在线听音乐和聊 qq 都是需要连网的。这一点通过 IP 地址可以做到。以 qq 音乐为例：需要通过互联网获取音乐数据然后放到计算机的播放器中进行播放；而 qq 聊天需要连接网络接收朋友的短消息然后放到消息框中显示。如何保证这两个步骤传输的数据不会弄错呢？即音乐数据传到了 qq 聊天里，qq 聊天数据传输到了音乐里？这就涉及到了端口。
 如果给 qq 音乐分配一个端口 4000（举例数字，实际并不是此端口，以下 5000 一样也是举例数字），给 qq 聊天分配一个端口  5000，并且规定在网络中传输数据时必须使用 ip:port 的方式作为地址。通过 ip 地址找到指定计算机，通过 port 找到计算机中运行的某一个应用程序，此时就可以准确的将数据传输到指定应用程序而不至混淆。
 
-![webserver003.png](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webserver003.png)
+![webserver003.png](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webserver003.jpg)
 
 #### 三、nginx 服务器
 
@@ -89,7 +89,7 @@ Web服务器 约等于 HTTP服务器 + 其他服务
 
 域名解析：域名备案成功之后就是域名解析了，将域名与 ip 一一对应。这个过程自己操作不理解的话有点困难。当初第一个域名是在新网买的，以为买了域名在浏览器中输入就有东东，殊不知域名就是个别名，不绑定 ip 卵用也没，不过刚接触这个，域名解析也不会搞就浪费了。第二个域名是在腾讯云上买的，解析也很方便，引导信息也很清楚。
 
-![webserver004.png](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webserver004.png)
+![webserver004.png](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webserver004.jpg)
 
 nginx 服务器配置：如果域名解析也完成后，只需将注册的域名在服务器的配置文件：conf 目录下的 nginx.conf 文件做相应修改即可。
 ```
