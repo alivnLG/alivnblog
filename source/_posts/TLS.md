@@ -2,6 +2,10 @@
 title: TLS
 date: 2020-05-26 11:03:57
 tags:
+- SSL
+- TSL
+categories:
+- 网络安全
 ---
 #### 一、为什么使用TLS
 在SSL/TLS出现之前，很多应用层协议（http、ftp、smtp等）都存在着网络安全问题，例如大家所熟知的http协议，在传输过程中使用的是明文信息，传输报文一旦被截获便会泄露传输内容；传输过程中报文如果被篡改，无法轻易发现；无法保证消息交换的对端身份的可靠性。为了解决此类问题，人们在应用层和传输层之间加入了SSL/TLS协议。
@@ -34,13 +38,13 @@ TLS协议可以分为两部分
 ##### 记录协议（Record Protocol）
 通过使用客户端和服务端协商后的秘钥进行数据加密传输。
 
-![image](http://alivnram-test.oss-cn-beijing.aliyuncs.com/TSL002.jpg)
+![tsl001](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/tsl001.jpg)
 
 ##### 握手协议（Handshake Protocol）
 客户端和服务端进行协商，确定一组用于数据传输加密的秘钥串。
 
 ###### 握手过程
-![image](http://alivnram-test.oss-cn-beijing.aliyuncs.com/TSL001.jpg)
+![tsl002](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/tsl002.jpg)
 
 ```
 步骤 1. ClientHello – 客户端发送所支持的 SSL/TLS 最高协议版本号和所支持的加密算法集合及压缩方法集合等信息给服务器端。

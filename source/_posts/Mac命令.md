@@ -2,6 +2,9 @@
 title: Mac命令
 date: 2020-05-26 11:07:39
 tags:
+- Mac
+categories: 
+- 计算机网路
 ---
 Mac终端使用技巧 或 Linux中常用操作命令
 <!--more-->

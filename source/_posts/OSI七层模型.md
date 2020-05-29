@@ -2,7 +2,10 @@
 title: OSI七层模型
 date: 2020-05-26 10:59:18
 tags:
+- OSI
+categories:
+- 计算机网路
 ---
 层结构图如下：
 <!--more-->
-![image](http://alivnram-test.oss-cn-beijing.aliyuncs.com/OSI001.jpg)
+![osi001](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/osi001.jpg)

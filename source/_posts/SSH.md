@@ -2,6 +2,10 @@
 title: SSH
 date: 2020-05-26 10:50:06
 tags:
+- SSH
+- SCP
+categories:
+- 网络安全
 ---
 #### 1. 定义
 Secure Shell， 由IETF网络工作小组所制定，为创建在应用层和传输层基础上的安全协议。
