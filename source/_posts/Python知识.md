@@ -4,7 +4,7 @@ date: 2020-05-29 10:55:01
 tags:
 - Python教程
 categories:
-- Python
+- 编程语言
 ---
 
 ##### 1.Python 3.0 在设计的时候没有考虑向下兼容，相对与Python 2.0是一个较大的升级
