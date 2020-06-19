@@ -15,31 +15,24 @@ categories:
 ##### 2.跨平台
 ```
 一套代码，多端发行；
-
 条件编译；
 ```
 ##### 3.运行体验
 ```
 组件、api与小程序一致；
-
 兼容weex原生渲染
 ```
 ##### 4.技术支持
 ```
 vue的语法、小程序的标签和API
-
 内嵌mpvue
 ```
 ##### 5.开放生态
 ```
 支持npm安装第三方包；
-
 支持微信小程序自定义组件和SDK；
-
 兼容mpvue组件及项目；
-
 APP端支持和原生混合编码；
-
 插件市场
 ```
 ##### 6.功能框架
@@ -55,19 +48,23 @@ APP端支持和原生混合编码；
 ```
 npm install -g @vue/cli
 ```
+
 使用正式版（对应HBuilderX最新正式版）
 ```
 vue create -p dcloudio/uni-preset-vue my-project
 ```
+
 使用alpha版（对应HBuilderX最新alpha版）
 ```
 vue create -p dcloudio/uni-preset-vue#alpha my-alpha-project
 ```
+
 运行并发布uni-app
 ```
 npm run dev:%PLATFORM%
 npm run build:%PLATFORM%
 ```
+
 %PLATFORM% 可取值如下
 
 值 | 平台
@@ -80,32 +77,26 @@ mp-toutiao | 头条小程序
 mp-qq | qq 小程
 
 可以自定义更多条件编译平台，比如钉钉小程序。
+
 ```
 dev 模式编译出的各平台代码存放于根目录下的 /dist/dev/目录，打开各平台开发工具选择对应平台目录即可进行预览（h5 平台不会在此目录，存在于缓存中）；
-
 build 模式编译出的各平台代码存放于根目录下的 /dist/build/ 目录，发布时选择此目录进行发布；
-
 # dev 和 build 模式的区别：
-
 dev 模式有 SourceMap 可以方便的进行断点调试；
-
 build 模式会将代码进行压缩，体积更小更适合发布为正式版应用；
-
 进行 环境判断 时，dev 模式 process.env.NODE_ENV 的值为 development，build 模式 process.env.NODE_ENV 的值为 production。
-
 ```
+
 ##### 8.uni-app 开发规范
+
 ```
 页面文件遵循 Vue 单文件组件 (SFC) 规范
-
 组件标签靠近小程序规范，详见uni-app 组件规范
-
 接口能力（JS API）靠近微信小程序规范，但需将前缀 wx 替换为 uni，详见uni-app接口规范
-
 数据绑定及事件处理同 Vue.js 规范，同时补充了App及页面的生命周期
-
 为兼容多端运行，建议使用flex布局进行开发
 ```
+
 ##### 9.项目目录结构
 ```
 ┌─components            uni-app组件目录
@@ -126,6 +117,7 @@ build 模式会将代码进行压缩，体积更小更适合发布为正式版�
 ```
 ##### 10.生命周期
 ##### 应用声明周期
+
 函数名 | 说明
 ---|---
 onLaunch | 当uni-app 初始化完成时触发（全局只触发一次）
@@ -134,12 +126,14 @@ onHide | 当 uni-app 从前台进入后台
 onError | 当 uni-app 报错时触发
 onUniNViewMessage |	对 nvue 页面发送的数据进行监听，可参考 nvue 向 vue 通讯
 
+
 ```
 应用生命周期仅可在App.vue中监听，在其它页面监听无效。
-
 onlaunch里进行页面跳转，如遇白屏报错，请参考https://ask.dcloud.net.cn/article/35942
 ```
+
 ##### 页面生命周期
+
 函数名 | 说明 | 平台差异说明 | 最低版本
 ---|---|---|---
 onLoad|	监听页面加载，其参数为上个页面传递的数据，参数类型为Object（用于页面传参）|	| |	
@@ -167,6 +161,7 @@ uni-app页面路由为框架统一管理，开发者需要在pages.json里配置
 
 ##### 13.页面栈
 框架以栈的形式管理当前所有页面， 当发生路由切换的时候，页面栈的表现如下：
+
 路由方式 | 页面栈表现 | 触发时机
 --- | --- | ---
 初始化 | 新页面入栈 | uni-app 打开的第一个页面
@@ -194,6 +189,7 @@ if(process.env.NODE_ENV === 'development'){
 ##### 平台判断有2种场景，一种是在编译期判断，一种是在运行期判断。
 
 编译期判断 编译期判断，即条件编译，不同平台在编译出包后已经是不同的代码。
+
 ```
 // #ifdef H5
     alert("只有h5平台才有alert方法")
@@ -201,6 +197,7 @@ if(process.env.NODE_ENV === 'development'){
 ```
 
 运行期判断 运行期判断是指代码已经打入包中，仍然需要在运行期判断平台，此时可使用 uni.getSystemInfoSync().platform 判断客户端环境是 Android、iOS 还是小程序开发工具（在百度小程序开发工具、微信小程序开发工具、支付宝小程序开发工具中使用 uni.getSystemInfoSync().platform 返回值均为 devtools）。
+
 ```
 switch(uni.getSystemInfoSync().platform){
     case 'android':
@@ -214,16 +211,20 @@ switch(uni.getSystemInfoSync().platform){
        break;
 }
 ```
+
 如有必要，也可以在条件编译里自己定义一个变量，赋不同值。在后续运行代码中动态判断环境。
 
 ##### 16.页面样式与布局
 ##### 尺寸单位
 uni-app 支持的通用 css 单位包括 px、rpx
+
 ```
 px 即屏幕像素
 rpx 即响应式px，一种根据屏幕宽度自适应的动态单位。以750宽的屏幕为基准，750rpx恰好为屏幕宽度。屏幕变宽，rpx 实际显示效果会等比放大。
 ```
+
 vue页面支持普通H5单位，但在nvue里不支持，nvue还不支持百分比单位。
+
 ```
 rem 默认根字体大小为 屏幕宽度/20（微信小程序、头条小程序、App、H5）
 vh viewpoint height，视窗高度，1vh等于视窗高度的1%
@@ -238,36 +239,36 @@ px:，以750宽的屏幕为基准动态计算的长度单位，与 vue 页面中
 wx：与设备屏幕宽度无关的长度单位，与 vue 页面中的 px 理念相同
 
 **rpx 是相对于基准宽度的单位，可以根据屏幕宽度进行自适应。uni-app 规定屏幕基准宽度 750rpx。**
+
 ```
 设计稿 1px / 设计稿基准宽度 = 框架样式 1rpx / 750rpx
 ```
+
 页面元素宽度在 uni-app 中的宽度计算公式:
+
 ```
 750 * 元素在设计稿中的宽度 / 设计稿基准宽度
 ```
+
 ```
 若设计稿宽度为 750px，元素 A 在设计稿上的宽度为 100px，那么元素 A 在 uni-app 里面的宽度应该设为：750 * 100 / 750，结果为：100rpx。
 若设计稿宽度为 640px，元素 A 在设计稿上的宽度为 100px，那么元素 A 在 uni-app 里面的宽度应该设为：750 * 100 / 640，结果为：117rpx。
 若设计稿宽度为 375px，元素 B 在设计稿上的宽度为 200px，那么元素 B 在 uni-app 里面的宽度应该设为：750 * 200 / 375，结果为：400rpx。
 ```
+
 ```
 注意 rpx 是和宽度相关的单位，屏幕越宽，该值实际像素越大。如不想根据屏幕宽度缩放，则应该使用 px 单位。
-
 如果开发者在字体或高度中也使用了 rpx ，那么需注意这样的写法意味着随着屏幕变宽，字体会变大、高度会变大。如果你需要固定高度，则应该使用 px 。
-
 rpx不支持动态横竖屏切换计算，使用rpx建议锁定屏幕方向
-
 设计师可以用 iPhone6 作为视觉稿的标准。
-
 如果设计稿不是750px，HBuilderX提供了自动换算的工具，详见：https://ask.dcloud.net.cn/article/35445。
-
 App端，在 pages.json 里的 titleNView 或页面里写的 plus api 中涉及的单位，只支持 px，不支持 rpx。
-
 早期 uni-app 提供了 upx ，目前已经推荐统一改为 rpx 了
 ```
 
 ##### 样式导入
 使用@import语句可以导入外联样式表，@import后跟需要导入的外联样式表的相对路径，用;表示语句结束;
+
 ```
 <style>
     @import "../../common/uni.css";
@@ -277,15 +278,20 @@ App端，在 pages.json 里的 titleNView 或页面里写的 plus api 中涉及�
     }
 </style>
 ```
+
 ##### 内联样式
 框架组件上支持使用 style、class 属性来控制组件的样式。
+
 ```
 <view :style="{color:color}" />
 ```
+
 ```
 <view class="normal_view" />
 ```
+
 ##### 选择器
+
 选择器 | 样例 | 样例描述
 -- | -- | --
 .class | .intro | 选择所有拥有 class="intro" 的组件
@@ -295,9 +301,10 @@ element, element | view, checkbox | 选择所有文档的 view 组件和所有�
 ::after | view::after | 在 view 组件后边插入内容，仅微信小程序和App生效
 ::before | view::before | 在 view 组件前边插入内容，仅微信小程序和App生效
 
-```
 在 uni-app 中不能使用 * 选择器。
 page 相当于 body 节点，例如：
+
+```
 <!-- 设置页面背景颜色 -->
 page {
   background-color:#ccc;
@@ -308,6 +315,7 @@ page {
 定义在 App.vue 中的样式为全局样式，作用于每一个页面。在 pages 目录下 的 vue 文件中定义的样式为局部样式，只作用在对应的页面，并会覆盖 App.vue 中相同的选择器。
 
 注意：
+
 ```
 App.vue 中通过 @import 语句可以导入外联样式，一样作用于每一个页面。
 nvue页面暂不支持全局样式
@@ -324,13 +332,11 @@ CSS变量 | 描述 | App | 小程序 | H5
 
 ```
 var(--status-bar-height) 此变量在微信小程序环境为固定 25px，在 App 里为手机实际状态栏高度。
-
 当设置 "navigationStyle":"custom" 取消原生导航栏后，由于窗体为沉浸式，占据了状态栏位置。此时可以使用一个高度为 var(--status-bar-height) 的 view 放在页面顶部，避免页面内容出现在状态栏。
-
 由于在H5端，不存在原生导航栏和tabbar，也是前端div模拟。如果设置了一个固定位置的居底view，在小程序和App端是在tabbar上方，但在H5端会与tabbar重叠。此时可使用--window-bottom，不管在哪个端，都是固定在tabbar上方。
-
 目前 nvue 在App端，还不支持 --status-bar-height变量，替代方案是在页面onLoad时通过uni.getSystemInfoSync().statusBarHeight获取状态栏高度，然后通过style绑定方式给占位view设定高度。
 ```
+
 ```
 <template>
     <!-- HBuilderX 2.6.3+ 新增 page-meta, 详情：https://uniapp.dcloud.io/component/page-meta -->
@@ -351,7 +357,9 @@ var(--status-bar-height) 此变量在微信小程序环境为固定 25px，在 A
     }
 </style>
 ```
+
 nvue页面获取状态栏高度
+
 ```
 <template>
     <view class="content">
@@ -375,6 +383,7 @@ nvue页面获取状态栏高度
 
 ##### 固定值
 uni-app 中以下组件的高度是固定的，不可修改：
+
 组件 | 描述 | App | H5
 --|--|--|--
 NavigationBar | 导航栏 | 44px | 44px
@@ -407,36 +416,38 @@ uni-app 支持使用在 css 里设置背景图片，使用方式与普通 web �
      background-image: url('~@/static/logo.png');
  }
 ```
+
 **微信小程序不支持相对路径（真机不支持，开发工具支持）**
 
 ##### 字体图标
 uni-app 支持使用字体图标，使用方式与普通 web 项目相同，需要注意以下几点：
+
 ```
 支持 base64 格式字体图标。
-
 支持网络路径字体图标。
-
 小程序不支持在css中使用本地文件，包括本地的背景图和字体文件。需以base64方式方可使用。App端在v3模式以前，也有相同限制。v3编译模式起支持直接使用本地背景图和字体。
-
 网络路径必须加协议头 https。
-
 从 http://www.iconfont.cn 上拷贝的代码，默认是没加协议头的。
-
 使用本地路径图标字体需注意
-
 1.为方便开发者，在字体文件小于 40kb 时，uni-app 会自动将其转化为 base64 格式；
-
 2.字体文件大于等于 40kb，仍转换为 base64 方式使用的话可能有性能问题，如开发者必须使用，则需自己将其转换为 base64 格式使用，或将其挪到服务器上，从网络地址引用；
-
 3.字体文件的引用路径推荐使用以 ~@ 开头的绝对路径。
-
  @font-face {
      font-family: test1-icon;
      src: url('~@/static/iconfont.ttf');
  }
 ```
-##### <template/> 和 <block/>
-uni-app 支持在 template 模板中嵌套 <template/> 和 <block/>，用来进行 列表渲染 和 条件渲染。
+
+##### template 和 block
+
+uni-app 支持在 template 模板中嵌套 
+
+```
+<template/> 和 <block/>
+```
+
+用来进行 列表渲染 和 条件渲染。
+
 ```
 <template>
     <view>
@@ -449,6 +460,7 @@ uni-app 支持在 template 模板中嵌套 <template/> 和 <block/>，用来进�
     </view>
 </template>
 ```
+
 ```
 <template>
     <view>
@@ -458,6 +470,7 @@ uni-app 支持在 template 模板中嵌套 <template/> 和 <block/>，用来进�
     </view>
 </template>
 ```
+
 ##### 17.ES6 支持
 uni-app 在支持绝大部分 ES6 API 的同时，也支持了 ES7 的 await/async。
 ##### 18.NPM 支持
@@ -466,20 +479,25 @@ uni-app支持使用npm安装第三方包。
 **初始化npm工程**
 
 若项目之前未使用npm管理依赖（项目根目录下无package.json文件），先在项目根目录执行命令初始化npm工程：
+
 ```
 npm init -y
 ```
+
 cli项目默认已经有package.json了。HBuilderX创建的项目默认没有，需要通过初始化命令来创建。
 
 **安装依赖**
 
 在项目根目录执行命令安装npm包：
+
 ```
 npm install packageName --save
 ```
+
 **使用**
 
 安装完即可使用npm包，js中引入npm包：
+
 ```
 import package from 'packageName'
 const package = require('packageName')
@@ -499,6 +517,7 @@ node_modules 目录必须在项目根目录下。不管是cli项目还是HBuilde
 在 uni-app 中使用 ts 开发，请参考 Vue.js TypeScript 支持 说明。
 
 在 vue 文件的 script 节点声明 lang="ts"
+
 ```
 <script lang="ts">
     // 仅展示需要修改的核心代码，完整代码请参考原来的组件。
@@ -539,6 +558,7 @@ node_modules 目录必须在项目根目录下。不管是cli项目还是HBuilde
     })
 </script>
 ```
+
 ```
 <script lang="ts">
     import Vue from 'vue';
@@ -555,6 +575,7 @@ node_modules 目录必须在项目根目录下。不管是cli项目还是HBuilde
     });
 </script>
 ```
+
 ##### 20.小程序组件支持
 uni-app 支持在 App 和 小程序 中使用小程序自定义组件，从HBuilderX2.4.7起，H5端也可以运行微信小程序组件。
 
@@ -571,6 +592,7 @@ App（不含nvue） | 支持微信小程序组件 | wxcomponents
 QQ小程序 | 支持QQ小程序组件 | wxcomponents
 
 目录结构
+
 ```
 ┌─wxcomponents                  微信小程序自定义组件存放目录
 │   └──custom                   微信小程序自定义组件
@@ -600,9 +622,11 @@ QQ小程序 | 支持QQ小程序组件 | wxcomponents
 ├─manifest.json
 └─pages.json
 ```
+
 ##### 使用方式
 
 在 pages.json 对应页面的 style -> usingComponents 引入组件：
+
 ```
 {
     "pages": [
@@ -625,6 +649,7 @@ QQ小程序 | 支持QQ小程序组件 | wxcomponents
     ]
 }
 ```
+
 ```
 <!-- 页面模板 (index.vue) -->
 <view>
@@ -640,6 +665,7 @@ QQ小程序 | 支持QQ小程序组件 | wxcomponents
 当需要在 vue 组件中使用小程序组件时，注意在 pages.json 的 globalStyle 中配置 usingComponents，而不是页面级配置。
 
 注意数据和事件绑定的差异，使用时应按照 vue 的数据和事件绑定方式
+
 ```
 属性绑定从 attr="{{ a }}"，改为 :attr="a"；从 title="复选框{{ item }}" 改为 :title="'复选框' + item"
 
@@ -677,50 +703,56 @@ renderjs的主要作用有2个：
 uni-app 在发布到H5时支持所有vue的语法；发布到App和小程序时，由于平台限制，无法实现全部vue语法，但uni-app仍是是对vue语法支持度最高的跨端框架。
 
 相比Web平台， Vue.js 在 uni-app 中使用差异主要集中在两个方面：
+
 ```
 新增：uni-app除了支持Vue实例的生命周期，还支持应用启动、页面显示等生命周期
-
 受限：相比web平台，在小程序和App端部分功能受限
-
 v3版本App端可以使用更多的vue特性
 ```
-.........
+
 ##### 24.条件编译
 ##### 跨端兼容
 uni-app 已将常用的组件、JS API 封装到框架中，开发者按照 uni-app 规范开发即可保证多平台兼容，大部分业务均可直接满足。
 
 但每个平台有自己的一些特性，因此会存在一些无法跨平台的情况。
+
 ```
 大量写 if else，会造成代码执行性能低下和管理混乱。
 编译到不同的工程后二次修改，会让后续升级变的很麻烦。
 ```
+
 在 C 语言中，通过 #ifdef、#ifndef 的方式，为 windows、mac 等不同 os 编译不同的代码。 uni-app 参考这个思路，为 uni-app 提供了条件编译手段，在一个工程里优雅的完成了平台个性化实现。
 
 ##### 条件编译
 条件编译是用特殊的注释作为标记，在编译时根据这些特殊的注释，将注释里面的代码编译到不同平台。
 
 以 #ifdef 或 #ifndef 加 %PLATFORM% 开头，以 #endif 结尾。
+
 ```
 #ifdef：if defined 仅在某平台存在
 #ifndef：if not defined 除了某平台均存在
 %PLATFORM%：平台名称
 ```
+
 支持的文件
 .vue  
 .js  
 .css  
 pages.json  
 各预编译语言文件，如：.scss、.less、.stylus、.ts、.pug；
+
 ```
 注意： 条件编译是利用注释实现的，在不同语法里注释写法不一样，js使用 // 注释、css 使用 /* 注释 */、vue/nvue 模板里使用 <!-- 注释 -->；
 ```
 
 ##### API 的条件编译
+
 ```
 // #ifdef  %PLATFORM%
 平台特有的API实现
 // #endif
 ```
+
 APP下
 
 ![uniapp002](https://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/uniapp002.jpg)
@@ -734,14 +766,17 @@ H5下
 ![uniapp004](https://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/uniapp004.jpg)
 
 ##### 组件的条件编译
+
 ```
 <!--  #ifdef  %PLATFORM% -->
 平台特有的组件
 <!--  #endif -->
 ```
+
 ![uniapp005](https://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/uniapp005.jpg)
 
 ##### 样式的条件编译
+
 ```
 /*  #ifdef  %PLATFORM%  */
 平台特有样式
@@ -776,6 +811,7 @@ json的条件编译，如不同平台的key名称相同，cli项目下开发者�
 ├─manifest.json 
 └─pages.json    
 ```
+
 ##### 整体目录条件编译
 如果想把各平台的页面文件更彻底的分开，也可以在uni-app项目根目录创建platforms目录，然后在下面进一步创建APP-PLUS、MP-WEIXIN等子目录，存放不同平台的文件。
 
@@ -797,12 +833,12 @@ json的条件编译，如不同平台的key名称相同，cli项目下开发者�
 ![uniapp011](https://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/uniapp011.jpg)
 
 **注意**
+
 ```
 Android 和 iOS 平台不支持通过条件编译来区分，
 如果需要区分 Android、iOS 平台，
 请通过调用 uni.getSystemInfo 来获取平台信息。在HBuilderX1.9.10起，
 支持ifios、ifAndroid代码块，可方便编写判断。
-
 有些跨端工具可以提供js的条件编译或多态，
 但这对于实际开发远远不够。uni-app不止是处理js，
 任何代码都可以多端条件编译，才能真正解决实际项目的
@@ -810,7 +846,6 @@ Android 和 iOS 平台不支持通过条件编译来区分，
 代码，很不利于复用和维护。举例，微信小程序主题色
 是绿色，而百度支付宝小程序是蓝色，你的应用想分平
 台适配颜色，只有条件编译是代码量最低、最容易维护的。
-
 有些公司的产品运营总是给不同平台提不同需求，
 但这不是拒绝uni-app的理由。关键在于项目里，
 复用的代码多还是个性的代码多，正常都是复用的代码多，
@@ -820,22 +855,28 @@ Android 和 iOS 平台不支持通过条件编译来区分，
 
 ##### 25.uni-app 跨端开发注意事项
 ##### H5正常但App异常的可能性
+
 ```
 1.css异常
 2.不支持的选择器 非H5端不支持*选择器；
 ```
+
 ##### H5正常但小程序异常的可能性
+
 ```
 1.同上
 2.v-html在h5和app-vue(v3编译模式)均支持，但小程序不支持
 3.小程序要求连接的网址都要配白名单
 ```
+
 ##### 小程序正常但App异常的可能性
 ##### 小程序或App正常，但H5异常的可能性
 ##### App正常，小程序、H5异常的可能性
+
 ```
 1.代码中使用了App端特有的plus、Native.js、subNVue、原生插件等功能
 ```
+
 ##### vendor.js过大的处理方式
 
 使用运行时代码压缩
@@ -844,9 +885,11 @@ HBuilderX创建的项目勾选运行-->运行到小程序模拟器-->
 运行时是否压缩代码
 cli创建的项目可以在pacakge.json中添加参数--minimize，
 示例：
+
 ```
 "dev:mp-weixin": "cross-env NODE_ENV=development UNI_PLATFORM=mp-weixin vue-cli-service uni-build --watch --minimize"
 ```
+
 使用分包优化，关于分包优化的说明
 
 ##### 26.高效率开发技巧
@@ -872,6 +915,7 @@ uni.showToast({
     duration: 1500
 });
 ```
+
 ##### 使用 Chrome 调试 H5
 进入 uni-app 项目，点击工具栏的运行 -> 运行到浏览器 -> 选择 Chrome，即可将 uni-app运行到 浏览器，可参考 运行uni-app，运行到浏览器后，就能和普通 web 项目一样进行预览和调试了。
 
@@ -941,6 +985,7 @@ App端动画效果可以自定义。popin/popout的双窗体联动挤压动画�
 如果页面背景是深色，在vue页面中可能会发生新窗体刚开始动画时是灰白色背景，动画结束时才变为深色背景，造成闪屏。这是因为webview的背景生效太慢的问题。此时需将样式写在 App.vue 里，可以加速页面样式渲染速度。App.vue 里面的样式是全局样式，每次新开页面会优先加载 App.vue 里面的样式，然后加载普通 vue 页面的样式。
 
 还可以在pages.json的globalStyle->style->app-plus->background下配置全局背景色
+
 ```
 "style": {  
   "app-plus": {  
@@ -1021,6 +1066,7 @@ webview渲染和weex引擎渲染。
 注意这种方式只支持vue页面
 
 在 main.js 中挂载属性/方法
+
 ```
 Vue.prototype.websiteUrl = 'http://uniapp.dcloud.io';  
 Vue.prototype.now = Date.now || function () {  
@@ -1047,9 +1093,11 @@ Vue.prototype.isArray = Array.isArray || function (obj) {
     }  
 </script>
 ```
+
 这种方式，只需要在 main.js 中定义好即可在每个页面中直接调用。
 
 **注意**
+
 ```
 每个页面中不要在出现重复的属性或方法名。
 建议在 Vue.prototype 上挂载的属性或方法，可以加一个统一的前缀。比如 $url、global_url 这样，在阅读代码时也容易与当前页面的内容区分开。
@@ -1064,6 +1112,7 @@ globalData支持vue和nvue共享数据。
 globalData是一种比较简单的全局变量使用方式。
 
 定义：App.vue
+
 ```
 <script>  
     export default {  
@@ -1099,6 +1148,7 @@ js中操作globalData的方式如下：
 Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。
 
 在 uni-app 项目根目录下新建 store 目录，在 store 目录下创建 index.js 定义状态值
+
 ```
 const store = new Vuex.Store({  
     state: {  
@@ -1329,6 +1379,7 @@ workers | String | 否 | Worker 代码放置的目录 | 微信小程序
   }
 }
 ```
+
 ##### 2.manifest.json 文件是应用的配置文件，用于指定应用的名称、图标、权限等。
 
 属性 | 类型 | 默认值 | 描述 | 最低版本
@@ -1355,6 +1406,7 @@ mp-qq | Object |  | qq 小程序特有配置 | 2.1.0
 通过在package.json文件中增加uni-app扩展节点，可实现自定义条件编译平台（如钉钉小程序、微信服务号等平台）。
 
 package.json扩展配置用法（拷贝代码记得去掉注释！）：
+
 ```
 {
     /**
@@ -1399,6 +1451,7 @@ main.js是uni-app的入口文件，主要作用是初始化vue实例、定义全
 
 ##### 8.框架接口
 ##### 日志打印
+
 ```
 console.debug()
 console.log()
@@ -1406,6 +1459,7 @@ console.info()
 console.warn()
 console.error()
 ```
+
 ##### 定时器
 
 参数说明
@@ -1429,8 +1483,10 @@ setInterval(callback, delay, rest)
 
 clearInterval(intervalID)
 ```
+
 ##### 生命周期
 ###### 应用生命周期
+
 函数名 | 说明
 -- | --
 onLaunch | 当uni-app 初始化完成时触发（全局只触发一次）
@@ -1440,6 +1496,7 @@ onError | 当 uni-app 报错时触发
 onUniNViewMessage | 对 nvue 页面发送的数据进行监听，可参考 nvue 向 vue 通讯
 
 应用生命周期仅可在App.vue中监听，在其它页面监听无效
+
 ```
 <script>
     // 只能在App.vue里监听应用的生命周期
@@ -1456,6 +1513,7 @@ onUniNViewMessage | 对 nvue 页面发送的数据进行监听，可参考 nvue 
     }
 </script>
 ```
+
 ###### 页面生命周期
 
 函数名 | 说明 | 平台差异说明 | 最低版本
@@ -1479,6 +1537,7 @@ onNavigationBarSearchInputClicked | 监听原生标题栏搜索输入框点击�
 
 ###### 组件生命周期
 uni-app 组件支持的生命周期，与vue标准组件的生命周期相同。这里没有页面级的onLoad等生命周期：
+
 函数名 | 说明 | 平台差异说明 | 最低版本
 -- | -- | -- | --
 beforeCreate | 在实例初始化之后被调用。详见 |  | 		
@@ -1503,12 +1562,14 @@ uni-app 在 getCurrentPages()获得的页面里内置了一个方法 $getAppWebv
 ##### 页面通讯
 ###### uni.$emit(eventName,OBJECT)
 触发全局的自定事件。附加参数都会传给监听器回调。
+
 ```
 uni.$emit('update',{msg:'页面更新'})
 ```
 
 ###### uni.$on(eventName,callback)
 监听全局的自定义事件。事件可以由 uni.$emit 触发，回调函数会接收所有传入事件触发函数的额外参数。
+
 ```
 uni.$on('update',function(data){
     console.log('监听到事件来自 update ，携带参数 msg 为：' + data.msg);
@@ -1517,6 +1578,7 @@ uni.$on('update',function(data){
 
 ###### uni.$once(eventName,callback)
 监听全局的自定义事件。事件可以由 uni.$emit 触发，但是只触发一次，在第一次触发之后移除监听器。
+
 ```
 uni.$once('update',function(data){
     console.log('监听到事件来自 update ，携带参数 msg 为：' + data.msg);
