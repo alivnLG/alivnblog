@@ -27,6 +27,9 @@ categories:
 vue的语法、小程序的标签和API
 内嵌mpvue
 ```
+
+**mpvue （github 地址请参见）是一个使用 Vue.js 开发小程序的前端框架。框架基于 Vue.js 核心，mpvue 修改了 Vue.js 的 runtime 和 compiler 实现，使其可以运行在小程序环境中，从而为小程序开发引入了整套 Vue.js 开发体验。**
+
 ##### 5.开放生态
 ```
 支持npm安装第三方包；
@@ -69,22 +72,52 @@ npm run build:%PLATFORM%
 
 值 | 平台
 ---|---
+app-plus | app平台生成打包资源（仅支持npm run build:app-plus，也就是App平台运行调试不支持cli方式，需在HBuilderX中运行调试）
 h5 | H5
 mp-alipay | 支付宝小程序
 mp-baidu | 百度小程序
 mp-weixin | 微信小程序
 mp-toutiao | 头条小程序
 mp-qq | qq 小程
+mp-360 | 360 小程序
+quickapp-webview | 快应用通用
+quickapp-webview-union | 快应用联盟
+quickapp-webview-huawei | 快应用华为
 
 可以自定义更多条件编译平台，比如钉钉小程序。
 
 ```
+目前使用npm run build:app-plus会在/dist/build/app-plus下生成app打包资源。如需制作wgt包，将app-plus中的文件压缩成zip（注意：不要包含app-plus目录），再重命名为${appid}.wgt， appid为manifest.json文件中的appid。
+
 dev 模式编译出的各平台代码存放于根目录下的 /dist/dev/目录，打开各平台开发工具选择对应平台目录即可进行预览（h5 平台不会在此目录，存在于缓存中）；
+
 build 模式编译出的各平台代码存放于根目录下的 /dist/build/ 目录，发布时选择此目录进行发布；
-# dev 和 build 模式的区别：
-dev 模式有 SourceMap 可以方便的进行断点调试；
-build 模式会将代码进行压缩，体积更小更适合发布为正式版应用；
-进行 环境判断 时，dev 模式 process.env.NODE_ENV 的值为 development，build 模式 process.env.NODE_ENV 的值为 production。
+
+dev 和 build 模式的区别：
+    dev 模式有 SourceMap 可以方便的进行断点调试；
+    build 模式会将代码进行压缩，体积更小更适合发布为正式版应用；
+    进行 环境判断 时，dev 模式 process.env.NODE_ENV 的值为 development，build 模式 process.env.NODE_ENV 的值为 production。
+```
+
+使用cli创建项目和使用HBuilderX可视化界面创建项目有什么区别
+
+编译器的区别
+
+```
+cli创建的项目，编译器安装在项目下。并且不会跟随HBuilderX升级。如需升级编译器，执行npm update。
+HBuilderX可视化界面创建的项目，编译器在HBuilderX的安装目录下的plugin目录，随着HBuilderX的升级会自动升级编译器。
+已经使用cli创建的项目，如果想继续在HBuilderX里使用，可以把工程拖到HBuilderX中。注意如果是把整个项目拖入HBuilderX，则编译时走的是项目下的编译器。如果是把src目录拖入到HBuilderX中，则走的是HBuilderX安装目录下plugin目录下的编译器。
+cli版如果想安装less、scss、ts等编译器，需自己手动npm安装。在HBuilderX的插件管理界面安装无效，那个只作用于HBuilderX创建的项目。
+```
+
+开发工具的区别
+
+```
+cli创建的项目，内置了d.ts，同其他常规npm库一样，可在vscode、webstorm等支持d.ts的开发工具里正常开发并有语法提示。
+使用HBuilderX创建的项目不带d.ts，HBuilderX内置了uni-app语法提示库。如需把HBuilderX创建的项目在其他编辑器打开并且补充d.ts，可以在项目下先执行 npm init，然后npm i @types/uni-app -D，来补充d.ts。
+但vscode等其他开发工具，在vue或uni-app领域，开发效率比不过HBuilderX。详见：https://ask.dcloud.net.cn/article/35451
+发布App时，仍然需要使用HBuilderX。其他开发工具无法发布App，但可以发布H5、各种小程序。如需开发App，可以先在HBuilderX里运行起来，然后在其他编辑器里修改保存代码，代码修改后会自动同步到手机基座。
+如果使用cli创建项目，那下载HBuilderX时只需下载10M的标准版即可。因为编译器已经安装到项目下了。
 ```
 
 ##### 8.uni-app 开发规范
