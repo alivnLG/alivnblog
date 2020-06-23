@@ -357,7 +357,8 @@ tables: 要检索的数据表。
 
 WHERE conditions: 可选， 检索条件。
 
-DISTINCT: 可选，删除结果集中重复的数据。默认情况下 UNION 操作符已经删除了重复数据，所以 DISTINCT 修饰符对结果没啥影响。
+DISTINCT: 可选，删除结果集中重复的数据。默认情况下 UNION 操作符已经删除了重复数据，
+所以 DISTINCT 修饰符对结果没啥影响。
 
 ALL: 可选，返回所有结果集，包含重复数据。
 ```
@@ -403,11 +404,13 @@ RIGHT JOIN（右连接）： 与 LEFT JOIN 相反，用于获取右表所有记�
 ```
 
 ```
-SELECT a.runoob_id, a.runoob_author, b.runoob_count FROM runoob_tbl a INNER JOIN tcount_tbl b ON a.runoob_author = b.runoob_author;
+SELECT a.runoob_id, a.runoob_author, b.runoob_count FROM runoob_tbl a INNER JOIN tcount_tbl b
+ ON a.runoob_author = b.runoob_author;
 ```
 
 ```
-SELECT a.runoob_id, a.runoob_author, b.runoob_count FROM runoob_tbl a, tcount_tbl b WHERE a.runoob_author = b.runoob_author;
+SELECT a.runoob_id, a.runoob_author, b.runoob_count FROM runoob_tbl a, tcount_tbl b WHERE
+ a.runoob_author = b.runoob_author;
 ```
 
 ![mysql001](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/mysql001.jpg)
@@ -415,7 +418,8 @@ SELECT a.runoob_id, a.runoob_author, b.runoob_count FROM runoob_tbl a, tcount_tb
 ##### LEFT JOIN
 
 ```
-SELECT a.runoob_id, a.runoob_author, b.runoob_count FROM runoob_tbl a LEFT JOIN tcount_tbl b ON a.runoob_author = b.runoob_author;
+SELECT a.runoob_id, a.runoob_author, b.runoob_count FROM runoob_tbl a LEFT JOIN tcount_tbl b
+ ON a.runoob_author = b.runoob_author;
 ```
 
 ![mysql002](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/mysql002.jpg)
@@ -424,7 +428,8 @@ SELECT a.runoob_id, a.runoob_author, b.runoob_count FROM runoob_tbl a LEFT JOIN 
 ##### RIGHT JOIN
 
 ```
-SELECT a.runoob_id, a.runoob_author, b.runoob_count FROM runoob_tbl a RIGHT JOIN tcount_tbl b ON a.runoob_author = b.runoob_author;
+SELECT a.runoob_id, a.runoob_author, b.runoob_count FROM runoob_tbl a RIGHT JOIN tcount_tbl b
+ ON a.runoob_author = b.runoob_author;
 ```
 
 ![mysql003](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/mysql003.jpg)

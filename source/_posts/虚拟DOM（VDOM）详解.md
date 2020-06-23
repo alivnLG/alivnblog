@@ -102,7 +102,8 @@ DOM结构
 
         $table.append($('<tr><td>name</td><td>age</td><td>address</td>/tr>'))
         data.forEach(function (item) {
-            $table.append($('<tr><td>' + item.name + '</td><td>' + item.age + '</td><td>' + item.address + '</td>/tr>'))
+            $table.append($('<tr><td>' + item.name + '</td><td>' + item.age + '</td><td>'
+             + item.address + '</td>/tr>'))
         })
 
         // 渲染到页面

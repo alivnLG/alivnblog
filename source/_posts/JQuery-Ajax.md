@@ -78,7 +78,8 @@ $("button").click(function(){
 async	//布尔值，表示请求是否异步处理。默认是 true。
 beforeSend(xhr)	//发送请求前运行的函数。
 cache	//布尔值，表示浏览器是否缓存被请求页面。默认是 true。
-complete(xhr,status)	//请求完成时运行的函数（在请求成功或失败之后均调用，即在 success 和 error 函数之后）。
+complete(xhr,status)	//请求完成时运行的函数（在请求成功或失败之后均调用，
+                        //即在 success 和 error 函数之后）。
 contentType	//发送数据到服务器时所使用的内容类型。默认是："application/x-www-form-urlencoded"。
 context	//为所有 AJAX 相关的回调函数规定 "this" 值。
 data	//规定要发送到服务器的数据。

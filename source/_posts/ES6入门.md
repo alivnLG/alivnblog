@@ -1248,7 +1248,9 @@ class A{
 
 class B extends A{//=>extends 类似实现原型继承
     constructor(){
-        super(100);//=>类似于call的继承：在这里super相当于把A的constructor给执行了，并且让方法中的this是B的实例，super当中传递的实参都是在给A的constructor传递。
+        super(100);
+        //=>类似于call的继承：在这里super相当于把A的constructor给执行了，
+        //并且让方法中的this是B的实例，super当中传递的实参都是在给A的constructor传递。
         this.y = 200;
     }
     getY(){
@@ -2653,7 +2655,8 @@ class Example {
         return this.a;
     }
 }
-let exam = new Example(1); // Uncaught TypeError: Cannot set property // a of #<Example> which has only a getter
+let exam = new Example(1); 
+// Uncaught TypeError: Cannot set property // a of #<Example> which has only a getter
 ```
 getter 与 setter 必须同级出现
 ```

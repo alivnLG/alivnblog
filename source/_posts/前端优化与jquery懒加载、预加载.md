@@ -138,7 +138,8 @@ function loadImg ($img) {
         $(window).on('scroll', function () {
             //当页面滚动的时候绑定事件 
             $('.container img').each(function () {//遍历所有的img标签 
-                if (checkShow($(this)) && !isLoaded($(this))) { // 需要写一个checkShow函数来判断当前img是否已经出现在了视野中
+                if (checkShow($(this)) && !isLoaded($(this))) { 
+                    // 需要写一个checkShow函数来判断当前img是否已经出现在了视野中
                     //还需要写一个isLoaded函数判断当前img是否已经被加载过了 
                     loadImg($(this));
                     //符合上述条件之后，再写一个加载函数加载当前img 
@@ -150,7 +151,8 @@ function loadImg ($img) {
             var scrollTop = $(window).scrollTop(); //即页面向上滚动的距离 
             var windowHeight = $(window).height(); // 浏览器自身的高度
             var offsetTop = $img.offset().top; //目标标签img相对于document顶部的位置 
-            if (offsetTop < (scrollTop + windowHeight) && offsetTop > scrollTop) { //在2个临界状态之间的就为出现在视野中的 
+            if (offsetTop < (scrollTop + windowHeight) && offsetTop > scrollTop) { 
+                //在2个临界状态之间的就为出现在视野中的 
                 return true;
             }
             return false;
@@ -271,12 +273,17 @@ echo.js方式（不依赖jquery）
 该方法虽然高效，但仍有改进余地。使用该法加载的图片会同页面的其他内容一起加载，增加了页面的整体加载时间。为了解决这个问题，我们增加了一些JavaScript代码，来推迟预加载的时间，直到页面加载完毕。代码如下：
 
 ```
-// better image preloading @ <a href="http://perishablepress.com/press/2009/12/28/3-ways-preload-images-css-javascript-ajax/">http://perishablepress.com/press/2009/12/28/3-ways-preload-images-css-javascript-ajax/</a>  
+// better image preloading @ 
+// <a href="http://perishablepress.com/press/2009/12/28/3-ways-preload-images-css-javascript-ajax/">
+// http://perishablepress.com/press/2009/12/28/3-ways-preload-images-css-javascript-ajax/</a>  
 function preloader() {  
     if (document.getElementById) {  
-        document.getElementById("preload-01").style.background = "url(http://domain.tld/image-01.png) no-repeat -9999px -9999px";  
-        document.getElementById("preload-02").style.background = "url(http://domain.tld/image-02.png) no-repeat -9999px -9999px";  
-        document.getElementById("preload-03").style.background = "url(http://domain.tld/image-03.png) no-repeat -9999px -9999px";  
+        document.getElementById("preload-01").style.background =
+         "url(http://domain.tld/image-01.png) no-repeat -9999px -9999px";  
+        document.getElementById("preload-02").style.background =
+         "url(http://domain.tld/image-02.png) no-repeat -9999px -9999px";  
+        document.getElementById("preload-03").style.background =
+         "url(http://domain.tld/image-03.png) no-repeat -9999px -9999px";  
     }  
 }  
 function addLoadEvent(func) {  

@@ -35,7 +35,8 @@ abc();
   jQuery = function( selector, context ) {
     // The jQuery object is actually just the init constructor 'enhanced'
     // Need init if jQuery is called (just allow error to be thrown if not included)
-   //在这个函数执行完了就是一个new构造函数的过程，返回的就是一个jQuery对象~~既然返回的是对象，当然可以调用方法喽~~
+    // 在这个函数执行完了就是一个new构造函数的过程，返回的就是一个jQuery对象~~既然返回的是对象，
+    // 当然可以调用方法喽~~
     return new jQuery.fn.init( selector, context );
   }
 ```
