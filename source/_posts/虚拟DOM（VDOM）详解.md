@@ -8,7 +8,7 @@ tags:
 categories:
 - Web前端
 ---
-#### 一、vdom是什么？为何使用vdom?
+### 一、vdom是什么？为何使用vdom?
 <!--more-->
 - virtual dom,虚拟DOM
 - 用JS模拟DOM结构
@@ -64,7 +64,7 @@ DOM结构
 
 浏览器最耗费性能的是DOM操作，js操作一万遍赶不上DOM操作一遍耗费性能。
 
-##### 设计一个需求场景，用Jquery实现
+#### 设计一个需求场景，用Jquery实现
 假如我们要改变一个表格里的内容，用jquery实现
 ```
 <div id="container"></div>
@@ -127,14 +127,14 @@ DOM结构
 ![vdom001](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/vdom002.jpg)
 <p style="text-align:center;color:#aaaaaa">本来只想改变左侧红框里的数据，结果在dom结构中发现整个table都变了，先清除整个表格，然后把新的数据渲染到dom里，这样就违背了我们的初衷</p>
 
-##### 遇到的问题
+#### 遇到的问题
 - DOM操作是”昂贵“的，js运行效率高
 - 尽量减少DOM操作，而不是”推到重来“
 - 项目越复杂，影响越严重
 - vdom即可解决这些问题
 
-#### 二、vdom如何应用？核心API是什么？
-##### 介绍snabbdom(实现vdom的一个库)
+### 二、vdom如何应用？核心API是什么？
+#### 介绍snabbdom(实现vdom的一个库)
 h函数、patch函数是snabbdom的核心api，也就是vdom的核心api。
 ```
 h('<标签名>',{...属性...},[...子元素...]) //生成vdom节点的
@@ -190,21 +190,21 @@ btnChange.addEventListener('click',function(){
 ```
 在浏览器中发现只有第二个li发生变化了，第一个li没有变。只改变了变化的内容，解决了jquery重新渲染所有数据的问题。
 
-##### 问题解答
+#### 问题解答
 - 如何使用？可用snabbdom的用法来举例
 - 核心API：h函数、patch函数
 
-#### 三、介绍一下diff算法(vdom的核心算法)
+### 三、介绍一下diff算法(vdom的核心算法)
 
-##### 什么是diff算法？
+#### 什么是diff算法？
 找出两个文件差异的算法
 Linux 的diff命令 diff log1 log2  
 git的diff命令 git diff index.html index1.html
 
-##### vdom为何用diff算法？
+#### vdom为何用diff算法？
 DOM操作是昂贵的，为了尽量减少DOM操作，只找出DOM必须更新的节点来更新，其他的不更新，这个”找出“的过程，就需要diff算法
-##### diff算法的实现流程？
-###### patch(container,vnode);
+#### diff算法的实现流程？
+##### patch(container,vnode);
 ```
 {
     tag:'ul',
@@ -260,7 +260,7 @@ function createElement(vnode) {
     return elem
 }
 ```
-###### patch(vnode,newVnode);
+##### patch(vnode,newVnode);
 ![vdom003](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/vdom003.jpg)
 <p style="text-align:center;color:#aaaaaa">找出newVnode 和 vnode的区别</p>
 
@@ -292,7 +292,7 @@ function replaceNode(vnode, newVnode) {
     // 替换
 }
 ```
-##### 问题解答
+#### 问题解答
 patch(container,vnode); createElement  
 用vdom创建真实dom  
 patch(vnode,newVnode); updateChildren; replaceNode;  
