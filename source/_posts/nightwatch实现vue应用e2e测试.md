@@ -160,3 +160,16 @@ module.exports = {
 调用命令 node test/e2e/runner.js即可启动服务，等几秒后，会自动打开chrome进行测试。
 
 ![test001](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/test001.jpg)
+
+#### 6.测试报告转HTML
+可以安装插件nightwatch-html-reporter将测试报告转为html文件
+
+#### 7.使用一个浏览器对象完成测试
+
+![test003](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/test003.jpg)
+
+![test002](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/test002.jpg)
+
+#### 8.配置浏览器语言 是否为无头浏览器、错误截屏等
+
+![test004](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/test004.jpg)
