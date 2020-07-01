@@ -335,7 +335,7 @@ https://stackoverflow.com/questions/14274293/show-current-state-of-jenkins-build
 
 点击Manage Plugins 安装Hudson Post Build Task
 
-
+![jenkins036](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/jenkins036.jpg)
 
 配置github
 
@@ -343,7 +343,38 @@ https://stackoverflow.com/questions/14274293/show-current-state-of-jenkins-build
 
 增加构建配置
 
+![jenkins037](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/jenkins037.jpg)
 
+![jenkins038](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/jenkins038.jpg)
+
+SUCCESS构建命令
+
+```
+curl "https://api.GitHub.com/repos/<GitHubUserName>/<REPO_NAME>/statuses/$GIT_COMMIT?access_token=<YOUR_GITHUB_TOKEN>" \
+  -H "Content-Type: application/json" \
+  -X POST \
+  -d "{\"state\": \"failure\",\"context\": \"continuous-integration/jenkins\", \"description\": \"Jenkins\", \"target_url\": \"<YOUR_JENKINS_URL>/job/<JenkinsProjectName>/$BUILD_NUMBER/console\"}"
+```
+
+FAILURE构建命令
+
+```
+curl "https://api.GitHub.com/repos/<GitHubUserName>/<REPO_NAME>/statuses/$GIT_COMMIT?access_token=<YOUR_GITHUB_TOKEN>" \
+  -H "Content-Type: application/json" \
+  -X POST \
+  -d "{\"state\": \"failure\",\"context\": \"continuous-integration/jenkins\", \"description\": \"Jenkins\", \"target_url\": \"<YOUR_JENKINS_URL>/job/<JenkinsProjectName>/$BUILD_NUMBER/console\"}"
+```
+```
+<GitHubUserName> – from GitHub
+<REPO_NAME> – from GitHub
+<YOUR_GITHUB_TOKEN>
+<YOUR_JENKINS_URL>
+<JenkinsProjectName> – your Jenkins project name
+```
+
+提交结果
+
+![jenkins035](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/jenkins035.jpg)
 
 参考资料：
 
@@ -352,3 +383,14 @@ https://stackoverflow.com/questions/14274293/show-current-state-of-jenkins-build
 https://applitools.com/blog/how-to-update-jenkins-build-status-in-github-pull-requests-step-by-step-tutorial/
 
 ### 九、构建触发器
+当github项目有更新可以触发jenkins自动构建
+
+![jenkins039](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/jenkins039.jpg)
+
+配置github webhooks
+
+![jenkins040](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/jenkins040.jpg)
+
+![jenkins041](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/jenkins041.jpg)
+
+![jenkins042](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/jenkins042.jpg)
