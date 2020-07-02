@@ -394,3 +394,10 @@ https://applitools.com/blog/how-to-update-jenkins-build-status-in-github-pull-re
 ![jenkins041](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/jenkins041.jpg)
 
 ![jenkins042](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/jenkins042.jpg)
+
+### 十.实践
+git 拉取代码很慢，增加以下配置，每次拉取不拉取历史版本，获取最新版本。
+
+![jenkins043](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/jenkins043.jpg)
+
+
