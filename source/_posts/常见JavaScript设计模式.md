@@ -168,6 +168,7 @@ var EventCenter = (function(){
 }());
 
 
+
 var number = 1;
 EventCenter.on('click', function(data){
     console.log('click 事件' + data + number++ +'次');
