@@ -11,9 +11,11 @@ categories:
 MVC:分别所指Model、View、Controller。
 MVC为标准的设计模式，是官方推荐的权威的规范模式。
 <!--more-->
-视图（View）：用户交互界面。  
-控制器（Controller）：调节Modle和View的交互。  
-模型（Model）：业务逻辑模型(并非数据模型)  
+视图（View）：用户交互界面，是其对应的模型的可视化呈现，视图 将模型渲染成适合于交互的形式（通常为用户界面元素）；。 
+
+控制器（Controller）：调节Modle和View的交互。用户与系统之间的纽带，它接受用户输入，并指示模型和视图基于用户输入执行操作（处理数据、展示数据）。  
+
+模型（Model）：业务逻辑模型(并非数据模型)，通常代表应用程序中的数据以及用于操纵数据的业务逻辑。 
 
 注意：这里大家容易误解Model，可能通常大家模型对象感觉非常的简单，就只是做数据模型，使Model的量级特别的轻，这样就加重了Controller对业务逻辑的处理，加重了Controller的量级。
 
@@ -21,7 +23,7 @@ MVC为标准的设计模式，是官方推荐的权威的规范模式。
 
 ![mvcmvvm001.png](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/mvcmvvm001.jpg)
 
-如图所示，这是一个基本的MVC模式示意图。在MVC1中，Controller和其他部分之间的通信都是双向的。而View和model之间没有任何通信关系。
+如图所示，这是一个基本的MVC模式示意图。在MVC中，Controller和其他部分之间的通信都是双向的。而View和model之间没有任何通信关系。
 #### 二、MVVM
 MVVM:分别所指Model、View | Controller、ViewModel。
 在MVVM中，view 和 view controller结合在一起，我们把它们看做一个部分。
@@ -42,6 +44,8 @@ MVVM:分别所指Model、View | Controller、ViewModel。
 ViewModel用来放置用户交互验证逻辑；视图显示逻辑；发起网络请求和其他代码。
 
 注意: 使用MVVM会一定程度的增加程序的代码量，但总体上减少了代码的复杂性，并能很好的减轻Controller的量级。View引用ViewModel，但反过来不行,任何视图本身的引用都不应该放在viewModel中。ViewController尽量不涉及业务逻辑，让ViewModel去做这些事情。ViewModel应避免过于臃肿，否则重蹈Controller的“覆辙”，变得更难以维护。
+
+ViewModel 通过双向数据绑定把 View 层和 Model 层连接了起来，而View 和 Model 之间的同步工作完全是自动的，无需人为干涉，因此开发者只需关注业务逻辑，不需要手动操作DOM, 不需要关注数据状态的同步问题，复杂的数据状态维护完全由 MVVM 来统一管理。
 
 ##### 优点:MVC
 
