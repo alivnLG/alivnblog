@@ -112,7 +112,7 @@ $(document).ready(function () {
 
 <https://www.baidu.com>
 #### markdown图片
-![生物神经网络](http://note.youdao.com/yws/res/4117/WEBRESOURCEdfab3637ef4ee5c28975d4c33a7fedc2)
+![机器学习](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/machinelearning013.jpg)
 #### Markdown 表格
 -: 设置内容和标题栏居右对齐。  
 :- 设置内容和标题栏居左对齐。  
