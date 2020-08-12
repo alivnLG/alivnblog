@@ -155,7 +155,7 @@ computed: {
 在 JavaScript 中，truthy（真值）指的是在布尔值上下文中，转换后的值为真的值。所有值都是真值，除非它们被定义为 假值（即除 false、0、""、null、undefined 和 NaN 以外皆为真值）。
 
 ##### 26.v-if指令
-在 <template> 元素上使用 v-if 条件渲染分组。把一个 <template> 元素当做不可见的包裹元素，并在上面使用 v-if。最终的渲染结果将不包含 <template> 元素。
+在 template 元素上使用 v-if 条件渲染分组。把一个 template 元素当做不可见的包裹元素，并在上面使用 v-if。最终的渲染结果将不包含 template 元素。
 
 ##### 27.key 管理可复用的元素
 
