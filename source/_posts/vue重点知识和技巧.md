@@ -171,7 +171,7 @@ computed: {
 ```
 切换不会复用。
 
-##### 28.v-show 不支持 <template> 元素，也不支持 v-else
+##### 28.v-show 不支持 template 元素，也不支持 v-else
 v-if 是“真正”的条件渲染，因为它会确保在切换过程中条件块内的事件监听器和子组件适当地被销毁和重建。
 
 v-if 也是惰性的：如果在初始渲染时条件为假，则什么也不做——直到条件第一次变为真时，才会开始渲染条件块。
@@ -344,9 +344,9 @@ text 和 textarea 元素使用 value 属性和 input 事件；
 checkbox 和 radio 使用 checked 属性和 change 事件；  
 select 字段将 value 作为 prop 并将 change 作为事件。
 
-在文本区域插值 (<textarea>{{text}}</textarea>) 并不会生效，应用 v-model 来代替。
+在文本区域插值 ```(<textarea>{{text}}</textarea>)``` 并不会生效，应用 v-model 来代替。
 
-如果 v-model 表达式的初始值未能匹配任何选项，<select> 元素将被渲染为“未选中”状态。在 iOS 中，这会使用户无法选择第一个选项。因为这样的情况下，iOS 不会触发 change 事件。因此，更推荐像上面这样提供一个值为空的禁用选项。
+如果 v-model 表达式的初始值未能匹配任何选项，```<select>``` 元素将被渲染为“未选中”状态。在 iOS 中，这会使用户无法选择第一个选项。因为这样的情况下，iOS 不会触发 change 事件。因此，更推荐像上面这样提供一个值为空的禁用选项。
 
 ##### 39.input修饰符
 .lazy  在“change”时而非“input”时更新  
