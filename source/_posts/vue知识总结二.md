@@ -1,5 +1,5 @@
 ---
-title: vue相关知识点
+title: vue知识总结二
 date: 2020-06-02 16:53:18
 tags:
 - VUE
