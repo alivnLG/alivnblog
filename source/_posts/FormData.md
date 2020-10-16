@@ -128,8 +128,10 @@ console.log(formdata.get("name"));//laoliu
 //删除key为name的值
 formdata.delete("name");
 console.log(formdata.get("name"));//null
+```
 
-6、通过entries()方法遍历
+##### 6、通过entries()方法遍历
+```
 let data=new FormData();
 formdata.append("name","laoliu");
 formdata.append("name","laoliu2");
