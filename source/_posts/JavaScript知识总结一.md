@@ -8,6 +8,7 @@ categories:
 ---
 #### 1.window.location.replace(…)最适合模拟 HTTP 重定向。
 window.location.replace(...)优于使用window.location.href，因为replace()不会将原始页面保留在会话历史记录中，这意味着用户将不会陷入永无休止回退按钮。
+<!--more-->
 如果要模拟单击链接，可以使用location.href，如果要模拟HTTP重定向，请使用location.replace。
 ```
 //模拟HTTP重定向
