@@ -1,5 +1,5 @@
 ---
-title: nightwatch实现vue应用e2e测试
+title: Nightwatch实现vue应用e2e测试
 date: 2020-05-29 11:49:12
 tags:
 - nightwatch

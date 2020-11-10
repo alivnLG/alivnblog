@@ -1,5 +1,5 @@
 ---
-title: git设置、查看、取消代理
+title: Git设置、查看、取消代理
 date: 2020-07-03 10:38:55
 tags:
 - proxy

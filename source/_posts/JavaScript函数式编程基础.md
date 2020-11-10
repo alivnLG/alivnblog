@@ -1,5 +1,5 @@
 ---
-title: js函数式编程基础
+title: JavaScript函数式编程基础
 date: 2020-06-03 16:31:37
 tags:
 - 函数式编程

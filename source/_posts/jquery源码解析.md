@@ -1,5 +1,5 @@
 ---
-title: jquery源码解析
+title: JQuery源码解析
 date: 2020-06-03 16:30:33
 tags:
 - JQuery

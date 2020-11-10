@@ -1,5 +1,5 @@
 ---
-title: git官网下载慢，解决方案
+title: Git官网下载慢，解决方案
 date: 2020-05-26 10:35:31
 tags:
 - GitHub

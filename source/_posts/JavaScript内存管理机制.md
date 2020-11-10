@@ -1,5 +1,5 @@
 ---
-title: js内存管理机制
+title: JavaScript内存管理机制
 date: 2020-06-03 16:08:19
 tags:
 - 内存

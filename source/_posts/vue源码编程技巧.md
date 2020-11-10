@@ -8,7 +8,7 @@ categories:
 ---
 #### 1.获取HTML格式的字符串中非标签文本(vue/src/compiler/parser/entity-decoder.js)
 假设字符串
-
+<!--more-->
 ```
 var html = '<span class="red">hello world</span> <span>hello xxx</span>'
 ```

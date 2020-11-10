@@ -1,5 +1,5 @@
 ---
-title: javascript基础知识
+title: JavaScript基础知识
 date: 2020-06-03 14:26:45
 tags:
 - JavaScript
