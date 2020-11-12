@@ -157,3 +157,5 @@ import(/* webpackPreload: true */ 'AsyncModule');
 
 可以看到，两者的兼容性目前都还不是太好。好在不支持preload和prefetch的浏览器会自动忽略它，因此可以将它们作为一种渐进增强功能，优化我们页面的资源加载，提升性能和用户体验。
 
+
+[转载自：https://juejin.im/post/6893681741240909832](https://juejin.im/post/6893681741240909832)
