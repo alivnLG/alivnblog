@@ -1,5 +1,5 @@
 ---
-title: Typescript
+title: TypeScript
 date: 2020-06-01 10:46:27
 tags:
 - TypeScript
@@ -97,8 +97,8 @@ boolean     布尔类型
 let arr: number[] = [1,2];
             
 let arr: Array<number> = [1,2];
-```         
-
+```
+         
 无          元组 元组类型用来表示已知元素数量和类型的数组，各元素的类型不必相同，对应位置的类型需要相同。
 
 ```
@@ -123,6 +123,7 @@ never       其它类型（包括 null 和 undefined）的子类型，代表从�
 Any 类型
 
 任意值是 TypeScript 针对编程时类型不明确的变量使用的一种数据类型，它常用于以下三种情况。
+
 ```
 <p>1、变量的值会动态改变时，比如来自用户的输入，任意值类型可以让这些变量跳过编译阶段的类型检查，示例代码如下：</p>
 
@@ -132,12 +133,15 @@ x = false;    // 布尔类型
 ```
 
 改写现有代码时，任意值允许在编译时可选择地包含或移除类型检查，示例代码如下：
+
 ```
 let x: any = 4;
 x.ifItExists();    // 正确，ifItExists方法在运行时可能存在，但这里并不会检查
 x.toFixed();    // 正确
 ```
+
 定义存储各种类型数据的数组时，示例代码如下
+
 ```
 let arrayList: any[] = [1, false, 'fine'];
 arrayList[1] = 100;
