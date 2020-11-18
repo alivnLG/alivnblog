@@ -8,7 +8,7 @@ categories:
 ---
 #### 1.JavaScript 的数据类型
 基本数据类型：String、Boolean、Number、Symbol、null、undefined
-
+<!--more-->
 引用数据类型：Object，如果要细分的话有 Object、Array、Date、RegExp 和 Function
 
 #### 2.基本数据类型和引用数据类型区别
