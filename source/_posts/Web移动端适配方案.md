@@ -114,9 +114,9 @@ postcss-pxtorem可以帮我们把我们需要转的px值计算转换为对应的
 ###### 2.3.1 对iframe的使用不兼容。
 即iframe中展示的内容依然使用的是css像素，在高倍屏下会出问题，如我们在使用iframe引用一个腾讯视频的视频播放资源时，该视频播放器的播放按钮在不同dpr的设备上展示差异很大：
 
-![webMobile001.png](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webMobile001.jpg)
+![webMobile001](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webMobile001.jpg)
 
-![webMobile002.png](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webMobile002.jpg)
+![webMobile002](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webMobile002.jpg)
 
 从图中我们可以看出播放按钮在dpr = 2的设备上展示的大小要比在dpr = 3的设备上要大很多，如果你去仔细测量的话，会发现刚好是其1.5倍，如果你读过了[深入浅出移动端适配](https://juejin.im/post/6844903951012200456#heading-24)，那么很容易就理解为什么了，我们这里不做深究。
 
@@ -173,11 +173,11 @@ if (isIPhone) {
 
 然而，在微信环境（或其他可设置字体大小的Web浏览器中，如Safari）下，设置微信的字体大小（调大）后再打开使用Flexible技术适配的Web页面，你会发现页面布局错乱了，所有使用rem设置大小的元素都变大了，此时html的font-size还是原来的大小，但是元素就是变大了，这是为什么呢？
 
-![webMobile003.png](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webMobile003.jpg)
+![webMobile003](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webMobile003.jpg)
 
 事实上，虽然Flexible帮我们使用<meta/>标签设置了width=device-width和user-scalable=no以及对应的scale缩放值以保证我们的元素大小在高倍屏下（dpr >= 2 ）正常展示，但是在调整Web浏览器的字体大小后，我们的"视口"也响应的等比缩小了，即视觉视口(window.innerWidth)，豁然开朗，并不是我们的元素变大了，而是我们的视觉视口变小了！
 
-![webMobile004.png](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webMobile004.jpg)
+![webMobile004](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webMobile004.jpg)
 
 
 基于我们已经掌握的视口相关知识，其根本原因是我们在调整Web浏览器的字体大小时，也响应的调整了视口的scale值，因此才导致了视觉视口的变小。
@@ -194,15 +194,15 @@ unit | relative to（参考单位）
 'vmax' | 1% of viewport's larger dimension（vw和vh中的较大值）
 'vmin' | 1% of viewport's smaller dimension（vw和vh中的较大值）
 
-![webMobile005.png](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webMobile005.jpg)
+![webMobile005](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webMobile005.jpg)
 
 > vmin和vmax是根据Viewport中长度偏大的那个维度值计算出来的，如果window.innerHeight > window.innerWidth则vmin取值为window.innerWidth / 100，vmax取值为window.innerHeight / 100。
 
 可能会有同学担心Viewport方案的浏览器兼容性问题，我们可以使用[caniuse](https://caniuse.com/)来查看下viewport单位在各主流浏览器版本上的兼容情况：
 
-![webMobile006.png](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webMobile006.jpg)
+![webMobile006](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webMobile006.jpg)
 
-![webMobile007.png](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webMobile007.jpg)
+![webMobile007](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webMobile007.jpg)
 
 从图中可以看出，目前大部分的主流浏览器基本上已经支持了viewport单位，其中有一些淡绿色的浏览器版本表示为部分支持，其主要内容为无法兼容vmax和vmin的用法；而“Know issues”一栏中所列的一些已知问题大多也是针对用户缩放viewport大小或者IOS 7 Safari所特有的一些buggy behavior，而对于这些我们是可以控制的。
 
@@ -333,7 +333,7 @@ plugins: {
 ###### 3.2.2 Viewport Units Buggyfill
 这个js库是为了兼容那些不兼容vw、vh、vmax、vmin这些viewport单位的浏览器所使用的，在该方案开始我们已经明确过，现如今大部分机型的大部分浏览器都已经兼容了viewport单位，大漠老师在17年左右对Top30的热门机型进行了测试，其中只有如下几款机型没有完全支持viewport单位：
 
-![webMobile008.png](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webMobile008.jpg)
+![webMobile008](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webMobile008.jpg)
 
 但是如果你的业务不允许，需要你的项目跑在很多更古老的机型或者浏览器版本上，那么就不得不考虑到一些hack手段，那么这个js库就是你的首选方案了。
 
@@ -448,13 +448,13 @@ img {
 
 border-image方案虽然很好用，但是在一些低端机型和ios设备上有兼容问题。主要表现为在一些低端安卓机型，如魅蓝note1中展示4个边框时，下侧和右侧边框缺失；在iPhone5s、iPhone6s、iPhone6s Plus上直接不显示（不知道是不是我姿势不对）。
 
-![webMobile009.png](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webMobile009.jpg)
+![webMobile009](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webMobile009.jpg)
 
 border-image还有一个问题就是无法做圆角。
 
 background-image方案，在以上机型上都能比较好的展现，但是在背景图方案中需要提供2像素的图片，如：
 
-![webMobile010.png](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webMobile010.jpg)
+![webMobile010](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webMobile010.jpg)
 
 ```
 fineLine(color = #e8e8e8, position = bottom)
@@ -558,7 +558,7 @@ bgLine($color = #efefef, $direction = all)
   bgLine(red, all)  
 ```
 
-![webMobile011.png](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webMobile011.jpg)
+![webMobile011](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webMobile011.jpg)
 
 但是渐变色背景图方案依然有她的不足，如无法设置边框圆角、需要维护比较繁琐的渐变色控制代码（虽然一万年可能就动一次）等问题，不过依然是值得一试的适配方案。
 
@@ -612,4 +612,47 @@ border-1px($color = #ccc, $radius = 2PX, $direction = all)
 在高倍屏下产生图片模糊的问题以及其对应的解决方案，在深入浅出移动端适配已经向大家解释和介绍过了，此处略过。
 
 
-[转载自：https://juejin.im/post/6894044091836563469](https://juejin.im/post/6894044091836563469)
+#### 四、rem适配
+
+##### 4.1 原理
+
+rem是css3新增的一个相对单位，当使用rem为元素设定字体大小时，相对的是HTML根元素的字体大小。例如你给html设置font-size为16px，html中的div元素设置font-size为1rem，则这1rem也是16px。
+
+rem适配的原理是布局等比例缩放，我们可以动态控制html中font-size的大小来改变rem的大小。
+
+##### 4.2 实现
+
+###### 4.2.1 设置视口viewport
+
+在移动端配置视口的方法是设置一个meta标签：
+
+```html
+<meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1; minimum-scale=1; user-scalable=no;">
+```
+
+其中，width为定义视口的宽度，height为定义视口的高度，initial-scale为定义初始缩放值，maximum-scale和minimum-scale分别为定义放大最大和缩小最小比例，user-scalable指是否允许用户手动缩放页面。上面的meta标签例子是将scale设置为固定1倍视口的大小。
+
+如果我们不去设置，则浏览器的默认设置为：viewport=980，initial-scale为空
+
+让我们看看设置与不设置viewport的区别：
+
+**不设置**
+
+![webMobile012](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webMobile012.jpg)
+
+**设置**
+
+![webMobile013](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webMobile013.jpg)
+
+同样设置宽高为300px的正方形，可以看出，当设置viewport时，会有一个缩放效果。
+
+我们也可以根据设备像素比例devicePixelRatio的值来缩放viewport，代码如下：
+
+
+<br/>
+<br/>
+<br/>
+
+转载自：[https://juejin.im/post/6894044091836563469](https://juejin.im/post/6894044091836563469)
+
+转载自：[https://juejin.cn/post/6844904176892248078](https://juejin.cn/post/6844904176892248078)
