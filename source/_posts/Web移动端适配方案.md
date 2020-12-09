@@ -648,6 +648,117 @@ rem适配的原理是布局等比例缩放，我们可以动态控制html中font
 
 我们也可以根据设备像素比例devicePixelRatio的值来缩放viewport，代码如下：
 
+```js
+let viewport = document.querySelector('meta[name=viewport]')
+let dpr = window.devicePixelRatio || 1
+let scale = 1 / dpr
+viewport.setAttribute(
+    "content",
+    "width=device-width" +
+    ",initial-scale=" +
+    scale +
+    ", maximum-scale=" +
+    scale +
+    ", minimum-scale=" +
+    scale +
+    ", user-scalable=no"
+)
+```
+
+这样就可以实现元素在不同设备下有不同的缩放效果
+
+缺点：边框等不需要缩放的元素，也会跟着缩放
+
+注意：
+
+- viewport标签只对移动端浏览器有效，对PC端浏览器是无效的。
+- 当缩放比例为100%时，逻辑像素 = CSS 像素宽度 = 理想视口的宽度 = 布局视口的宽度。
+- 单独设置initial-scale或 width都会有兼容性问题，所以设置布局视口为理想视口的最佳方法是同时设置这两个属性。
+- 即使设置了user-scalable = no，在Android Chrome浏览器中也可以强制启用手动缩放。
+
+###### 4.2.2 动态设置rem 
+
+通过js获取设备宽度来动态设置font-size随着视口大小的改变而改变，流程如下：
+
+- 获得设计稿尺寸，如750px
+- 对设计稿标注进行转换
+- 需要等比缩放的使用rem，不需要缩放的，例如border阴影，则使用px
+
+```js
+const WIDTH = 750//设计稿宽度
+function setRemUnit() {
+  let rem = 100*screen.width/WIDTH
+  document.documentElement.style.fontSize = `${rem}px`
+}
+setRemUnit()
+```
+
+看看无设置和有设置的区别：
+
+![webMobile014](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webMobile014.jpg)
+
+![webMobile015](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webMobile015.jpg)
+
+除了字体，设置宽高等值，都可以达到缩放的效果。
+
+缺点
+
+- css与js代码具有一定的耦合性
+- 必须将改变font-size的代码放在css样式之前
+
+#### 五、vw适配
+
+如果说我们要一个不需要JS和CSS耦合在一起的单位，那vw/vh就是一个不错的选择。
+
+- **vw：view width，指视口宽度的百分比，如：1vw = 视口宽度的1%**
+- **vh：view height，指视口高度的百分比，如：1vh = 视口高度的1%**
+- **vmin：vmin的值是当前vw和vh中较小的值**
+- **vmax：vmax的值是当前vw和vh中较大的值**
+
+使用起来也比较简单，比如我假设设计稿使用1080px宽度，则100vw = 1080px，即1vw = 10.8px。我们可以根据设计图上的px值直接转换成对应的vw值，也可以使用PostCSS的插件postcss-px-to-viewport，可以直接在代码中写px。
+
+例子：设置一个视口宽高都占百分之五十的div
+
+```css
+.box {
+  width: 50vw;
+  height: 50vh;
+  background-color: red;
+}
+```
+
+#### 六、rem配合vw
+
+我们也可以通过vw来动态调整html的font-size，元素布局上使用rem单位，并使用媒体查询@media，当超过一定宽度时设置font-size为px限制根元素字体的大小。
+
+```css
+@media screen and (max-width: 320px) {
+      html {
+          font-size: 64px;
+      }
+}
+@media screen and (min-width: 540px) {
+        html {
+            font-size: 108px;
+        }
+ }
+html {
+  font-size: 20vw;
+}
+.box {
+    max-width: 540px;
+    min-width: 320px;
+}
+```
+
+新闻、社区等可阅读内容比较多的场景：px+flex+百分比
+
+例子：携程（m.ctrip.com/html5/）
+
+视觉图形组件较多的，或者是组件位置有一定相对依赖关系的场景：vw + rem
+
+例子：京东（m.jd.com/）
+网易（3g.163.com/touch/）
 
 <br/>
 <br/>
