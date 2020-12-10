@@ -141,6 +141,13 @@ stage2意味着这个提案的东西随时可能会发生翻天覆地的变化�
 
 ![vuethree013](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/vuethree013.jpg)
 
+可以看到，内存占用仅仅为Vue2的一半，初始化的速度快了将近一倍。
+
+但是，还不够！
+
+这只是初始化，我们看看组件更新时的优化。
+
+
 
 <br/>
 <br/>
