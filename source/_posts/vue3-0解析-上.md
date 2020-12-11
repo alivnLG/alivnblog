@@ -1,5 +1,5 @@
 ---
-title: vue3解析
+title: vue3.0解析-上
 date: 2020-11-24 17:15:24
 tags:
 - VUE
@@ -60,7 +60,7 @@ Proxy不仅消除了Vue2中现有的限制（比如对象新属性的增加、�
 
 首先Vue2最初是使用纯JS写成的，但后来意识到一个类型系统将对这样大型规模的项目是非常必要的，尤其体现在重构或者扩展，类型检查将很大程度地减少这个过程中引入意外错误的机会，也让更多代码贡献者可以更大胆放心地进行大范围的更改。
 
-所以Vue2当时引入了Fackbook的Flow进行静态类型检查，一方面是因为它可以渐进地添加到现有的纯JS项目中，但可惜的是Flow虽然有一定的帮助但是并没有期望中那么香，最离谱的是谁能想到连Flow自己也都烂尾了，可以上Flow的官网看看，这玩意到现在还是0.X的版本，相比TypeScript的飞速发展以及TS与开发工具的深度集成尤其是VSCode，Flow真的是一言难尽好吧。不可否认，尤大自己也说自己当初是压错宝了。
+所以Vue2当时引入了Facebook的Flow进行静态类型检查，一方面是因为它可以渐进地添加到现有的纯JS项目中，但可惜的是Flow虽然有一定的帮助但是并没有期望中那么香，最离谱的是谁能想到连Flow自己也都烂尾了，可以上Flow的官网看看，这玩意到现在还是0.X的版本，相比TypeScript的飞速发展以及TS与开发工具的深度集成尤其是VSCode，Flow真的是一言难尽好吧。不可否认，尤大自己也说自己当初是压错宝了。
 
 也由于TS的蓬勃发展，越来越多的用户也在Vue中使用TS，而对Vue来说，同时支持两个类型系统是一件比较麻烦的事情，并且在类型推导上变得非常困难。如果源代码切换到TS也就没那么多屁事了。
 
@@ -147,6 +147,198 @@ stage2意味着这个提案的东西随时可能会发生翻天覆地的变化�
 
 这只是初始化，我们看看组件更新时的优化。
 
+##### 2.1.2 突破Virtual DOM瓶颈
+
+首先，我们看看传统的Virtual DOM 树是如何更新的：
+
+![vuethree014](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/vuethree014.jpg)
+
+当数据发生改变的时候，两棵vdom的树会进行diff比较，找到需要更新的节点再patch为实际的DOM更新到浏览器上。这个过程在Vue2中已经优化到了组件的粒度，通过渲染Watcher去准确找到需要更新的组件，将整个组件内的vdom tree进行diff。这个组件粒度的优化React也做到了，只不过这个优化的操作是交给了用户，比如利用pureComponeng、shouldComponentUpdate等等。
+
+但组件的粒度还是相对比较粗的，于是Vue3重写了Virtual Dom，以利用模板的静态分析优势去将更新的粒度进一步缩小到动态元素甚至是动态的属性。
+
+我们先看一个最简单的情况：
+
+![vuethree015](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/vuethree015.jpg)
+
+在传统的Virtual DOM下的diff过程：
+
+![vuethree016](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/vuethree016.jpg)
+
+我们可以看到，在这个模板下，整个组件节点的结构是固定不变的，而里面有夹杂很多完全静态的节点，只有一个节点的文本内容是动态的。而在传统的vdom下，仍然去遍历diff了这些完全不会发生变化的节点。虽然Vue2已经对这些完全静态的节点进行了优化标记以一种fastPath的方式去跳过这些静态节点的diff，但仍然存在一个遍历递归的过程。
+
+那么在Vue3新的Virtual DOM下，会如何进行diff呢？
+
+通过compiler对模板的静态分析，在优化模式下将静态的内容进行hosting，也就是把静态节点提升到外面去，实际生成vnode的就只有动态的元素<p class="text">{{ msg }}</p>，再分析这个元素内可能发生变化的东西，对这个元素打上patchFlag，表示这个元素可能发生变化的类型是文本内容textContent还是属性类class等等。
+
+我们看看模板编译为render函数后的结果：
+
+![vuethree017](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/vuethree017.jpg)
+
+可以看到，完全静态的元素已经被提升到render函数上面去了，实际会创建vnode的就只有一个含有动态文本内容的p元素。
+
+所以在新的Virtual DOM下，这个组件的diff过程就变成了：
+
+![vuethree018](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/vuethree018.jpg)
+
+肉眼可见的，这是一个数量级的优化。
+
+那么刚刚说了，这是一个组件节点结构完全固定的情况，那么也就有另一种情况：动态节点。
+
+而在Vue的模板中，出现动态节点的情况就只有两种：
+
+- **v-if**
+
+- **v-for**
+
+先看v-if：
+
+![vuethree019](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/vuethree019.jpg)
+
+我们可以看到，在v-if内部，节点结构又是完全固定的，并且只有{{ msg }}是动态节点。所以如果把v-if划分为一个区块Block的话，又变成了我们上一个看的那种情况。因此，只要先将整个模板看作一个Block，然后以动态指令进行划分一个个嵌套的Block，每个Block就都变成最简单的那种情况了：
+
+![vuethree020](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/vuethree020.jpg)
+
+并且每个Block里面的动态元素只需要以一个简单的打平的数组去记录跟踪即可。所以diff的过程就只是遍历递归去找那些存在动态节点的Block，根据这些动态Block中的一个数组就可以完成diff的过程。
+
+所以刚刚这个v-if的例子的新diff过程就是：
+
+![vuethree021](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/vuethree021.jpg)
+
+v-for也是相同的原理，将v-for划分为一个Block：
+
+![vuethree022](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/vuethree022.jpg)
+
+只有 v-for 是动态节点 ，每个 v-for 循环内部：只有 {{ item.message }} 是动态节点。它的diff过程：
+
+![vuethree023](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/vuethree023.jpg)
+
+**总结：**
+
+![vuethree024](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/vuethree024.jpg)
+
+- **将模版基于动态节点指令切割为嵌套的区块**
+- **每个区块内部的节点结构是固定的**
+- **每个区块只需要以一个平面数组追踪自身包含的动态节点**
+
+所以Virtual DOM的更新性能从与模板整体大小相关，提升到了只与动态内容的数量相关：
+
+![vuethree025](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/vuethree025.jpg)
+
+##### 2.1.3 更多编译时的优化
+
+- **Slot默认编译为函数**
+
+   这个让使用插槽的父子组件之间的更新关系不再强耦合
+
+- **利用模板静态分析对vnode生成的类型标记——patchFlag**
+
+  这一点我们刚刚也讲到了，对于pacthFlag的定义，我们可以去源码中看看（为了方便截图，我删了部分的注释，以及标注了前几个的类型的二进制值出来）：
+
+![vuethree026](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/vuethree026.jpg)
+
+  << 就是左移操作符，我们可以看到一共有十个动态的类型，每个类型的数值都是在1的基础上移动不同位数得到的，所以一个十一位的二进制数就描述了vnode的动态类型。并且尤大非常友好地告诉我们了这个怎么用：
+
+![vuethree027](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/vuethree027.jpg)
+
+vnode的patchFlag通过 | 操作符去组合起来，vnode的patchFlag和某个特定类型所代表的patchFlag就用 & 操作符计算一下，如果得到的结果为0，则说明这个vnode的这个类型的属性是不会变的，不为0则相反。还引导了你去renderer.ts下看看怎么使用的，不过他的路径似乎有点问题....我看的是packages/runtime-core/src/renderer.ts。
+
+经过了这么层层优化，Vue3究竟有多快？
+
+我去vue3.0 release时给出的数据docs.google.com/spreadsheet… 中搬运了过来：
+
+![vuethree028](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/vuethree028.jpg)
+
+可以看到，与Vue2相比，Vue 3在bundle包大小减少41%、初始渲染快了55%、更新快了133% 和内存使用 减少54% 。
+
+#### 2.2 如何更小
+
+最主要的就是充分利用了Tree-shaking的特性，那么什么是Tree-shaking呢? 中文翻译过来就是抖树，我们来看看它的工作原理：
+
+MDN上对Tree shaking的描述：
+
+![vuethree029](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/vuethree029.jpg)
+
+什么意思呢？为了更好地体会到它的作用，我们先看看两种export的写法：
+
+第一种：
+
+```js
+const msgA = 'hhhh'
+
+const msgB = 777
+
+const funcA = () => {
+    console.log('AAA')
+}
+
+const funcB = () => {
+    console.log('BBB')
+}
+
+export default{
+    msgA,
+    msgB,
+    funcA,
+    funcB
+};
+```
+
+第二种：
+
+```js
+export const msgA = 'hhhh'
+
+export const msgB = 777
+
+export const funcA = () => {
+    console.log('AAA')
+}
+
+export const funcB = () => {
+    console.log('BBB')
+}
+```
+
+然后我在main.ts中分别引入并使用这两个模块：
+
+第一种：
+
+```js
+import TreeShaking1 from "@/benchmarks/TreeShaking1"
+
+console.log(TreeShaking1.msgA)
+TreeShaking1.funcA()
+```
+
+第二种：
+
+```js
+import {funcA,msgA} from "@/benchmarks/TreeShaking2"
+
+console.log(msgA)
+// funcA()
+```
+
+build以后生成的app.js bundle：
+
+第一种：
+
+![vuethree030](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/vuethree030.jpg)
+
+第二种：
+
+![vuethree031](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/vuethree031.jpg)
+
+我们可以看到，tree shaking以后，进入bundle的只有被引入并且真正会被使用的代码块。在Vue3中许多渐进式的特性都使用了第二种的写法来进行重写，而且模板本身又是Tree shaking友好的。
+
+但不是所有东西都可以被抖掉，有部分代码是对任何类型的应用程序都不可或缺的，我们把这些不可或缺的部分称之为基线大小，所以Vue3尽管增加了很多的新特性，但是被压缩后的基线大小只有10KB左右，甚至不到Vue2的一半。
+
+我把刚刚的两个demo所在的项目build以后：
+
+![vuethree032](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/vuethree032.jpg)
+
+可以看到这个app.js的bundle只有9.68kb，这还是包括了router在内的，而以往Vue2构建出来的普遍都在20+kb以上。
 
 
 <br/>
