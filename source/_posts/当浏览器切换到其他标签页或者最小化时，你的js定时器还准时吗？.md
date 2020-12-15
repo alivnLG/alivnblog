@@ -1,6 +1,7 @@
 ---
 title: 当浏览器切换到其他标签页或者最小化时，你的js定时器还准时吗？
 date: 2020-11-30 11:15:46
+top: true
 tags:
 - 定时器
 categories:

@@ -1,6 +1,7 @@
 ---
 title: call( )和apply( )方法用法总结
 date: 2020-06-03 16:19:00
+top: true
 tags:
 - call()
 - apply()

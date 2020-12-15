@@ -1,6 +1,7 @@
 ---
 title: 域名与DNS
 date: 2020-05-28 09:48:44
+top: true
 tags:
 - 主机名
 - 域名

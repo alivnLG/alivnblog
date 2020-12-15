@@ -1,6 +1,7 @@
 ---
 title: TypeScript
 date: 2020-06-01 10:46:27
+top: true
 tags:
 - TypeScript
 - Interfaces

@@ -1,6 +1,7 @@
 ---
 title: 常见JavaScript设计模式
 date: 2020-06-03 15:45:05
+top: true
 tags:
 - JavaScript
 categories:

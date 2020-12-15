@@ -1,6 +1,7 @@
 ---
 title: JavaScript检查数据类型
 date: 2020-11-11 11:25:10
+top: true
 tags:
 - 数据类型
 categories:

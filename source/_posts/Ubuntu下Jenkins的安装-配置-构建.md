@@ -1,6 +1,7 @@
 ---
 title: Ubuntu下Jenkins的安装-配置-构建
 date: 2020-06-28 10:14:07
+top: true
 tags:
 - jenkins
 - 自动化部署

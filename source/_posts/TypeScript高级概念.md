@@ -1,6 +1,7 @@
 ---
 title: TypeScript高级概念
 date: 2020-11-30 13:51:23
+top: true
 tags:
 - TypeScript
 - Interfaces
