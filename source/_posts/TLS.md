@@ -35,15 +35,16 @@ TLS协议主要解决如下三个网络安全问题。
 #### 五、TLS是怎样实现的
 TLS协议可以分为两部分
 
-##### 记录协议（Record Protocol）
+##### 5.1 记录协议（Record Protocol）
 通过使用客户端和服务端协商后的秘钥进行数据加密传输。
 
 ![tsl001](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/tsl001.jpg)
 
-##### 握手协议（Handshake Protocol）
+##### 5.2 握手协议（Handshake Protocol）
 客户端和服务端进行协商，确定一组用于数据传输加密的秘钥串。
 
-###### 握手过程
+**握手过程**
+
 ![tsl002](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/tsl002.jpg)
 
 ```
