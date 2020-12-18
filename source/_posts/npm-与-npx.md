@@ -1,11 +1,11 @@
 ---
 title: npm 与 npx
-date: 2020-05-25 17:55:41
+date: 2020-05-26 17:55:41
 tags:
 - npm
 - npx
 categories: 
-- 编程框架
+- 学习笔记
 ---
 ##### 1.npx主要作用是代替npm来直接执行包（package）命令。
 

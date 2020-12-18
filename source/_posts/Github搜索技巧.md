@@ -1,12 +1,13 @@
 ---
 title: Github搜索技巧
-date: 2020-11-11 14:32:05
+date: 2020-05-26 08:32:05
 tags:
 - Github
 categories:
-- 学习
+- 学习笔记
 ---
 #### 一、按照 name 搜索
+
 搜索项目名里面包含React的项目:
 
 ```
@@ -40,6 +41,7 @@ in:name React stars:>5000 forks:>3000
 ![github003](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/github003.jpg)
 
 #### 二、按照README来搜索
+
 搜索README.md里面包含React的项目:
 
 ```
@@ -59,6 +61,7 @@ in:readme React stars:>3000 forks:>3000
 搜索结果一下子精确到了90个。这个时候你再去选择项目，就会变得容易很多。
 
 #### 三、按照descriptin搜索
+
 假设我们现在要学习微服务的项目，我们搜索项目描述(description)里面包含微服务的项目:
 
 ```
@@ -99,6 +102,7 @@ pushed:>2020-01-01的意思是我们把项目的最后更新时间限制到2020-
 > pushed:>YYYY-MM-DD // 最后更新时间大于YYYY-MM-DD
 
 #### 五、其他技巧
+
 [github 项目趋势榜 github.com/trending](https://github.com/trending)
 
 [其他Github搜索技巧 https://juejin.im/post/6891056415440535565](https://juejin.im/post/6891056415440535565)

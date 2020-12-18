@@ -5,11 +5,13 @@ tags:
 - GitHub
 - 镜像
 categories:
-- 计算机网络
+- 学习笔记
 ---
 ##### 1.GitHub地址 下载
+
 https://github.com/git-for-windows/git/releases/
 
 ##### 2.淘宝镜像下载
+
 https://npm.taobao.org/mirrors/git-for-windows/
 <!--more-->

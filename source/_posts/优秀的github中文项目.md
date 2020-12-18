@@ -4,7 +4,7 @@ date: 2020-11-24 16:13:12
 tags:
 - 中文项目
 categories:
-- Github
+- 学习笔记
 ---
 #### Github中文项目
 
