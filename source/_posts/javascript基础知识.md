@@ -262,6 +262,93 @@ new Date().constructor             // 返回函数 Date()    { [native code] }
 function () {}.constructor         // 返回函数 Function(){ [native code] }
 ```
 ##### 41.数据类型转换
+
+**转为Boolean**
+
+在条件判断时，除了 undefined， null， false， NaN， ''， 0， -0，其他所有值都转为 true，包括所有对象。
+
+**对象转基本类型**
+
+对象在转换基本类型时，首先会调用 valueOf 然后调用 toString。并且这两个方法你是可以重写的。
+
+```js
+let a = {
+    valueOf() {
+    	return 0
+    }
+}
+```
+
+当然你也可以重写 Symbol.toPrimitive ，该方法在转基本类型时调用优先级最高。
+
+```js
+let a = {
+  valueOf() {
+    return 0;
+  },
+  toString() {
+    return '1';
+  },
+  [Symbol.toPrimitive]() {
+    return 2;
+  }
+}
+1 + a // => 3
+'1' + a // => '12'
+```
+
+**四则运算符**
+
+只有当加法运算时，其中一方是字符串类型，就会把另一个也转为字符串类型。
+
+其他运算只要其中一方是数字，那么另一方就转为数字。
+
+并且加法运算会触发三种类型转换：将值转换为原始值，转换为数字，转换为字符串。
+
+```js
+1 + '1' // '11'
+2 * '2' // 4
+[1, 2] + [2, 1] // '1,22,1'
+// [1, 2].toString() -> '1,2'
+// [2, 1].toString() -> '2,1'
+// '1,2' + '2,1' = '1,22,1'
+```
+
+<span style="color:red">对于加号需要注意这个表达式 'a' + + 'b'</span>
+
+```js
+'a' + + 'b' // -> "aNaN"
+// 因为 + 'b' -> NaN
+// 你也许在一些代码中看到过 + '1' -> 1
+```
+
+![jssummary013](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/jssummary013.jpg)
+
+上图中的 toPrimitive 就是对象转基本类型。
+
+这里来解析一道题目 [] == ![] // -> true ，下面是这个表达式为何为 true 的步骤
+
+```js
+// [] 转成 true，然后取反变成 false
+[] == false
+// 根据第 8 条得出
+[] == ToNumber(false)
+[] == 0
+// 根据第 10 条得出
+ToPrimitive([]) == 0
+// [].toString() -> ''
+'' == 0
+// 根据第 6 条得出
+0 == 0 // -> true
+```
+
+**比较运算符**
+
+如果是对象，就通过 toPrimitive 转换对象
+
+如果是字符串，就通过 unicode 字符索引来比较
+
+
 ##### 42.正则表达式
 正则表达式（英语：Regular Expression，在代码中常简写为regex、regexp或RE）使用单个字符串来描述、匹配一系列符合某个句法规则的字符串搜索模式。
 
@@ -549,6 +636,8 @@ myObject = myFunction.call(myObject, 10, 2);     // 返回 20
 能够访问另一个函数作用域的变量的函数
 
 有时候需要得到函数内的局部变量，一般办不到，
+
+闭包的定义很简单：函数 A 返回了一个函数 B，并且函数 B 中使用了函数 A 的变量，函数 B 就被称为闭包。
 
 解决方法：在函数的内部，再定义一个函数。
 ```

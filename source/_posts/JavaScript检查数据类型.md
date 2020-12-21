@@ -11,15 +11,21 @@ categories:
 > 引用数据类型: Object , Array , RegExp ......
 <!--more-->
 - typeof [重点]
+
 - instanceof
+
 - constructor
+
 - Object.prototype.toString.call [重点]
 
 #### 一、typeof
+
 ##### 1.1 基本内容
 
 - 定义 : 能够检测基本类型的运算符
+
 - 语法  : typeof [value]
+
 - 返回值  : [“string”、“number”、“boolean”、“undefined”、“object”、“function”、“symbol”、“bigint”]
 
 结果如图所示 :
@@ -28,9 +34,20 @@ categories:
 
 ##### 1.2 缺陷与不足
 
-- typeof检测基本类型基本完美，但是引用类型可以说原地爆炸,例如数组对象 ，正则对象 ，new出来的数字对象...... 全部返回的是  字符串形式的Object
-- 如NaN / Infinity 均为 “number”
-- typeof null 为 "object"
+> typeof检测基本类型基本完美，但是引用类型可以说原地爆炸,例如数组对象 ，正则对象 ，new出来的数字对象...... 全部返回的是  字符串形式的Object
+
+> 如NaN / Infinity 均为 “number”
+
+> typeof null 为 "object"
+
+> typeof 对于对象，除了函数都会显示 object
+
+
+**<span style="color:red">对于 null 来说，虽然它是基本类型，但是会显示 object，这是一个存在很久了的 Bug</span>**
+
+PS：为什么会出现这种情况呢？因为在 JS 的最初版本中，使用的是 32 位系统，为了性能考虑使用低位存储了变量的类型信息，000 开头代表是对象，然而 null 表示为全零，所以将它错误的判断为 object 。虽然现在的内部类型判断代码已经改变了，但是对于这个 Bug 却是一直流传下来。
+
+**<span style="color:red">如果我们想获得一个变量的正确类型，可以通过 Object.prototype.toString.call(xx)。这样我们就可以获得类似 [object Type] 的字符串。</span>**
 
 结果如图所示 ：
 
@@ -45,10 +62,13 @@ if（x != null && typeof x === "object"）{
 }
 ```
 #### 二、instanceof
+
 ##### 2.1 基本内容
 
 - 定义 : 用于检测构造函数的 prototype 属性是否出现在某个实例对象的原型链上。
+
 - 语法 : object instanceof constructor
+
 - 返回值 : 布尔值
 
 结果如图所示 :
@@ -60,15 +80,19 @@ if（x != null && typeof x === "object"）{
 ##### 2.2 缺陷与不足
 
 - 无法检测基本类型，返回的都是false ，只能检测引用类型
+
 - 由于instanceof是根据原型来检测类型的，返回值也是布尔类型，因此无法直观的看出数据类型
+
 - 因为原型可以更改，有时候利用instanceof来判断不一定十分准确 
 
 ![jsjc004.jpg](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/jsjc004.jpg)
 
 #### 三、constructor
+
 ##### 3.1 基本内容
 
 - 定义 : 通过构造器来判断类型。
+
 - 语法 : target.constructor == "类型名字"
 
 ![jsjc005.jpg](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/jsjc005.jpg)
@@ -78,6 +102,7 @@ if（x != null && typeof x === "object"）{
 - 原理基本和instanceof一样，都是根据原型判断
 
 #### 四、Object.prototype.toString.call()
+
 ##### 4.1 基本内容
 
 - 定义 : 返回一个表示该对象的字符串。
