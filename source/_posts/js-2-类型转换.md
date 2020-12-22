@@ -1,13 +1,14 @@
 ---
 title: js重点知识-2-类型转换
 date: 2020-12-21 17:35:06
+top: true
 tags:
 - 类型转换
 categories:
 - JavaScript
 ---
 ### 一、转换为boolean
-
+<!--more-->
 在条件判断时，除了undefined、null、false、NaN、''、0、-0，其他所有值都转为true，包括所有对象。
 
 ### 二、对象转基本类型

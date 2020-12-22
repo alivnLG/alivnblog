@@ -1,13 +1,14 @@
 ---
 title: js重点知识-7-原型-构造函数-实例
 date: 2020-12-22 11:51:57
+top: true
 tags:
 - 原型
 categories:
 - JavaScript
 ---
 ### 一、定义
-
+<!--more-->
 > 原型(prototype): 一个简单的对象，用于实现对象的 属性继承。可以简单的理解成对象的爹。在 Firefox 和 Chrome 中，每个JavaScript对象中都包含一个__proto__ (非标准)的属性指向它爹(该对象的原型)，可obj.__proto__进行访问。
 
 关于原型：

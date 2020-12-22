@@ -1,13 +1,14 @@
 ---
 title: js重点知识-6-this关键字
 date: 2020-12-22 11:41:25
+top: true
 tags:
 - this
 categories:
 - JavaScript
 ---
 ### 一、定义
-
+<!--more-->
 面向对象语言中 this 表示当前对象的一个引用。
 
 this：代表对象。就是所在方法所属对象的引用。哪个对象调用了this所在的方法，this就代表哪个对象，就是哪个对象的引用。

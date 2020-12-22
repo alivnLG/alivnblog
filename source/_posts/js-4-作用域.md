@@ -1,13 +1,14 @@
 ---
 title: js重点知识-4-作用域
 date: 2020-12-22 10:19:15
+top: true
 tags:
 - 作用域
 categories:
 - JavaScript
 ---
 ### 一、定义
-
+<!--more-->
 在 JavaScript 中, 作用域为可访问变量，对象，函数的集合。
 
 作用域其实可理解为执行上下文中声明的 变量和声明的作用范围。

@@ -1,6 +1,7 @@
 ---
 title: js重点知识-1-数据类型
 date: 2020-12-21 17:02:00
+top: true
 tags:
 - 数据类型
 categories:
@@ -9,7 +10,7 @@ categories:
 ### 一、基本类型
 
 > 基本类型：String、Number、null、undefined、Boolean、Symbol、Bigint
-
+<!--more-->
 - null
 
   - 在 JavaScript 中 null 表示 “什么都没有”。
