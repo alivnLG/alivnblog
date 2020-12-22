@@ -26,7 +26,7 @@ categories:
 
 1.可以转为false的5个值:NaN,'',0,null,undefined
 
-2.Number([value])把其他数据类型转换我number数字类型
+2.Number([value])把其他数据类型转换为number数字类型
 
 - 字符串转换为数字:空字符串是0，如果字符串中出现任意一个非有效数字字符，结果都是NaN
 - 布尔转换为数字:true=>1 false=>0
