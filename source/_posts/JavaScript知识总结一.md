@@ -203,7 +203,7 @@ JSON.parse(JSON.stringify(obj))
 如果想拷贝的一个对象且你知道对象结构。那么，你可以写一个简单的for (var i in obj)循环来克隆你的对象，同时检查
 
 ```js
-hasOwnProperty，这将比jQuery快得多。
+// hasOwnProperty，这将比jQuery快得多。
 var clonedObject = {
   knownProp: obj.knownProp,
   ..
