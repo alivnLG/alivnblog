@@ -1,17 +1,17 @@
 ---
-title: Proxy/Reflect
-date: 2020-12-10 15:03:59
+title: js重点知识-23-Proxy与Reflect
+date: 2021-01-05 10:25:05
 top: true
 tags:
-- JavaScript
+- proxy
+- reflect
 categories:
 - JavaScript
 ---
-
-#### 一、Proxy
-
-如果我们想要监视某个对象中的属性读写，我们可以使用ES5中提供的Object.defineProperty这样的方法来去为我们的对象添加属性，这样的话我们就可以捕获到我们对象中属性的读写过程。
+### 一、Proxy
 <!--more-->
+如果我们想要监视某个对象中的属性读写，我们可以使用ES5中提供的Object.defineProperty这样的方法来去为我们的对象添加属性，这样的话我们就可以捕获到我们对象中属性的读写过程。
+
 这种方法实际上运用的非常广泛，在Vue3.0以前的版本就是使用这样的一个方法来去实现的数据响应，从而完成双向数据绑定。
 
 在ES2015当中全新设计了一个叫做Proxy类型，他就是专门为对象设置访问代理器的，那如果你不理解什么是代理可以想象成门卫，也就是说不管你进去那东西还是往里放东西都必须要经过这样一个代理。
@@ -66,7 +66,7 @@ const personProxy = new Proxy(person, {
 
 以上就是Proxy的一些基本用法，在以后Proxy会用的越来越多，Vue3.0开始就开始使用Proxy去实现内部的数据响应了。
 
-#### 二、Proxy 对比 defineProperty
+### 二、Proxy 对比 defineProperty
 
 了解了Proxy的基本用法过后接下来我们再深入探讨一下相比于Object.defineProperty, Proxy到底有哪些优势。
 
@@ -93,17 +93,29 @@ const personProxy = new Proxy(person, {
 这是Object.defineProperty无法做到的, 除了delete以外, 还有很多其他的对象操作都能够被监视到，列举如下。
 
 - get: 读取某个属性
+
 - set: 写入某个属性
+
 - has: in 操作符调用
+
 - deleteProperty: delete操作符调用
+
 - getProperty: Object.getPropertypeOf()
+
 - setProperty: Object.setProtoTypeOf()
+
 - isExtensible: Object.isExtensible()
+
 - preventExtensions: Object.preventExtensions()
+
 - getOwnPropertyDescriptor: Object.getOwnPropertyDescriptor()
+
 - defineProperty: Object.defineProperty()
+
 - ownKeys: Object.keys(), Object.getOwnPropertyNames(), Object.getOwnPropertSymbols()
+
 - apply: 调用一个函数
+
 - construct: 用new调用一个函数。
 
 接下来我们来看第二点优势就是对于数组对象进行监视。
@@ -137,7 +149,7 @@ Proxy内部会自动根据push操作推断出来他所处的下标，每次添�
 
 对于一个已经存在的对象我们要想去监视他的属性我们需要做很多额外的操作。这个优势实际上需要有大量的使用然后在这个过程当中去慢慢的体会。
 
-#### 三、Reflect
+### 三、Reflect
 
 Reflect是ECMAScript2015中提供的一个全新的内置对象，如果按照java或者c#这类语言的说法，Reflect属于一个静态类，也就是说他不能通过new的方式去构建一个实例对象。只能够去调用这个静态类中的静态方法。
 
@@ -223,8 +235,3 @@ console.log(Reflect.ownKeys(obj));
 需要注意的一点是，目前以前的那些对象的操作方式还是可以使用的，但是ECMAScript他希望经过一段时间的过渡过后以后的标准中就会把之前的那些方法把他给废弃掉。
 所以我觉得我们现在就应该去了解这13个方法以及他们各自取代的用法。这些内容在mdn上都有完整的描述，我们这里就不重复了。
 
-<br/>
-<br/>
-<br/>
-
-转载自：[https://juejin.cn/post/6904126286152531976](https://juejin.cn/post/6904126286152531976)

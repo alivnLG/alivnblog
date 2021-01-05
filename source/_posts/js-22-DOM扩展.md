@@ -1,6 +1,7 @@
 ---
-title: DOM扩展
-date: 2020-12-18 17:16:01
+title: js重点知识-22-DOM扩展
+date: 2021-01-05 10:25:03
+top: true
 tags:
 - DOM
 categories:
@@ -43,13 +44,13 @@ let ems = document.getElementById("myDiv").querySelectorAll("em");
 let strongElements = document.querySelectorAll("p strong"); 
 // 以下 3 个循环的效果一样
 for (let strong of strongElements) { 
-  strong.className = "important"; 
+    strong.className = "important"; 
 } 
 for (let i = 0; i < strongElements.length; ++i) { 
-  strongElements.item(i).className = "important"; 
+    strongElements.item(i).className = "important"; 
 } 
 for (let i = 0; i < strongElements.length; ++i) { 
-  strongElements[i].className = "important"; 
+    strongElements[i].className = "important"; 
 }
 ```
 
@@ -59,7 +60,7 @@ for (let i = 0; i < strongElements.length; ++i) {
 
 ```js
 if (document.body.matches("body.page1")){ 
-  // true 
+    // true 
 }
 ```
 
@@ -83,14 +84,14 @@ let parentElement = document.getElementById('parent');
 let currentChildNode = parentElement.firstChild; 
 // 没有子元素，firstChild 返回 null，跳过循环
 while (currentChildNode) { 
-  if (currentChildNode.nodeType === 1) { 
-    // 如果有元素节点，则做相应处理
-    processChild(currentChildNode); 
-  } 
-  if (currentChildNode === parentElement.lastChild) { 
-  break; 
-  } 
-  currentChildNode = currentChildNode.nextSibling; 
+    if (currentChildNode.nodeType === 1) { 
+        // 如果有元素节点，则做相应处理
+        processChild(currentChildNode); 
+    } 
+    if (currentChildNode === parentElement.lastChild) { 
+        break; 
+    } 
+    currentChildNode = currentChildNode.nextSibling; 
 }
 ```
 
@@ -103,7 +104,7 @@ while (currentChildElement) {
     // 这就是元素节点，做相应处理
     processChild(currentChildElement); 
     if (currentChildElement === parentElement.lastElementChild) { 
-    break; 
+        break; 
     } 
     currentChildElement = currentChildElement.nextElementSibling; 
 }
@@ -144,7 +145,7 @@ div.classList.remove("disabled"); // 删除"disabled"类
 div.classList.add("current"); // 添加"current"类
 
 for (let class of div.classList){  // 迭代类名
- 	doStuff(class); 
+ 	  doStuff(class); 
 }
 ```
 
@@ -162,7 +163,7 @@ for (let class of div.classList){  // 迭代类名
 
 ```js
 if (document.readyState == "complete"){ 
-  // 执行操作
+    // 执行操作
 }
 ```
 
@@ -192,7 +193,7 @@ div.dataset.appId = 23456;
 div.dataset.myname = "Michael"; 
 // 有"myname"吗？
 if (div.dataset.myname){ 
-  console.log(`Hello, ${div.dataset.myname}`); 
+    console.log(`Hello, ${div.dataset.myname}`); 
 }
 ```
 

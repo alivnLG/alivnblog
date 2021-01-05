@@ -1,6 +1,6 @@
 ---
-title: call( )和apply( )方法用法总结
-date: 2020-06-03 16:19:00
+title: js重点知识-18-call( )和apply( )方法
+date: 2021-01-05 10:24:57
 top: true
 tags:
 - call()
@@ -8,10 +8,10 @@ tags:
 categories:
 - JavaScript
 ---
-#### call()和apply()方法用法总结
-
-每个函数都包含两个非继承而来的方法：call()方法和apply()方法。
+### call()和apply()方法用法
 <!--more-->
+每个函数都包含两个非继承而来的方法：call()方法和apply()方法。
+
 相同点：这两个方法的作用是一样的。
 
 不同点：接收参数的方式不同。

@@ -1,20 +1,25 @@
 ---
-title: FormData
-date: 2020-06-03 16:21:03
+title: js重点知识-20-FormData用法
+date: 2021-01-05 10:25:00
+top: true
 tags:
 - FormData
 categories:
 - JavaScript
 ---
-### FormData
-#### FormData的主要用途有两个：
-##### 1、将form表单元素的name与value进行组合，实现表单数据的序列化，从而减少表单元素的拼接，提高工作效率。
+### 一、FormData
 <!--more-->
-##### 2、异步上传文件
+#### 主要用途
 
-#### 一、创建formData对象
-##### 1、创建一个空对象：
-```
+- 1、将form表单元素的name与value进行组合，实现表单数据的序列化，从而减少表单元素的拼接，提高工作效率。
+
+- 2、异步上传文件
+
+### 二、formData对象
+
+#### 2.1 创建一个空对象
+
+```js
 //通过FormData构造函数创建一个空对象
 var formdata=new FormData();
 //可以通过append()方法来追加数据
@@ -25,9 +30,12 @@ console.log(formdata.get("name"));//laotie
 formdata.set("name","laoliu");
 console.log(formdata.get("name"));//laoliu
 ```
-##### 2、通过表单对formData进行初始化  
+
+#### 2.2 通过表单对formData进行初始化  
+
 创建表单：
-```
+
+```html
 <form id="advForm">
     <p>广告名称：<input type="text" name="advName"  value="xixi"></p>
     <p>广告类别：<select name="advType">
@@ -39,8 +47,10 @@ console.log(formdata.get("name"));//laoliu
     <p><input type="button" id="btn" value="添加"></p>
 </form>
 ```
+
 通过表单元素作为参数，实现对formData的初始化：
-```
+
+```js
 //获得表单按钮元素
 var btn=document.querySelector("#btn");
 //为按钮添加点击事件
@@ -55,16 +65,21 @@ btn.onclick=function(){
     console.log(formdata.get("advType"));//1 
 }
 ```
-#### 二、操作方法
-##### 1、通过get(key)与getAll(key)来获取相对应的值
-```
+
+### 三、操作方法
+
+#### 3.1 通过get(key)与getAll(key)来获取相对应的值
+
+```js
 // 获取key为age的第一个值
 formdata.get("age"); 
  // 获取key为age的所有值，返回值为数组类型
 formdata.getAll("age");
 ```
-##### 2、通过append(key,value)在数据末尾追加数据
-```
+
+#### 3.2 通过append(key,value)在数据末尾追加数据
+
+```js
 //通过FormData构造函数创建一个空对象
 var formdata=new FormData();
 //通过append()方法在末尾追加key为name值为laoliu的数据
@@ -78,9 +93,11 @@ console.log(formdata.get("name"));//laoliu
 //通过getAll方法读取key为name的所有值
 console.log(formdata.getAll("name"));//["laoliu", "laoli", "laotie"]
 ```
-##### 3、通过set(key, value)来设置修改数据
-```
-key的值不存在，会添加一条数据
+
+#### 3.3 通过set(key, value)来设置修改数据
+
+```js
+//key的值不存在，会添加一条数据
 //通过FormData构造函数创建一个空对象
 var formdata=new FormData();
 //如果key的值不存在会为数据添加一个key为name值为laoliu的数据
@@ -107,8 +124,10 @@ console.log(formdata.get("name"));//laoli
 //通过getAll方法读取key为name的所有值
 console.log(formdata.getAll("name"));//["laoli"]
 ```
-##### 4、通过has(key)来判断是否存在对应的key值
-```
+
+#### 3.4 通过has(key)来判断是否存在对应的key值
+
+```js
 //通过FormData构造函数创建一个空对象
 var formdata=new FormData();
 //通过append()方法在末尾追加key为name值为laoliu的数据
@@ -118,8 +137,10 @@ console.log(formdata.has("name"));//true
 //判断是否包含key为age的数据
 console.log(formdata.has("age"));//false
 ```
-##### 5、通过delete(key)可以删除数据
-```
+
+#### 3.5 通过delete(key)可以删除数据
+
+```js
 //通过FormData构造函数创建一个空对象
 var formdata=new FormData();
 //通过append()方法在末尾追加key为name值为laoliu的数据
@@ -130,8 +151,9 @@ formdata.delete("name");
 console.log(formdata.get("name"));//null
 ```
 
-##### 6、通过entries()方法遍历
-```
+#### 3.6 通过entries()方法遍历
+
+```js
 let data=new FormData();
 formdata.append("name","laoliu");
 formdata.append("name","laoliu2");

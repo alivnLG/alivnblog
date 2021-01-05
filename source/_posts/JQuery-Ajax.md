@@ -7,15 +7,20 @@ tags:
 categories:
 - JavaScript
 ---
-#### JQuery Ajax
-##### 1.AJAX 是与服务器交换数据的技术，它在不重载全部页面的情况下，实现了对部分网页的更新。
-<!--more-->
-##### 2.AJAX = 异步 JavaScript 和 XML（Asynchronous JavaScript and XML）
-##### 3.GET 与 POST
-GET - 从指定的资源请求数据  
-POST - 向指定的资源提交要处理的数据
+### 一、JQuery Ajax
 
-GET 基本上用于从服务器获得（取回）数据。注释：GET 方法可能返回缓存数据。  
+- 1.AJAX 是与服务器交换数据的技术，它在不重载全部页面的情况下，实现了对部分网页的更新。
+
+- 2.AJAX = 异步 JavaScript 和 XML（Asynchronous JavaScript and XML）
+
+### 二、GET 与 POST
+
+- GET - 从指定的资源请求数据  
+
+- POST - 向指定的资源提交要处理的数据
+
+GET 基本上用于从服务器获得（取回）数据。注释：GET 方法可能返回缓存数据。 
+
 ```
 GET 请求可被缓存
 GET 请求保留在浏览器历史记录中
@@ -24,14 +29,18 @@ GET 请求不应在处理敏感数据时使用
 GET 请求有长度限制
 GET 请求只应当用于取回数据
 ```
+
 POST 也可用于从服务器获取数据。不过，POST   方法不会缓存数据，并且常用于连同请求一起发送数据。
+
 ```
 POST 请求不会被缓存
 POST 请求不会保留在浏览器历史记录中
 POST 不能被收藏为书签
 POST 请求对数据长度没有要求
 ```
+
 其他请求类型
+
 ```
 HEAD	与 GET 相同，但只返回 HTTP 报头，不返回文档主体。
 PUT	    上传指定的 URI 表示，向指定资源位置上传其最新内容。
@@ -41,8 +50,10 @@ OPTIONS	返回服务器支持的 HTTP 方法。
 CONNECT	把请求连接转换到透明的 TCP/IP 通道。
 PATCH   实体中包含一个表，表中说明与该URI所表示的原内容的区别。
 ```
-##### 4.Ajax方法
-```
+
+### 三、Ajax方法
+
+```js
 $.ajax()	//执行异步 AJAX 请求
 $.ajaxPrefilter()	//在每个请求发送之前且被 $.ajax() 处理之前，处理自定义 Ajax 选项或修改已存在选项
 $.ajaxSetup()	//为将来的 AJAX 请求设置默认值
@@ -63,7 +74,8 @@ serialize()	//编码表单元素集为字符串以便提交
 serializeArray()	//编码表单元素集为 names 和 values 的数组
 
 ```
-```
+
+```js
 $("button").click(function(){
     $.ajax({
         url:"demo_test.txt",
@@ -73,8 +85,10 @@ $("button").click(function(){
     }); 
 });
 ```
+
 其他名称/值：
-```
+
+```js
 async	//布尔值，表示请求是否异步处理。默认是 true。
 beforeSend(xhr)	//发送请求前运行的函数。
 cache	//布尔值，表示浏览器是否缓存被请求页面。默认是 true。
@@ -102,14 +116,22 @@ username	//规定在 HTTP 访问认证请求中使用的用户名。
 xhr	//用于创建 XMLHttpRequest 对象的函数。
 ```
 
-#### Ajax缓存
-##### 1.Ajax缓存原理
+### 四、Ajax缓存
+
+#### 4.1 Ajax缓存原理
+
 Ajax在发送的数据成功后，会把请求的URL和返回的响应结果保存在缓存内，当下一次调用Ajax发送相同的请求时，它会直接从缓存中把数据取出来，这是为了提高页面的响应速度和用户体验。当前这要求两次请求URL完全相同，包括参数。这个时候，浏览器就不会与服务器交互。
-##### 2.Ajax缓存的好处
+
+#### 4.2 Ajax缓存的好处
+
 这种设计使客户端对一些静态页面内容的请求，比如图片，css文件，js脚本等，变得更加快捷，提高了页面的响应速度，也节省了网络通信资源。
-##### 3.Ajax缓存的不足
+
+#### 4.3 Ajax缓存的不足
+
 Ajax缓存虽然有上述的好处，但是如果通过Ajax对一些后台数据进行更改的时候，虽然数据在后台已经发生改变，但是页面缓存中并没有改变，对于相同的URL，Ajax提交过去以后，浏览器还只是简单的从缓存中拿数据，这种情况当然就不行了。
-##### 4.解决Ajax缓存问题的方法
+
+#### 4.4 解决Ajax缓存问题的方法
+
 解决这个问题最有效的办法是禁止页面缓存，有以下几种处理方法：
 
 1、在ajax发送请求前加上 xmlHttpRequest.setRequestHeader(“Cache-Control”,”no-cache”);
@@ -125,17 +147,20 @@ Ajax缓存虽然有上述的好处，但是如果通过Ajax对一些后台数据
 6、用POST替代GET：不推荐
 
 7、jQuery提供一个防止ajax使用缓存的方法：
-```
+
+```js
 <script type="text/[javascript](http://www.111cn.net/js_a/js.html)" language="javascript"> 
      $.ajaxSetup ({ 
            cache: false //close AJAX cache 
       }); 
 </script>
 ```
+
 8、修改load 加载的url地址，如在url 多加个时间参数就可以：
 
 9、设置html的缓存
-```
+
+```html
 <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
 <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
 <META HTTP-EQUIV="Expires" CONTENT="0">
