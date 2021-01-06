@@ -1,21 +1,25 @@
 ---
-title: H5 Web Workers
-date: 2020-06-02 15:34:47
+title: HTML重点知识-4-Web Workers
+date: 2021-01-06 15:58:55
+top: true
 tags:
-- worker
+- web worker
 categories:
 - HTML
 ---
-### H5 web worker 
-#### 1.定义
-web worker 是运行在后台的 JavaScript，不会影响页面的性能。
+### 一、H5 web worker 
 <!--more-->
+#### 1.1 定义
+
+web worker 是运行在后台的 JavaScript，不会影响页面的性能。
+
 当在 HTML 页面中执行脚本时，页面的状态是不可响应的，直到脚本已完成。
 
 web worker 是运行在后台的 JavaScript，独立于其他脚本，不会影响页面的性能。您可以继续做任何愿意做的事情：点击、选取内容等等，而此时 web worker 在后台运行。
 
-#### 2.检测浏览器是否支持 Web Worker
-```
+#### 1.2 检测浏览器是否支持 Web Worker
+
+```js
 if(typeof(Worker)!=="undefined")
 {
     // 是的! Web worker 支持!
@@ -27,9 +31,10 @@ else
 }
 ```
 
-#### 3.创建 web worker 文件
+#### 1.3 创建 web worker 文件
 创建一个计数脚本 "demo_workers.js"：
-```
+
+```js
 var i=0;
 
 function timedCount()
@@ -41,29 +46,35 @@ function timedCount()
 
 timedCount();
 ```
+
 以上代码中重要的部分是 postMessage() 方法 - 它用于向 HTML 页面传回一段消息。
 
 注意: web worker 通常不用于如此简单的脚本，而是用于更耗费 CPU 资源的任务。
 
 #### 4.创建 Web Worker 对象
-```
+
+```js
 if(typeof(w)=="undefined")
 {
     w=new Worker("demo_workers.js");
 }
 ```
-```
+
+```js
 w.onmessage=function(event){
     document.getElementById("result").innerHTML=event.data;
 };
 ```
+
 #### 5.终止 Web Worker
-```
+
+```js
 w.terminate();
 ```
 
 #### 6.完整示例
-```
+
+```html
 <!DOCTYPE html>
 <html>
 <head> 
