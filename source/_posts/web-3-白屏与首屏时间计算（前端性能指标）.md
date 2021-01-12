@@ -253,7 +253,7 @@ if (performance) {
 
 - timing：一系列关键时间点，包含网络、解析等一系列的时间数据。
 
-![webzh001.jpg](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webzh001.jpg)
+![webzh001](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webzh001.jpg)
 
 #### 3.2 timing中的时间点
 
