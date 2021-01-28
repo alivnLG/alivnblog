@@ -1,5 +1,5 @@
 ---
-title: web-4-骨架屏skeleton
+title: 前端综合-4-骨架屏skeleton
 date: 2021-01-05 11:52:56
 top: true
 tags:
