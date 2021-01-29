@@ -283,3 +283,18 @@ user?.address;
 ?. 链使我们能够安全地访问嵌套属性。
 
 但是，我们应该谨慎地使用 ?.，仅在当左边部分不存在也没问题的情况下使用为宜。以保证在代码中有编程上的错误出现时，也不会对我们隐藏。
+
+### 四、cookie
+
+当不设置max-age和expires，此cookie就是会话级别的，浏览器关闭就没了。
+
+### 五、在浏览器中如何监听剪切板中内容
+
+```js
+// 是否能够有读取剪贴板的权限
+// result.state == "granted" || result.state == "prompt"
+const result = await navigator.permissions.query({ name: "clipboard-read" })
+
+// 获取剪贴板内容
+const text = await navigator.clipboard.readText()
+```
