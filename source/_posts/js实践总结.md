@@ -458,3 +458,97 @@ dom-to-img 库也是使用该原理；
 
 [https://github.com/niklasvh/html2canvas](https://github.com/niklasvh/html2canvas)
 
+### 八、实现文字选中复制功能
+
+**方法一**
+
+实现原理：
+
+- 选中: Selection API
+
+- 复制: document.execCommand
+
+选中：
+
+```js
+const selection = window.getSelection();
+const range = document.createRange();
+
+range.selectNodeContents(element);
+selection.removeAllRanges();
+selection.addRange(range);
+
+selectedText = selection.toString();
+```
+
+取消选中：
+
+```js
+window.getSelection().removeAllRanges();
+```
+
+复制：
+
+```js
+document.exec('copy')
+```
+
+**方式二**
+
+clipboard.js  原理同方法一。
+
+### 九、将json数据转化为json文件保存
+
+#### 9.1 实现原理
+
+（1）json 视为字符串，可以利用 DataURL 进行下载
+
+```
+Text -> DataURL
+```
+
+（2）转化为 Object URL 进行下载
+
+```
+Text -> Blob -> Object URL
+```
+
+```js
+function download (url, name) {
+  const a = document.createElement('a')
+  a.download = name
+  a.rel = 'noopener'
+  a.href = url
+  // 触发模拟点击
+  a.dispatchEvent(new MouseEvent('click'))
+  // 或者 a.click()
+}
+
+const json = {
+  a: 3,
+  b: 4,
+  c: 5
+}
+const str = JSON.stringify(json, null, 2)
+
+// 方案一：Text -> DataURL
+const dataUrl = `data:,${str}`
+download(dataUrl, 'demo.json')
+
+// 方案二：Text -> Blob -> ObjectURL
+const url = URL.createObjectURL(new Blob(str.split('')))
+download(url, 'demo1.json')
+```
+
+#### 9.2 总结
+
+1.模拟下载，可以通过新建一个 <a href="url" download><a> 标签并设置 url 及 download 属性来下载
+
+2.可以通过把 json 转化为 dataurl 来构造 URL
+
+3.可以通过把 json 转换为 Blob 再转化为 ObjectURL 来构造 URL
+
+### 十、找到当前页面出现次数最多的HTML标签
+
+
+
