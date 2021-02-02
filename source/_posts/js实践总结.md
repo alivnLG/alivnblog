@@ -550,5 +550,24 @@ download(url, 'demo1.json')
 
 ### 十、找到当前页面出现次数最多的HTML标签
 
+```js
+// 统计页面标签数
+let elementArray = document.querySelectorAll('*');
+let elementTagNameArray = [];
+for (let i=0;i<elementArray.length;i++){
+    elementTagNameArray.push(elementArray[i].localName)
+}
+let statisticsElement = [];
+elementTagNameArray.forEach(x=>{
+    let hasElement = statisticsElement.find(y=>y.name===x);
+    if(hasElement){
+        hasElement.count = hasElement.count + 1;
+    } else {
+        statisticsElement.push({name:x,count:1})
+    }
+})
+console.log(statisticsElement)
+```
+
 
 
