@@ -35,13 +35,14 @@ Secure Shell， 由IETF网络工作小组所制定，为创建在应用层和传
 第二种级别（基于密匙的安全验证），需要依靠密匙，也就是你必须为自己创建一对密匙，
 并把公有密匙放在需要访问的服务器上。如果你要连接到SSH服务器上，
 客户端软件就会向服务器发出请求，请求用你的密匙进行安全验证。
-服务器收到请求之后，先在你在该服务器的用户根目录下寻找你的公有密匙，然后把它和你发送过来的公有密匙进行比较。
+服务器收到请求之后，先在你在该服务器的用户根目录下寻找你的公有密匙，然后把它和你发送过来的
+公有密匙进行比较。
 如果两个密匙一致，服务器就用公有密匙加密"质询"（challenge）并把它发送给客户端软件。
 客户端软件收到"质询"之后就可以用你的私人密匙解密再把它发送给服务器。
 ```
 与第一种级别相比，第二种级别不需要在网络上传送用户口令。另外，第二种级别不仅加密所有传送的数据，而"中间人"这种攻击方式也是不可能的（因为他没有你的私人密匙）。但是整个登录的过程可能慢一些。
 
-#### 5. scp远程拷贝
+#### 4. scp远程拷贝
 scp是secure copy的简写，用于在Linux下进行远程拷贝文件的命令，和它类似的命令有cp，不过cp只是在本机进行拷贝不能跨服务器，而且scp传输是加密的。可能会稍微影响一下速度。两台主机之间复制文件必需得同时有两台主机的复制执行帐号和操作权限。
 
 scp命令参数
@@ -55,7 +56,8 @@ scp命令参数
 -p 留原文件的修改时间，访问时间和访问权限。
 -q 不显示传输进度条。
 -r 递归复制整个目录。
--v 详细方式显示输出。scp和ssh(1)会显示出整个过程的调试信息。这些信息用于调试连接，验证和配置问题。
+-v 详细方式显示输出。scp和ssh(1)会显示出整个过程的调试信息。这些信息用于调试连接，验证
+   和配置问题。
 -c cipher 以cipher将数据传输进行加密，这个选项将直接传递给ssh。
 -F ssh_config 指定一个替代的ssh配置文件，此参数直接传递给ssh。
 -i identity_file 从指定文件中读取传输时使用的密钥文件，此参数直接传递给ssh。
@@ -74,7 +76,8 @@ scp /val/test.tar.gz root@www.test.com:/val/test.tar.gz
 scp -r root@www.test.com:/val/test/ /val/test/
 远程复制本地目录：（把本地的目录复制到远程主机上）
 scp -r ./ubuntu_env/ root@192.168.0.111:/home/pipi
-pika:/media/pika/files/machine_learning/datasets$scp -r SocialNetworks/ piting@192.168.0.172:/media/data/pipi/datasets
+pika:/media/pika/files/machine_learning/datasets$scp -r SocialNetworks/ 
+piting@192.168.0.172:/media/data/pipi/datasets
 
 本地复制远程文件到指定目录：（把远程的文件复制到本地）
 scp root@www.test.com:/val/test/test.tar.gz /val/test/

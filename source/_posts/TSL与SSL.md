@@ -54,9 +54,11 @@ TLS协议可以分为两部分
 ![tsl002](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/tsl002.jpg)
 
 ```
-步骤 1. ClientHello – 客户端发送所支持的 SSL/TLS 最高协议版本号和所支持的加密算法集合及压缩方法集合等信息给服务器端。
+步骤 1. ClientHello – 客户端发送所支持的 SSL/TLS 最高协议版本号和所支持的加密算法集合
+及压缩方法集合等信息给服务器端。
 
-步骤 2. ServerHello – 服务器端收到客户端信息后，选定双方都能够支持的 SSL/TLS 协议版本和加密方法及压缩方法，返回给客户端。
+步骤 2. ServerHello – 服务器端收到客户端信息后，选定双方都能够支持的 SSL/TLS 协议版本
+和加密方法及压缩方法，返回给客户端。
 
 （可选）步骤 3. SendCertificate – 服务器端发送服务端证书给客户端。
 
@@ -66,9 +68,11 @@ TLS协议可以分为两部分
 
 （可选）步骤 6. ResponseCertificate – 如果选择双向验证，客户端向服务器端发送客户端证书。
 
-步骤 7. ClientKeyExchange – 客户端使用服务器端的公钥，对客户端公钥和密钥种子进行加密，再发送给服务器端。
+步骤 7. ClientKeyExchange – 客户端使用服务器端的公钥，对客户端公钥和密钥种子进行加密，
+再发送给服务器端。
 
-（可选）步骤 8. CertificateVerify – 如果选择双向验证，客户端用本地私钥生成数字签名，并发送给服务器端，让其通过收到的客户端公钥进行身份验证。
+（可选）步骤 8. CertificateVerify – 如果选择双向验证，客户端用本地私钥生成数字签名，
+并发送给服务器端，让其通过收到的客户端公钥进行身份验证。
 
 步骤 9. CreateSecretKey – 通讯双方基于密钥种子等信息生成通讯密钥。
 
@@ -80,7 +84,8 @@ TLS协议可以分为两部分
 
 步骤 13. Finished – 服务器做好加密通讯的准备。
 
-步骤 14. Encrypted/DecryptedData – 双方使用客户端密钥，通过对称加密算法对通讯内容进行加密。
+步骤 14. Encrypted/DecryptedData – 双方使用客户端密钥，通过对称加密算法对通讯内容
+进行加密。
 
 步骤 15. ClosedConnection – 通讯结束后，任何一方发出断开 SSL 连接的消息。
 ```
@@ -371,11 +376,9 @@ CA 验证首先需要说一下它的颁发过程：
 
 **CRL**
 
-CRL（Certificate Revocation List），即，证书吊销列表。CA 机构会生成一个列表，列表里面是当前周期被吊销证书的序列号，当进行证书验证时，同样也会进行验证该项。如果，已经是吊销证书的话，那么该次 TLS/SSL 连接也会失败。
+CRL（Certificate Revocation List），即证书吊销列表。CA 机构会生成一个列表，列表里面是当前周期被吊销证书的序列号，当进行证书验证时，同样也会进行验证该项。如果，已经是吊销证书的话，那么该次 TLS/SSL 连接也会失败。
 
-我们可以从证书信息中找到 CRL URI:
-
-![tsl013](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/tsl013.jpg)
+我们可以从证书信息中找到 CRL URI
 
 该协议虽然简单，但，缺陷还是比较多的。
 
@@ -480,7 +483,13 @@ ssl_ciphers ECDH+AESGCM:ECDH+AES256:ECDH+AES128:DH+3DES:!ADH:!AECDH:!MD5
 那么，在 nginx 中，我们只要选择好合适的加密套件即可。这里就放一份现成的吧
 
 ```
-ssl_ciphers 'ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256::DES-CBC3-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5';
+ssl_ciphers 'ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:
+ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:
+DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:
+kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:
+ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:
+ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:
+DHE-RSA-AES128-SHA256::DES-CBC3-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5';
 ```
 
 ##### 11.3 使用 DH 密钥交换
@@ -498,9 +507,7 @@ openssl dhparam 2048 -out dhparam.pem
 ssl_dhparam dhparam.pem;
 ```
 
-这样，你就正式的开启的 DH 加密模式。如果你使用抓包工具观察一下，此时 DH 应该会在 Server Hello 里：
-
-![tsl014](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/tsl014.jpg)
+这样，你就正式的开启的 DH 加密模式。如果你使用抓包工具观察一下，此时 DH 应该会在 Server Hello 里
 
 不过，由于历史原因，DH param 已经使用的长度是 1024，比如: 采用 Oakley group 2 版本。现在，比较流行的 DH 加密方式是 ECDHE，它和以前的加密方式（DHE）比起来，在密钥生成这块会快很多。同样，由于历史原因，它的基本条件比较高：（其实也还好）
 
