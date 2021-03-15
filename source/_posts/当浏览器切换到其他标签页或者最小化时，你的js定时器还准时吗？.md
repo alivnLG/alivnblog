@@ -51,7 +51,8 @@ document.visibilityState有三个值
 document.getElementById('btn').addEventListener('click', function() {
   setInterval(function() {
     const myDate = new Date();
-    const currentDate = myDate.getMinutes() + '分'+ myDate.getSeconds() + '秒' + myDate.getMilliseconds() + '豪秒';
+    const currentDate = myDate.getMinutes() + '分'+ myDate.getSeconds() + '秒' + 
+    myDate.getMilliseconds() + '豪秒';
     // 每次循环打印当前时间
     console.log(currentDate);
   }, 500);
@@ -95,7 +96,8 @@ ie浏览器
 function timer() {
   setTimeout(function() {
     const myDate = new Date();
-    const currentDate = myDate.getMinutes() + '分'+ myDate.getSeconds() + '秒' + myDate.getMilliseconds() + '豪秒';
+    const currentDate = myDate.getMinutes() + '分'+ myDate.getSeconds() + '秒' + 
+    myDate.getMilliseconds() + '豪秒';
     console.log(currentDate);
     timer();
   }, 500)
@@ -143,7 +145,8 @@ raf是浏览器提供的一个更流畅的处理动画的方法，它会在下�
 ```js
 function timer() {
   const myDate = new Date();
-  const currentDate = myDate.getMinutes() + '分'+ myDate.getSeconds() + '秒' + myDate.getMilliseconds() + '豪秒';
+  const currentDate = myDate.getMinutes() + '分'+ myDate.getSeconds() + '秒' + 
+  myDate.getMilliseconds() + '豪秒';
   console.log(currentDate);
   window.requestAnimationFrame(timer)
 }
@@ -202,7 +205,8 @@ document.addEventListener('visibilitychange', function() {
 // demo_workers.js
 setInterval(function() {
   const myDate = new Date();
-  const currentDate = myDate.getMinutes() + '分'+ myDate.getSeconds() + '秒' + myDate.getMilliseconds() + '豪秒';
+  const currentDate = myDate.getMinutes() + '分'+ myDate.getSeconds() + '秒' + 
+  myDate.getMilliseconds() + '豪秒';
   postMessage(currentDate);
 }, 500);
 ```
