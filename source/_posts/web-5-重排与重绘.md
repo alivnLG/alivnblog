@@ -22,6 +22,8 @@ categories:
 
 第4步和第5步是最耗时的部分，这两步合起来，就是我们通常所说的渲染。
 
+![webzh004](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webzh004.jpg)
+
 ### 二、渲染
 
 在页面的生命周期中，网页生成的时候，至少会渲染一次。在用户访问的过程中，还会不断触发重排(reflow)和重绘(repaint)，不管页面发生了重绘还是重排，都会影响性能，最可怕的是重排，会使我们付出高额的性能代价，所以我们应尽量避免。
