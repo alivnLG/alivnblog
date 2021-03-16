@@ -250,5 +250,6 @@ STS提供了强大的权限控制功能，可以将客户端的访问权限限�
 ##### 2.在URL中包含签名
 除了使用Authorization Header，用户还可以在URL中加入签名信息，这样用户就可以把该URL转给第三方实现授权访问。
 ```
-http://oss-example.oss-cn-hangzhou.aliyuncs.com/oss-api.pdf?OSSAccessKeyId=nz2pc56s936**9l&Expires=1141889120&Signature=vjbyPxybdZaNmGa%2ByT272YEAiv4%3D
+http://oss-example.oss-cn-hangzhou.aliyuncs.com/oss-api.pdf?OSSAccessKeyId=nz2pc56s936**9l
+&Expires=1141889120&Signature=vjbyPxybdZaNmGa%2ByT272YEAiv4%3D
 ```

@@ -7,7 +7,7 @@ tags:
 categories:
 - 学习笔记
 ---
-##### 1.GitHub地址 下载
+##### 1.GitHub地址下载
 
 https://github.com/git-for-windows/git/releases/
 
