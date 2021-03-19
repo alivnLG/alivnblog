@@ -17,7 +17,7 @@ categories:
 
 #### 1.2 移动端
 
-独设计一个布局，使用不同的域名如wap.或m.
+单独设计一个布局，使用不同的域名如wap.或m.
 
 #### 1.3 优点
 
@@ -80,7 +80,8 @@ categories:
 头部加入
 
 ```html
-<meta name="applicable-device" content="pc,mobile"><meta http-equiv="Cache-Control" content="no-transform ">
+<meta name="applicable-device" content="pc,mobile"><meta http-equiv="Cache-Control" 
+content="no-transform ">
 ```
 
 ### 五、弹性布局（rem/em布局）

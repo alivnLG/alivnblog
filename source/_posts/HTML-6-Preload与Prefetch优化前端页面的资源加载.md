@@ -39,8 +39,10 @@ preload与prefetch同属于浏览器的Resource-Hints，用于辅助浏览器进
 ```html
 <head>
     ...
-    <link rel="preload" as="font" href="<%= require('/assets/fonts/AvenirNextLTPro-Demi.otf') %>" crossorigin>
-    <link rel="preload" as="font" href="<%= require('/assets/fonts/AvenirNextLTPro-Regular.otf') %>" crossorigin>
+    <link rel="preload" as="font" href="<%= require('/assets/fonts/AvenirNextLTPro-Demi.otf') %>"
+     crossorigin>
+    <link rel="preload" as="font" href="<%= require('/assets/fonts/AvenirNextLTPro-Regular.otf') %>"
+     crossorigin>
     ...
 </head>
 ```
@@ -64,8 +66,10 @@ preload与prefetch同属于浏览器的Resource-Hints，用于辅助浏览器进
 ```html
 <head>
     ...
-    <link rel="preload" as="font" href="<%= require('/assets/fonts/AvenirNextLTPro-Demi.otf') %>" crossorigin>
-    <link rel="preload" as="font" href="<%= require('/assets/fonts/AvenirNextLTPro-Regular.otf') %>" crossorigin>
+    <link rel="preload" as="font" href="<%= require('/assets/fonts/AvenirNextLTPro-Demi.otf') %>"
+     crossorigin>
+    <link rel="preload" as="font" href="<%= require('/assets/fonts/AvenirNextLTPro-Regular.otf') %>"
+     crossorigin>
     ...
 </head>
 ```
