@@ -13,7 +13,7 @@ categories:
 ##### 4.DOM (Document Object Model)（文档对象模型）是用于访问 HTML 元素的正式 W3C 标准。
 ##### 5.ECMAScript是javascript的规范。javascript是ECMAScript的实现
 ##### 6.ECMAScript 6 也称为 ECMAScript 2015。ECMAScript 7 也称为 ECMAScript 2016。
-##### 7.把函数放入 <head> 部分中，或者放在页面底部。这样就可以把它们安置到同一处位置，不会干扰页面的内容。
+##### 7.把函数放入```<head>```部分中，或者放在页面底部。这样就可以把它们安置到同一处位置，不会干扰页面的内容。
 ##### 8.如果在文档已完成加载后执行 document.write，整个 HTML 页面将被覆盖。
 ##### 9.在编程语言中，一般固定值称为字面量；变量用于存储数据值。JavaScript 使用关键字 var 来定义变量，使用等号来为变量赋值；变量是一个名称。字面量是一个值。
 ##### 10.JavaScript 关键字必须以字母、下划线（_）或美元符（$）开始。
@@ -29,7 +29,8 @@ var carname;
 ```
 ##### 18.数据类型
 ```
-1.值类型(基本类型)：字符串（String）、数字(Number)、布尔(Boolean)、对空（Null）、未定义（Undefined）、Symbol。
+1.值类型(基本类型)：字符串（String）、数字(Number)、布尔(Boolean)、
+对空（Null）、未定义（Undefined）、Symbol、BigInt。
 
 2.引用数据类型：对象(Object)、数组(Array)、函数(Function)。
 ```
