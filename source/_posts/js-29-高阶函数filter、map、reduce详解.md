@@ -83,7 +83,7 @@ reduce 接收 2 个参数： 第一个参数是回调函数（必选），第二
 // 20
 ```
 
-初始值 initialValue 可以是任意类型。如果没有提供 initialValue，reduce 会从索引 1 的地方开始执行 callback 方法，跳过第一个索引。如果提供 initialValue，从索引 0 开始。
+**<span style="color:red">初始值 initialValue 可以是任意类型。如果没有提供 initialValue，reduce 会从索引 1 的地方开始执行 callback 方法，跳过第一个索引。如果提供 initialValue，从索引 0 开始。</span>**
 
 它的执行就像一个贪吃蛇，蛇每吃一个豆子，豆子将会变成蛇身的一部分，蛇再去吃下一个豆子。
 
@@ -236,8 +236,6 @@ bills.reduce((acc, cur) => {
   return acc
 }, {})
 ```
-
-![jshof002](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/jshof002.jpg)
 
 ##### 数组去重
 
