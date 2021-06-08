@@ -8,7 +8,7 @@ categories:
 - Nginx
 ---
 #### 一、Nginx简介
-高性能的 Web和 反向代理 服务器，也是一个电子邮件 IMAP/POP3/SMTP 代理服务器。在高连接并发的情况下，Nginx是Apache服务器不错的替代品。
+高性能的 Web 和 反向代理 服务器，也是一个电子邮件 IMAP/POP3/SMTP 代理服务器。在高连接并发的情况下，Nginx是Apache服务器不错的替代品。
 <!--more-->
 #### 二、反向代理
 反向代理（Reverse Proxy）方式是指以代理服务器来接受internet上的连接请求，然后将请求转发给内部网络上的服务器，并将从服务器上得到的结果返回给internet上请求连接的客户端，此时代理服务器对外就表现为一个服务器。
@@ -132,7 +132,8 @@ nginx -s quit       平稳关闭Nginx，保存相关信息，有安排的结束w
 nginx -s reload     因改变了Nginx相关配置，需要重新加载配置而重载。
 nginx -s reopen     重新打开日志文件。
 nginx -c filename   为 Nginx 指定一个配置文件，来代替缺省的。
-nginx -t            不运行，而仅仅测试配置文件。nginx 将检查配置文件的语法的正确性，并尝试打开配置文件中所引用到的文件。
+nginx -t            不运行，而仅仅测试配置文件。nginx 将检查配置文件的语法的正确性，
+                    并尝试打开配置文件中所引用到的文件。
 nginx -v            显示 nginx 的版本。
 nginx -V            显示 nginx 的版本，编译器版本和配置参数。
 ```

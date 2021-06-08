@@ -46,7 +46,7 @@ standalone="no" 意味着 SVG 文档会引用一个外部文件 - 在这里，�
 
 第二和第三行引用了这个外部的 SVG DTD。该 DTD 位于 "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"。该 DTD 位于 W3C，含有所有允许的 SVG 元素。
 
-SVG 代码以 <svg> 元素开始，包括开启标签 <svg> 和关闭标签 </svg> 。这是根元素。width 和 height 属性可设置此 SVG 文档的宽度和高度。version 属性可定义所使用的 SVG 版本，xmlns 属性可定义 SVG 命名空间。
+SVG 代码以 ```<svg>``` 元素开始，包括开启标签 ```<svg>``` 和关闭标签 ```</svg>``` 。这是根元素。width 和 height 属性可设置此 SVG 文档的宽度和高度。version 属性可定义所使用的 SVG 版本，xmlns 属性可定义 SVG 命名空间。
 
 注释：所有的开启标签必须有关闭标签！
 ##### 4.SVG形状
@@ -129,13 +129,15 @@ y2 属性在 y 轴定义线条的结束
 ###### polyline曲线
 ```
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
-  <polyline points="0,40 40,40 40,80 80,80 80,120 120,120 120,160" style="fill:white;stroke:red;stroke-width:4" />
+  <polyline points="0,40 40,40 40,80 80,80 80,120 120,120 120,160" 
+  style="fill:white;stroke:red;stroke-width:4" />
 </svg>
 ```
 ###### path路径
 ```
 M = moveto  //移动到的点的x轴和y轴的坐标
-L = lineto  //需要两个参数，分别是一个点的x轴和y轴坐标，L命令将会在当前位置和新位置（L前面画笔所在的点）之间画一条线段。
+L = lineto  //需要两个参数，分别是一个点的x轴和y轴坐标，L命令将会在当前位置和
+                //新位置（L前面画笔所在的点）之间画一条线段。
 H = horizontal lineto  //绘制平行线
 V = vertical lineto    //绘制垂直线
 C = curveto

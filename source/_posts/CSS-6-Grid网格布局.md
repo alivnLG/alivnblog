@@ -85,7 +85,7 @@ div {
 }
 ```
 
-面代码指定div是一个行内元素，该元素内部采用网格布局。
+上面代码指定div是一个行内元素，该元素内部采用网格布局。
 
 ![grid005](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/grid005.jpg)
 
@@ -334,7 +334,8 @@ grid-template-areas: 'a . c'
 这个顺序由grid-auto-flow属性决定，默认值是row，即"先行后列"。也可以将它设成column，变成"先列后行"。
 
 ```css
-这个顺序由grid-auto-flow属性决定，默认值是row，即"先行后列"。也可以将它设成column，变成"先列后行"。
+这个顺序由grid-auto-flow属性决定，默认值是row，即"先行后列"。
+也可以将它设成column，变成"先列后行"。
 ```
 
 上面代码设置了column以后，放置顺序就变成了下图。
