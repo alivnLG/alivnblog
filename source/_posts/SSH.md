@@ -16,6 +16,7 @@ Secure Shell， 由IETF网络工作小组所制定，为创建在应用层和传
 #### 2. 协议内容
 ```
 传输层协议，它提供诸如认证、信任和完整性检验等安全措施，此外它还可以任意地提供数据压缩功能。
+
 通常情况下，这些传输层协议都建立在面向连接的TCP数据流之上。
 
 用户认证协议层，用来实现服务器和客户端之间的身份认证，运行在传输层协议之上。
@@ -70,17 +71,19 @@ scp一般有六种使用方法:
 ```
 本地复制远程文件：（把远程的文件复制到本地）
 scp root@www.test.com:/val/test/test.tar.gz /val/test/test.tar.gz
+
 远程复制本地文件：（把本地的文件复制到远程主机上）
 scp /val/test.tar.gz root@www.test.com:/val/test.tar.gz
+
 本地复制远程目录：（把远程的目录复制到本地）
 scp -r root@www.test.com:/val/test/ /val/test/
+
 远程复制本地目录：（把本地的目录复制到远程主机上）
 scp -r ./ubuntu_env/ root@192.168.0.111:/home/pipi
-pika:/media/pika/files/machine_learning/datasets$scp -r SocialNetworks/ 
-piting@192.168.0.172:/media/data/pipi/datasets
 
 本地复制远程文件到指定目录：（把远程的文件复制到本地）
 scp root@www.test.com:/val/test/test.tar.gz /val/test/
+
 远程复制本地文件到指定目录：（把本地的文件复制到远程主机上）
 scp /val/test.tar.gz root@www.test.com:/val/
 ```
