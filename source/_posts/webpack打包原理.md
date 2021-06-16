@@ -237,7 +237,8 @@ module.exports = {
   }
 };
 // 如上，css 文件编译顺序依次为：postcss-loader ---> css-loader ---> style-loader
-// 编译过程中，第一个loader的值 传递给下一个loader，依次传递；最后一个loader编译完成后，将预期值传递给 webpack
+// 编译过程中，第一个loader的值 传递给下一个loader，依次传递；最后一个loader编译完成后，
+// 将预期值传递给 webpack
 ```
 
 ### 七、核心概念：plugin
