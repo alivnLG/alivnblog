@@ -25,7 +25,7 @@ rem是相对于html元素的font-size来做计算的计算属性值。
 
 通过设置documentElement的fontSize属性值就可以统一整个页面的布局标准。
 
-```
+```js
 // set 1rem = viewWidth / 10
 function setRemUnit () {
     var rem = docEl.clientWidth / 10
@@ -42,11 +42,12 @@ setRemUnit();
 
 等比设置viewport的initial-scale、maximum-scale、minimum-scale的值，从而实现1物理像素=1css像素，以适配高倍屏的显示效果（就是在这个地方规避了大家熟知的“1px问题”）
 
-```
+```js
 var metaEL= doc.querySelector('meta[name="viewport"]');
 var dpr = window.devicePixelRatio;
 var scale = 1 / dpr
-metaEl.setAttribute('content', 'width=device-width, initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no'); 
+metaEl.setAttribute('content', 'width=device-width, initial-scale=' + scale + ', 
+maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no'); 
 ```
 
 ##### 2.2 Flexible配合的周边工具
@@ -57,7 +58,7 @@ Flexible使用了rem作为统一页面布局标准的布局单位，且把页面
 
 当然，以上的工作方式显然是低效且不可接受的，我们可以借助PostCSS的pxtorem插件来帮我们完成这个计算过程:
 
-```
+```js
 plugins: {
     ...,
     'postcss-pxtorem': {
@@ -88,7 +89,7 @@ plugins: {
 
 postcss-pxtorem可以帮我们把我们需要转的px值计算转换为对应的rem值，如：
 
-```
+```css
 .name-item {
     font-size: 40px;
   line-height: 56px;
@@ -100,7 +101,7 @@ postcss-pxtorem可以帮我们把我们需要转的px值计算转换为对应的
 
 转换后
 
-```
+```css
 .name-item {
     font-size: .53333rem;
   line-height: .74667rem;
@@ -124,7 +125,7 @@ postcss-pxtorem可以帮我们把我们需要转的px值计算转换为对应的
 ###### 2.3.2 对高倍屏的安卓手机没做处理
 如果你去研究过lib-flexible的源码，那你一定知道lib-flexible对安卓手机的特殊处理，即：一律按dpr = 1处理。
 
-```
+```js
 if (isIPhone) {
   // iOS下，对于2和3的屏，用2倍的方案，其余的用1倍方案
   if (devicePixelRatio >= 3 && (!dpr || dpr >= 3)) {                
@@ -146,7 +147,7 @@ if (isIPhone) {
 ###### 2.3.3 不兼容响应式布局
 响应式布局，其实质性做法就是结合css3的媒体查询@media对一些不同尺寸阈值做特定的布局设计，如对768px以下屏幕的使用紧凑型布局，对769px到992px的屏幕做图文混排型布局，对大于992px的屏幕做富元素、多元素布局等。
 
-```
+```css
 .main-content {
     max-width: 70em
 }
@@ -236,7 +237,7 @@ postcss-px-to-viewport插件的作用和postcss-pxtorem的作用类似，主要�
 
 结合webpack项目进行配置时，只需要将其配置在项目根目录下的postcss.config.js中即可，其基本配置项如下：
 
-```
+```js
 plugins: {
 'postcss-px-to-viewport': {
     unitToConvert: 'px',   // 需要转换的单位
@@ -245,17 +246,22 @@ plugins: {
     /**
     * 将会被转换的css属性列表，
     * 设置为 * 表示全部，如：['*']
-    * 在属性的前面或后面设置*，如：['*position*']，*position* 表示所有包含 position 的属性，如 background-position-y
-    * 设置为 !xx 表示不匹配xx的那些属性，如：['!letter-spacing'] 表示除了letter-spacing 属性之外的其他属性
-    * 还可以同时使用 ! 和 * ，如['!font*'] 表示除了font-size、 font-weight ...这些之外属性之外的其他属性名头部是‘font’的属性
+    * 在属性的前面或后面设置*，如：['*position*']，*position* 表示所有包含 position 的属性，
+    * 如 background-position-y
+    * 设置为 !xx 表示不匹配xx的那些属性，如：['!letter-spacing'] 表示除了letter-spacing 
+    * 属性之外的其他属性
+    * 还可以同时使用 ! 和 * ，如['!font*'] 表示除了font-size、 font-weight ...这些之外属性
+    * 之外的其他属性名头部是‘font’的属性
     * */
     propList: ['*'],
     viewportUnit: 'vw',    // 需要转换成为的单位
     fontViewportUnit: 'vw',// 需要转换称为的字体单位
     /**
     * 需要忽略的选择器，即这些选择器对应的属性值不做单位转换
-    * 设置为字符串，转换器在做转换时会忽略那些选择器中包含该字符串的选择器，如：['body']会匹配到 .body-class，也就意味着.body-class对应的样式设置不会被转换
-    * 设置为正则表达式，在做转换前会先校验选择器是否匹配该正则，如果匹配，则不进行转换，如[/^body$/]会匹配到 body 但是不会匹配到 .body
+    * 设置为字符串，转换器在做转换时会忽略那些选择器中包含该字符串的选择器，如：['body']会匹配到 
+    * .body-class，也就意味着.body-class对应的样式设置不会被转换
+    * 设置为正则表达式，在做转换前会先校验选择器是否匹配该正则，如果匹配，则不进行转换，如[/^body$/]
+    * 会匹配到 body 但是不会匹配到 .body
     */
     selectorBlackList: [],
     minPixelValue: 1,      // 最小的像素单位值
@@ -267,7 +273,11 @@ plugins: {
     * 如果设置为数组，那么该数组内的元素都必须是正则表达式
     */
     exclude: [],
-    landscape: false,      // 是否自动加入 @media (orientation: landscape)，其中的属性值是通过横屏宽度来转换的
+    landscape: false,      
+    /**
+    * 是否自动加入 @media (orientation: landscape)，其中的属性值是
+    * 通过横屏宽度来转换的
+    */
     landscapeUnit: 'vw',   // 横屏单位
     landscapeWidth: 1334   // 横屏宽度
 }
@@ -275,7 +285,7 @@ plugins: {
 
 目前出视觉设计稿，我们都是使用750px宽度的，那么100vw = 750px，即1vw = 7.5px。那么我们可以根据设计图上的px值直接转换成对应的vw值。在实际撸码过程，不需要进行任何的计算，直接在代码中写px即可，postcss-px-to-viewport会自动帮我们把px计算转换为对应的vw值，比如：
 
-```
+```css
 .name-item {
     font-size: 40px;
   line-height: 56px;
@@ -287,7 +297,7 @@ plugins: {
 
 转换后
 
-```
+```css
 .name-item {
     font-size: 5.33333vw;
   line-height: 7.46667vw;
@@ -299,9 +309,13 @@ plugins: {
 
 当然，postcss-px-to-viewport的功能不止于此，它还可以在selectorBlackList选项中设置一些关键词或正则，来避免对这些指定的选择器做转换，如selectorBlackList：['.ignore', '.hairlines']：
 
-```
+```html
 <div class="box ignore"></div>
+```
+
 写CSS的时候： 
+
+```css
 .ignore {
     margin: 10px;
     background-color: red;
@@ -317,7 +331,7 @@ plugins: {
 
 转换后
 
-```
+```css
 .box {
     width: 24vw;
     height: 40vw;
@@ -343,34 +357,35 @@ plugins: {
 1. 引入JavaScript文件
 viewport-units-buggyfill主要有两个JavaScript文件：viewport-units-buggyfill.js和viewport-units-buggyfill.hacks.js。你只需要在你的HTML文件中引入这两个文件。比如在Vue项目中的index.html引入它们：
 
-```
-<script src="//g.alicdn.com/fdilab/lib3rd/viewport-units-buggyfill/0.6.2/??viewport-units-buggyfill.hacks.min.js,viewport-units-buggyfill.min.js"></script>
+```html
+<script src="//g.alicdn.com/fdilab/lib3rd/viewport-units-buggyfill/0.6.2/
+??viewport-units-buggyfill.hacks.min.js,viewport-units-buggyfill.min.js"></script>
 ```
 
 2. 在HTML文件中调用viewport-units-buggyfill
 在html文件中引入polyfill的位置之后，需要手动调用下 viewport-units-buggyfill:
 
-```
-<script>
+```js
   window.onload = function () {
     window.viewportUnitsBuggyfill.init({
       hacks: window.viewportUnitsBuggyfillHacks
     });
 }
-</script>  
 ```
 
 3. 结合使用postcss-viewport-units
 具体的使用。在你的CSS中，只要使用到了viewport的单位地方，需要在样式中添加content：
 
-```
+```css
 .my-viewport-units-using-thingie {
   width: 50vmin;
   height: 50vmax;
   top: calc(50vh - 100px);
   left: calc(50vw - 100px);
   /* hack to engage viewport-units-buggyfill */
-  content: 'viewport-units-buggyfill; width: 50vmin; height: 50vmax; top: calc(50vh - 100px); left: calc(50vw - 100px);';
+  content: 
+  'viewport-units-buggyfill; width: 50vmin; height: 50vmax; 
+  top: calc(50vh - 100px); left: calc(50vw - 100px);';
 }  
 ```
 
@@ -378,7 +393,7 @@ viewport-units-buggyfill主要有两个JavaScript文件：viewport-units-buggyfi
 
 这个时候就需要前面提到的postcss-viewport-units插件。这个插件将让你无需关注content的内容，插件会自动帮你处理。比如插件处理后的代码：
 
-```
+```css
 .test {
     padding: 3.2vw;
     margin: 3.2vw auto;
@@ -392,7 +407,7 @@ viewport-units-buggyfill主要有两个JavaScript文件：viewport-units-buggyfi
 
 配置这个插件也很简单，只需要和配置postcss-px-to-viewport一样，配置在项目根目录的postcss.config.js中即可：
 
-```
+```js
 plugins: {
   'postcss-viewport-units': {}
 } 
@@ -404,7 +419,7 @@ plugins: {
 
 对于img，在部分浏览器中，content的写入会造成图片无法正常展示，这时候需要全局添加样式覆盖：
 
-```
+```css
 img {
     content: normal !important;
 } 
@@ -412,7 +427,7 @@ img {
 
 对于::before等伪元素，就算是在里面使用了vw单位，Viewport Units Buggyfill对其并不会起作用，如：
 
-```
+```css
 // 编译前
 .after {
     content: 'after content';
@@ -457,18 +472,22 @@ background-image方案，在以上机型上都能比较好的展现，但是在�
 
 ![webMobile010](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/webMobile010.jpg)
 
-```
+```js
 fineLine(color = #e8e8e8, position = bottom)
   if position == top || position == bottom
     background-repeat: repeat-x
-        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAAXNSR…hZcwAADsMAAA7DAcdvqGQAAAAQSURBVBhXY5g5c+Z/BhAAABRcAsvqBShzAAAAAElFTkSuQmCC)
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAA
+        CZgbYnAAAAAXNSR…hZcwAADsMAAA7DAcdvqGQAAAAQSURBVBhXY5g5c+Z/BhAAABRcAsvqB
+        ShzAAAAAElFTkSuQmCC)
     if position == top
       background-position: 0 0
     else
       background-position: 0 100%
   else
     background-repeat: repeat-y
-        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAAXNSR…hZcwAADsMAAA7DAcdvqGQAAAAQSURBVBhXY5g5c+Z/BhAAABRcAsvqBShzAAAAAElFTkSuQmCC)
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAA
+        CZgbYnAAAAAXNSR…hZcwAADsMAAA7DAcdvqGQAAAAQSURBVBhXY5g5c+Z/BhAAABRcAsvqB
+        ShzAAAAAElFTkSuQmCC)
     if position == left
       background-position: 0 0
     else
@@ -477,7 +496,7 @@ fineLine(color = #e8e8e8, position = bottom)
 
 当然，我们也可以借助postcss-write-svg的能力，自己编写一个可以绘出上图中两种类型的base64图片出来：
 
-```
+```css
 // 画出来的图片如图一(上下)
 @svg squareLR {
     width: 1px;
@@ -518,7 +537,7 @@ fineLine(color = #e8e8e8, position = bottom)
 
 除此之外，我们还有渐变背景图片方案。在渐变背景图片方案中，我们只需要维护一份mixin代码就可以实现我们想要的效果：
 
-```
+```css
 bgLine($color = #efefef, $direction = all)
   background-repeat: no-repeat
   if $direction == all
@@ -577,7 +596,7 @@ bgLine($color = #efefef, $direction = all)
 
 其方案的思路也很好理解，大家一看便知：
 
-```
+```css
 border-1px($color = #ccc, $radius = 2PX, $direction = all)
   position: relative
   &::after
@@ -628,7 +647,8 @@ rem适配的原理是布局等比例缩放，我们可以动态控制html中font
 在移动端配置视口的方法是设置一个meta标签：
 
 ```html
-<meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1; minimum-scale=1; user-scalable=no;">
+<meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1; 
+minimum-scale=1; user-scalable=no;">
 ```
 
 其中，width为定义视口的宽度，height为定义视口的高度，initial-scale为定义初始缩放值，maximum-scale和minimum-scale分别为定义放大最大和缩小最小比例，user-scalable指是否允许用户手动缩放页面。上面的meta标签例子是将scale设置为固定1倍视口的大小。
