@@ -5,7 +5,7 @@ tags:
 - nightwatch
 - e2e
 categories:
-- 测试
+- 学习笔记
 ---
 ### nightwatch实现vue应用e2e测试
 nightwatch是一个基于Selenium WebDriver API的e2e自动化测试框架，可以使用js方法与css选择器来编写运行在Selenium服务器上的端到端测试。这里直接使用vue-cli来安装的，nightwatch的相关模块都已自动安装，下面就来解释下安装了哪些模块，以及具体怎么进行测试。

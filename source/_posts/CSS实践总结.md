@@ -17,7 +17,17 @@ vmax — vw 和 vh 中的较大值
 
 ##### 2.calc函数
 
-```
+calc() 函数用于动态计算长度值。
+
+- **需要注意的是，运算符前后都需要保留一个空格，例如：width: calc(100% - 10px)；**
+
+- 任何长度值都可以使用calc()函数进行计算；
+
+- calc()函数支持 "+", "-", "*", "/" 运算；
+
+- calc()函数使用标准的数学运算优先级规则；
+
+```css
 .demo {
     width: calc(100% - 500px);
     height: 200px;
@@ -209,4 +219,99 @@ moreline(id,rows,str){
     }
   }
  }
+```
+
+##### 9.css制作三角形
+
+向上
+
+```css
+#triangle-up {
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 100px solid red;
+}
+```
+
+向下
+
+```css
+#triangle-down {
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-top: 100px solid red;
+}
+```
+
+向左
+
+```css
+#triangle-left {
+    width: 0;
+    height: 0;
+    border-top: 50px solid transparent;
+    border-right: 100px solid red;
+    border-bottom: 50px solid transparent;
+}
+```
+
+向右
+
+```css
+#triangle-right {
+    width: 0;
+    height: 0;
+    border-top: 50px solid transparent;
+    border-left: 100px solid red;
+    border-bottom: 50px solid transparent;
+}
+```
+
+左上角
+
+```css
+#triangle-topleft {
+    width: 0;
+    height: 0;
+    border-top: 100px solid red;
+    border-right: 100px solid transparent;
+}
+```
+
+右上角
+
+```css
+#triangle-topright {
+    width: 0;
+    height: 0;
+    border-top: 100px solid red;
+    border-left: 100px solid transparent;
+ 
+}
+```
+
+左下角
+
+```css
+#triangle-bottomleft {
+    width: 0;
+    height: 0;
+    border-bottom: 100px solid red;
+    border-right: 100px solid transparent;
+}
+```
+
+右下角
+
+```css
+#triangle-bottomright {
+    width: 0;
+    height: 0;
+    border-bottom: 100px solid red;
+    border-left: 100px solid transparent;
+}
 ```

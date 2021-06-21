@@ -4,7 +4,7 @@ date: 2020-05-26 11:07:39
 tags:
 - Mac
 categories: 
-- 计算机网络
+- 计算机系统与网络
 ---
 Mac终端使用技巧 或 Linux中常用操作命令
 <!--more-->

@@ -7,7 +7,7 @@ tags:
 - 小程序
 - H5
 categories:
-- 混合APP开发
+- 混合APP
 ---
 ## 一、uni-app介绍
 #### 1.uni-app 是一个使用 Vue.js 开发所有前端应用的框架，开发者编写一套代码，可发布到iOS、Android、H5、以及各种小程序（微信/支付宝/百度/头条/QQ/钉钉）等多个平台。

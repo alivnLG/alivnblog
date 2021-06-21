@@ -6,7 +6,7 @@ tags:
 - API
 - YAML
 categories:
-- API文档工具 
+- 学习笔记 
 ---
 #### 一、Swagger简介
 Swagger 是一款RESTFUL接口的、基于YAML、JSON语言的文档在线自动生成、代码自动生成的工具。

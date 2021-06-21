@@ -6,7 +6,7 @@ tags:
 - dart
 - APP
 categories:
-- 混合APP开发
+- 混合APP
 ---
 #### 一、安装环境
 ##### MAC环境安装

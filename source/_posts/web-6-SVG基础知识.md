@@ -1,11 +1,11 @@
 ---
-title: SVG基础知识
-date: 2020-06-02 15:06:29
+title: 前端综合-6-SVG基础知识
+date: 2021-01-05 11:52:58
 tags:
 - SVG
 - 矢量
 categories:
-- SVG
+- 前端综合
 ---
 ##### 1.SVG简介
 SVG 指可伸缩矢量图形 (Scalable Vector Graphics)  

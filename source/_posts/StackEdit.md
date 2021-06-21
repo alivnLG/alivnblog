@@ -6,7 +6,7 @@ tags:
 - GMF
 - markdown-it
 categories:
-- MarkDown
+- 学习笔记
 ---
 ## StackEdit
 **StackEdit** 基于PageDown。它是使用Markdown语言来编辑内容的。 

@@ -5,7 +5,7 @@ top: true
 tags:
 - OSI
 categories:
-- 计算机网络
+- 计算机系统与网络
 ---
 开放式系统互联通信参考模型（英语：Open System Interconnection Reference Model，缩写为 OSI），简称为OSI模型。
 

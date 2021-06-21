@@ -1,10 +1,10 @@
 ---
-title: Ubuntu
+title: Ubuntu系统
 date: 2020-05-29 10:52:50
 tags:
 - Ubuntu
 categories: 
-- Linux
+- 计算机系统与网络
 ---
 ### 一、Ubuntu
 Ubuntu是一个以桌面应用为主的Linux操作系统
