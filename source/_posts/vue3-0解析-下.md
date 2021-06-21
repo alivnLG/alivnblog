@@ -940,6 +940,341 @@ cd vite-demo && yarn && yarn dev
 
 当然，也不至于到可以完全取代Webpack的夸张地步，因为Vite还是在开发阶段，许多工程化的需求还是难以满足的，比如Webpack丰富的周边插件等等。
 
+### 二、生命周期函数
+
+vue2.x有8个生命周期函数：
+
+- beforeCreate
+- created
+- beforeMount
+- mounted
+- beforeUpdate
+- updated
+- beforeDestroy
+- destroyed
+
+在vue3中，新增了一个setup生命周期函数，setup执行的时机是在beforeCreate生命函数之前执行，因此在这个函数中是不能通过this来获取实例的；同时为了命名的统一，将beforeDestroy改名为beforeUnmount，destroyed改名为unmounted，因此vue3有以下生命周期函数：
+
+- beforeCreate（建议使用setup代替）
+- created（建议使用setup代替）
+- setup
+- beforeMount
+- mounted
+- beforeUpdate
+- updated
+- beforeUnmount
+- unmounted
+
+同时，vue3新增了生命周期钩子，我们可以通过在生命周期函数前加on来访问组件的生命周期，我们可以使用以下生命周期钩子：
+
+- onBeforeMount
+- onMounted
+- onBeforeUpdate
+- onUpdated
+- onBeforeUnmount
+- onUnmounted
+- onErrorCaptured
+- onRenderTracked
+- onRenderTriggered
+
+那么这些钩子函数如何来进行调用呢？我们在setup中挂载生命周期钩子，当执行到对应的生命周期时，就调用对应的钩子函数：
+
+```js
+import { onBeforeMount, onMounted } from "vue";
+export default {
+  setup() {
+    console.log("----setup----");
+    onBeforeMount(() => {
+      // beforeMount代码执行
+    });
+    onMounted(() => {
+      // mounted代码执行
+    });
+  },
+}
+```
+
+### 三、非兼容的功能
+
+非兼容的功能主要是一些和Vue2.x版本改动较大的语法，已经在Vue3上可能存在兼容问题了。
+
+#### 3.1 data、mixin和filter
+
+在Vue2.x中，我们可以定义data为object或者function，但是我们知道在组件中如果data是object的话会出现数据互相影响，因为object是引用数据类型；
+
+在Vue3中，data只接受function类型，通过function返回对象；同时Mixin的合并行为也发生了改变，当mixin和基类中data合并时，会执行浅拷贝合并：
+
+```js
+const Mixin = {
+  data() {
+    return {
+      user: {
+        name: 'Jack',
+        id: 1,
+        address: {
+          prov: 2,
+          city: 3,
+        },
+      }
+    }
+  }
+}
+const Component = {
+  mixins: [Mixin],
+  data() {
+    return {
+      user: {
+        id: 2,
+        address: {
+          prov: 4,
+        },
+      }
+    }
+  }
+}
+
+// vue2结果：
+{
+  id: 2,
+  name: 'Jack',
+  address: {
+    prov: 4,
+    city: 3
+  }
+}
+
+// vue3结果：
+user: {
+  id: 2,
+  address: {
+    prov: 4,
+  },
+}
+```
+
+我们看到最后合并的结果，vue2.x会进行深拷贝，对data中的数据向下深入合并拷贝；而vue3只进行浅层拷贝，对data中数据发现已存在就不合并拷贝。
+
+在vue2.x中，我们还可以通过过滤器filter来处理一些文本内容的展示：
+
+```html
+<template>
+  <div>{{ status | statusText }}</div>
+</template>
+<script>
+  export default {
+    props: {
+      status: {
+        type: Number,
+        default: 1
+      }
+    },
+    filters: {
+      statusText(value){
+        if(value === 1){
+          return '订单未下单'
+        } else if(value === 2){
+          return '订单待支付'
+        } else if(value === 3){
+          return '订单已完成'
+        }
+      }
+    }
+  }
+</script>
+```
+
+最常见的就是处理一些订单的文案展示等；然而在vue3中，过滤器filter已经删除，不再支持了，官方建议使用方法调用或者计算属性computed来进行代替。
+
+#### 3.2 v-model
+
+在Vue2.x中，v-model相当于绑定value属性和input事件，它本质也是一个语法糖：
+
+```html
+<child-component v-model="msg"></child-component>
+<!-- 相当于 -->
+<child-component :value="msg" @input="msg=$event"></child-component>
+```
+
+在某些情况下，我们需要对多个值进行双向绑定，其他的值就需要显示的使用回调函数来改变了：
+
+```html
+<child-component 
+    v-model="msg" 
+    :msg1="msg1" 
+    @change1="msg1=$event"
+    :msg2="msg2" 
+    @change2="msg2=$event">
+</child-component>
+```
+
+在vue2.3.0+版本引入了.sync修饰符，其本质也是语法糖，是在组件上绑定@update:propName回调，语法更简洁：
+
+```html
+<child-component 
+    :msg1.sync="msg1" 
+    :msg2.sync="msg2">
+</child-component>
+
+<!-- 相当于 -->
+
+<child-component 
+    :msg1="msg1" 
+    @update:msg1="msg1=$event"
+    :msg2="msg2"
+    @update:msg2="msg2=$event">
+</child-component>
+```
+
+Vue3中将v-model和.sync进行了功能的整合，抛弃了.sync，表示：多个双向绑定value值直接用多个v-model传就好了；同时也将v-model默认传的prop名称由value改成了modelValue：
+
+```html
+<child-component 
+    v-model="msg">
+</child-component>
+
+<!-- 相当于 -->
+<child-component 
+  :modelValue="msg"
+  @update:modelValue="msg = $event">
+</child-component>
+```
+
+如果我们想通过v-model传递多个值，可以将一个argument传递给v-model：
+
+```html
+<child-component 
+    v-model.msg1="msg1"
+    v-model.msg2="msg2">
+</child-component>
+
+<!-- 相当于 -->
+<child-component 
+    :msg1="msg1" 
+    @update:msg1="msg1=$event"
+    :msg2="msg2"
+    @update:msg2="msg2=$event">
+</child-component>
+```
+
+#### 3.3 v-for和key
+
+在Vue2.x中，我们都知道v-for每次循环都需要给每个子节点一个唯一的key，还不能绑定在template标签上，
+
+```html
+<template v-for="item in list">
+  <div :key="item.id">...</div>
+  <span :key="item.id">...</span>
+</template>
+```
+
+而在Vue3中，key值应该被放置在template标签上，这样我们就不用为每个子节点设一遍：
+
+```html
+<template v-for="item in list" :key="item.id">
+  <div>...</div>
+  <span>...</span>
+</template>
+```
+
+#### 3.4 v-bind合并
+
+在vue2.x中，如果一个元素同时定义了v-bind="object"和一个相同的单独的属性，那么这个单独的属性会覆盖object中的绑定：
+
+```html
+<div id="red" v-bind="{ id: 'blue' }"></div>
+<div v-bind="{ id: 'blue' }" id="red"></div>
+
+<!-- 最后结果都相同 -->
+<div id="red"></div>
+```
+
+然而在vue3中，如果一个元素同时定义了v-bind="object"和一个相同的单独的属性，那么声明绑定的顺序决定了最后的结果（后者覆盖前者）
+
+```html
+<!-- template -->
+<div id="red" v-bind="{ id: 'blue' }"></div>
+<!-- result -->
+<div id="blue"></div>
+
+<!-- template -->
+<div v-bind="{ id: 'blue' }" id="red"></div>
+<!-- result -->
+<div id="red"></div>
+```
+
+#### 3.5 v-for中ref
+
+vue2.x中，在v-for上使用ref属性，通过this.$refs会得到一个数组：
+
+```vue
+<template
+  <div v-for="item in list" :ref="setItemRef"></div>
+</template>
+<script>
+export default {
+  data(){
+    list: [1, 2]
+  },
+  mounted () {
+    // [div, div]
+    console.log(this.$refs.setItemRef) 
+  }
+}
+</script>
+```
+
+但是这样可能不是我们想要的结果；因此vue3不再自动创建数组，而是将ref的处理方式变为了函数，该函数默认传入该节点：
+
+```vue
+<template
+  <div v-for="item in 3" :ref="setItemRef"></div>
+</template>
+<script>
+import { reactive, onUpdated } from 'vue'
+export default {
+  setup() {
+    let itemRefs = reactive([])
+
+    const setItemRef = el => {
+      itemRefs.push(el)
+    }
+
+    onUpdated(() => {
+      console.log(itemRefs)
+    })
+
+    return {
+      itemRefs,
+      setItemRef
+    }
+  }
+}
+</script>
+```
+
+#### 3.6 v-for和v-if优先级
+
+在vue2.x中，在一个元素上同时使用v-for和v-if，v-for有更高的优先级，因此在vue2.x中做性能优化，有一个重要的点就是v-for和v-if不能放在同一个元素上。
+
+而在vue3中，v-if比v-for有更高的优先级。因此下面的代码，在vue2.x中能正常运行，但是在vue3中v-if生效时并没有item变量，因此会报错：
+
+```vue
+<template>
+  <div v-for="item in list" v-if="item % 2 === 0" :key="item">{{ item }}</div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      list: [1, 2, 3, 4, 5],
+    };
+  },
+};
+</script>
+```
+
+
 
 <br/>
 <br/>
