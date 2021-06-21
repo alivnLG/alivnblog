@@ -22,7 +22,7 @@ categories:
 ##### 1.2 代码实现
 路由信息
 
-```
+```js
 routes: [
     {
         path: '/login',
@@ -45,7 +45,7 @@ routes: [
 
 页面控制
 
-```
+```js
 // 假设角色有两种：admin 和 user
 // 这里是从后台获取的用户角色
 const role = 'user'
@@ -62,7 +62,7 @@ router.beforeEach((to, from, next) => {
 #### 二、登录验证
 网站一般只要登陆过一次后，接下来该网站的其他页面都是可以直接访问的，不用再次登陆。 我们可以通过 token 或 cookie 来实现，下面用代码来展示一下如何用 token 控制登陆验证。
 
-```
+```js
 router.beforeEach((to, from, next) => {
     // 如果有token 说明该用户已登陆
     if (localStorage.getItem('token')) {
@@ -91,7 +91,7 @@ router.beforeEach((to, from, next) => {
 
 router.addRoutes
 
-```
+```js
 router.addRoutes(routes: Array<RouteConfig>)
 ```
 
@@ -99,7 +99,7 @@ router.addRoutes(routes: Array<RouteConfig>)
 
 举个例子：
 
-```
+```js
 const router = new Router({
     routes: [
         {
@@ -114,7 +114,7 @@ const router = new Router({
 
 上面的代码和下面的代码效果是一样的
 
-```
+```js
 const router = new Router({
     routes: [
         {path: '/', redirect: '/home'},
@@ -134,14 +134,14 @@ router.addRoutes([
 
 类似于这样，这种规则一定要最后添加。
 
-```
+```js
 {path: '*', redirect: '/404'}
 ```
 
 ##### 3.2 动态生成菜单
 假设后台返回来的数据长这样：
 
-```
+```js
 // 左侧菜单栏数据
 menuItems: [
     {
@@ -177,7 +177,7 @@ menuItems: [
 
 来看看怎么将它转化为菜单栏，我在这里使用了 iview 的组件，不用重复造轮子。
 
-```
+```vue
 <!-- 菜单栏 -->
 <Menu ref="asideMenu" theme="dark" width="100%" @on-select="gotoPage" 
 accordion :open-names="openMenus" :active-name="currentPage" @on-open-change="menuChange">
@@ -194,7 +194,8 @@ accordion :open-names="openMenus" :active-name="currentPage" @on-open-change="me
                         <Icon :size="subItem.size" :type="subItem.type"/>
                         <span v-show="isShowAsideTitle">{{subItem.text}}</span>
                     </template>
-                    <MenuItem class="menu-level-3" v-for="(threeItem, k) in subItem.children" :name="threeItem.name" :key="index + i + k">
+                    <MenuItem class="menu-level-3" v-for="(threeItem, k) in subItem.children" 
+                    :name="threeItem.name" :key="index + i + k">
                         <Icon :size="threeItem.size" :type="threeItem.type"/>
                         <span v-show="isShowAsideTitle">{{threeItem.text}}</span>
                     </MenuItem>
@@ -222,7 +223,7 @@ accordion :open-names="openMenus" :active-name="currentPage" @on-open-change="me
 首先，要把项目所有的页面路由都列出来，再用后台返回来的数据动态匹配，能匹配上的就把路由加上，不能匹配上的就不加。
 最后把这个新生成的路由数据用 addRoutes 添加到路由表里。
 
-```
+```js
 const asyncRoutes = {
     'home': {
         path: 'home',
@@ -310,7 +311,7 @@ function generateRoutes(children, item) {
 
 在 App.vue设置：
 
-```
+```html
 <keep-alive include="list">
     <router-view/>
 </keep-alive>
@@ -328,7 +329,7 @@ function generateRoutes(children, item) {
 **解决方案二一**
 我们可以在路由配置文件上对 detail.vue 增加一个 meta 属性。
 
-```
+```js
 {
     path: '/detail',
     name: 'detail',
@@ -341,7 +342,7 @@ function generateRoutes(children, item) {
 
 设置完这个属性，还要在 App.vue 文件里设置 watch 一下 $route 属性。
 
-```
+```js
 watch: {
     $route(to, from) {
         const fname = from.name
@@ -367,7 +368,7 @@ watch: {
 
 对于需求二其实还有一个更简洁的方案，那就是使用 router-view 的 key 属性。
 
-```
+```html
 <keep-alive>
     <router-view :key="$route.fullPath"/>
 </keep-alive>
@@ -377,7 +378,7 @@ watch: {
 
 例如从列表页进入了详情页，然后在详情页中删除了列表页中的某个选项，此时从详情页退回列表页时就要刷新，我们可以这样跳转：
 
-```
+```js
 this.$router.push({
     path: '/list',
     query: { 'randomID': 'id' + Math.random() },
@@ -389,7 +390,7 @@ this.$router.push({
 
 在 App.vue 配置一个全局 loading。
 
-```
+```html
 <div class="app">
     <keep-alive :include="keepAliveData">
         <router-view/>
@@ -402,7 +403,7 @@ this.$router.push({
 
 同时设置 axios 拦截器。
 
-```
+```js
  // 添加请求拦截器
  this.$axios.interceptors.request.use(config => {
      this.isShowLoading = true
@@ -438,13 +439,13 @@ this.$router.push({
 
 增加一个 loadingCount 变量，用来计算请求的次数。
 
-```
+```js
 loadingCount: 0
 ```
 
 再增加两个方法，来对 loadingCount 进行增减操作。
 
-```
+```js
 methods: {
     addLoading() {
         this.isShowLoading = true
@@ -462,7 +463,7 @@ methods: {
 
 现在拦截器变成这样：
 
-```
+```js
 // 添加请求拦截器
 this.$axios.interceptors.request.use(config => {
     this.addLoading()
@@ -501,7 +502,7 @@ this.$axios.interceptors.response.use(response => {
 
 一般的表格打印直接仿照组件提供的例子就可以了。
 
-```
+```js
 printJS({
     printable: id, // DOM id
     type: 'html',
@@ -526,7 +527,7 @@ element-ui 的表格，表面上看起来是一个表格，实际上是由两个
 我的思路是将两个表格合成一个表格，print-js 组件打印的时候，实际上是把 id 对应的 DOM 里的内容提取出来打印。
 所以，在传入 id 之前，可以先把表头所在的表格内容提取出来，插入到第二个表格里，从而将两个表格合并，这时候打印就不会有错位的问题了。
 
-```
+```js
 function printHTML(id) {
     const html = document.querySelector('#' + id).innerHTML
     // 新建一个 DOM
@@ -578,7 +579,7 @@ function printHTML(id) {
 
 - Blob 对象表示一个不可变、原始数据的类文件对象。Blob 表示的不一定是JavaScript原生格式的数据
 
-```
+```js
 axios({
   method: 'post',
   url: '/export',
@@ -586,7 +587,9 @@ axios({
 .then(res => {
   // 假设 data 是返回来的二进制数据
   const data = res.data
-  const url = window.URL.createObjectURL(new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}))
+  const url = window.URL.createObjectURL(new Blob([data], {
+    type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+  }))
   const link = document.createElement('a')
   link.style.display = 'none'
   link.href = url
@@ -605,7 +608,7 @@ axios({
 
 最后发现是参数 responseType 的问题，responseType 它表示服务器响应的数据类型。由于后台返回来的是二进制数据，所以我们要把它设为 arraybuffer， 接下来再看看结果是否正确。
 
-```
+```js
 axios({
   method: 'post',
   url: '/export',
@@ -614,7 +617,9 @@ axios({
 .then(res => {
   // 假设 data 是返回来的二进制数据
   const data = res.data
-  const url = window.URL.createObjectURL(new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}))
+  const url = window.URL.createObjectURL(new Blob([data], {
+    type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+  }))
   const link = document.createElement('a')
   link.style.display = 'none'
   link.href = url
@@ -634,7 +639,7 @@ axios({
 
 先来分析一下，首先根据上文，我们都知道下载文件的接口响应数据类型为 arraybuffer。返回的数据无论是二进制文件，还是 JSON 字符串，前端接收到的其实都是 arraybuffer。所以我们要对 arraybuffer 的内容作个判断，在接收到数据时将它转换为字符串，判断是否有 code: 199999。如果有，则报错提示，如果没有，则是正常文件，下载即可。具体实现如下：
 
-```
+```js
 axios.interceptors.response.use(response => {
     const res = response.data
     // 判断响应数据类型是否 ArrayBuffer，true 则是下载文件接口，false 则是正常接口
@@ -664,7 +669,7 @@ axios.interceptors.response.use(response => {
 
 #### 八、自动忽略 console.log 语句
 
-```
+```js
 export function rewirteLog() {
     console.log = (function (log) {
         return process.env.NODE_ENV == 'development'? log : function() {}
