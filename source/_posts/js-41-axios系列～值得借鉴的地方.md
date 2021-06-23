@@ -32,7 +32,7 @@ Axios 是一个基于 Promise 的 HTTP 客户端，拥有以下特性：
 
 在浏览器端 Axios 支持大多数主流的浏览器，比如 Chrome、Firefox、Safari 和 IE 11。此外，Axios 还拥有自己的生态：
 
-![axios004.jpg]()
+![axios004.jpg](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/axios004.jpg)
 
 ### 三、HTTP 拦截器的设计与实现
 
@@ -44,7 +44,7 @@ Axios 是一个基于 Promise 的 HTTP 客户端，拥有以下特性：
 
 Axios 是一个基于 Promise 的 HTTP 客户端，而 HTTP 协议是基于请求和响应：
 
-![axios005.jpg]()
+![axios005.jpg](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/axios005.jpg)
 
 所以 Axios 提供了请求拦截器和响应拦截器来分别处理请求和响应，它们的作用如下：
 
@@ -127,7 +127,7 @@ InterceptorManager.prototype.use = function use(fulfilled, rejected) {
 
 通过观察 use 方法，我们可知注册的拦截器都会被保存到 InterceptorManager 对象的 handlers 属性中。下面我们用一张图来总结一下 Axios 对象与 InterceptorManager 对象的内部结构与关系：
 
-![axios006.jpg]()
+![axios006.jpg](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/axios006.jpg)
 
 #### 3.3 任务编排
 
@@ -176,7 +176,7 @@ Axios.prototype.request = function request(config) {
 
 任务编排的代码比较简单，我们来看一下任务编排前和任务编排后的对比图：
 
-![axios007.jpg]()
+![axios007.jpg](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/axios007.jpg)
 
 ### 3.4 任务调度
 
@@ -195,7 +195,7 @@ Axios.prototype.request = function request(config) {
 
 因为 chain 是数组，所以通过 while 语句我们就可以不断地取出设置的任务，然后组装成 Promise 调用链从而实现任务调度，对应的处理流程如下图所示：
 
-![axios008.jpg]()
+![axios008.jpg](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/axios008.jpg)
 
 下面我们来回顾一下 Axios 拦截器完整的使用流程：
 
@@ -224,7 +224,7 @@ axios({
 
 参考 Axios 拦截器的设计模型，我们就可以抽出以下通用的任务处理模型：
 
-![axios9.jpg]()
+![axios9.jpg](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/axios009.jpg)
 
 ### 四、HTTP 适配器的设计与实现
 
@@ -333,7 +333,7 @@ axios.get("/users").then(function (response) {
 
 对 MockAdapter 感兴趣的小伙伴，可以自行了解一下 axios-mock-adapter 这个库。到这里我们已经介绍了 Axios 的拦截器与适配器，下面用一张图来总结一下 Axios 使用请求拦截器和响应拦截器后，请求的处理流程：
 
-![axios010.jpg]()
+![axios010.jpg](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/axios010.jpg)
 
 ### 五、CSRF 防御
 
@@ -345,7 +345,7 @@ axios.get("/users").then(function (response) {
 
 为了让小伙伴更好地理解上述的内容，下面是一张跨站请求攻击示例图：
 
-![axios011.jpg]()
+![axios011.jpg](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/axios011.jpg)
 
 在上图中攻击者利用了 Web 中用户身份验证的一个漏洞：简单的身份验证只能保证请求发自某个用户的浏览器，却不能保证请求本身是用户自愿发出的。既然存在以上的漏洞，那么我们应该怎么进行防御呢？接下来我们来介绍一些常见的 CSRF 防御措施。
 
