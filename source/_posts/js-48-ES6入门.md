@@ -1,6 +1,7 @@
 ---
-title: ES6入门
-date: 2020-06-03 16:01:52
+title: js重点知识-48-ES6入门
+date: 2021-01-05 10:26:15
+top: true
 tags:
 - ES6
 - babel

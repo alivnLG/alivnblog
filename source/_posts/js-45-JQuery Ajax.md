@@ -1,6 +1,7 @@
 ---
-title: JQuery Ajax
-date: 2020-06-03 16:25:35
+title: js重点知识-45-JQuery Ajax
+date: 2021-01-05 10:26:08
+top: true
 tags:
 - JQuery
 - Ajax

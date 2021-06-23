@@ -7,139 +7,117 @@ tags:
 categories:
 - JavaScript
 ---
-### 一、转换为boolean
-<!--more-->
-在条件判断时，除了undefined、null、false、NaN、''、0、-0，其他所有值都转为true，包括所有对象。
+### 一、强弱类型语言
 
-### 二、对象转基本类型
+参考文章《强类型语言、弱类型语言》
 
-对象在转换基本类型时，首先会调用 valueOf 然后调用 toString。并且这两个方法你是可以重写的。
+### 二、类型转换
 
-```js
-let a = {
-    valueOf() {
-    	return 0
-    }
-}
-```
+#### 2.1 显示类型转换
 
-当然你也可以重写 Symbol.toPrimitive ，该方法在转基本类型时调用优先级最高。
+显示类型转换比较简单，通过 JS 提供的一些函数，可以直接进行转换
 
-```js
-let a = {
-  valueOf() {
-    return 0;
-  },
-  toString() {
-    return '1';
-  },
-  [Symbol.toPrimitive]() {
-    return 2;
-  }
-}
-1 + a // => 3
-'1' + a // => '12'
-```
+- 转化为 Number 类型：Number() / parseFloat() / parseInt()
+- 转化为 String 类型：String() / toString()
+- 转化为 Boolean 类型: Boolean()
 
-### 三、四则运算符转换
+undefined、null、false、+0、-0、NaN、""  只有这些 toBoolean()  是 false ，其余都为 true
 
-只有当加法运算时，其中一方是字符串类型，就会把另一个也转为字符串类型。
+Number类定义的toString()方法可以接受表示转换基数的可选参数，如果不指定此参数，转换规则将是基于十进进制。number.toString(radix),radix可选。规定表示数字的基数，是 2 ~ 36 之间的整数。若省略该参数，则使用基数 10。但是要注意，如果该参数是 10 以外的其他值，则 ECMAScript 标准允许实现返回任意值。
 
-其他运算只要其中一方是数字，那么另一方就转为数字。
+对象到字符串的转换经过了如下步骤：
 
-并且加法运算会触发三种类型转换：将值转换为原始值，转换为数字，转换为字符串。
+- 如果对象具有toString()方法，则调用这个方法。如果它返回一个基本类型值，js将这个值转换为字符串，并返回这个字符串。
+- 如果对象没有toString()方法，或者这个方法返回的不是一个基本类型值，那么js将调用valueOf()方法。如果存在这个方法，则调用，如果返回值是基本类型值，转换为字符串并返回
+- 否则，js无法从toString()或valueOf()获得一个基本类型值，此时将会抛出类型错误异常
+
+#### 2.2 ToPrimitive将值转为原始值
+
+ToPrimitive将接收到的参数转化为原始类型：
 
 ```js
-1 + '1' // '11'
-2 * '2' // 4
-[1, 2] + [2, 1] // '1,22,1'
-// [1, 2].toString() -> '1,2'
-// [2, 1].toString() -> '2,1'
-// '1,2' + '2,1' = '1,22,1'
+ToPrimitive(data, PreferredType?)
 ```
 
-<span style="color:red">对于加号需要注意这个表达式 'a' + + 'b'</span>
+data是要转换的值， PreferredType 是可选参数，ToPrimitive  运算符把其值参数转换为非对象类型。如果对象有能力被转换为不止一种原语类型（接受参数 number string ），可以使用可选的 PreferredType 来选择类型。
+
+![typeConversion001.jpg](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/typeConversion001.jpg)
+
+在执行 ToPrimitive(data,preferredType) 时如果第二个参数为空并且 data 为 Date 的事例时，此时preferredType 会
+被设置为String，其他情况下preferredType都会被设置为 Number
+
+如果 preferredType 为 Number，ToPrimitive执行过程如下：
+
+- 1.如果data为原始值，直接返回；
+- 2.否则调用 data.valueOf()，如果执行结果是原始值，返回之；
+- 3.否则调用 data.toString()，如果执行结果是原始值，返回之；
+- 4.否则抛异常。
+
+如果 preferredType 为String，将上面的第2步和第3步调换，即：
+
+- 1.如果data为原始值，直接返回；
+- 2.否则调用 data.toString()，如果执行结果是原始值，返回之；
+- 3.否则调用 data.valueOf()，如果执行结果是原始值，返回之；
+- 4.否则抛异常。
+
+#### 2.3 隐式转换
+
+隐式转换主要涉及的是两个操作符， +  和 ==
+
+##### 2.3.1 一元 +  运算符, 一元 -  运算符
+
+![typeConversion002.jpg](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/typeConversion002.jpg)
+
+- 一元 + 运算符如果后面是 Number 类型的话，会将其转换为 Number 类型;
+- 如果后面不是 Number 的话，就会将调用 ToNumber  方法。
 
 ```js
-'a' + + 'b' // -> "aNaN"
-// 因为 + 'b' -> NaN
-// 你也许在一些代码中看到过 + '1' -> 1
+// String
+const a = '123'
+
+typeof a
+"string"
+const b = +a
+
+typeof b
+"number"
+
+// Object
+const c = {}
+
+typeof c
+"object"
+const d = +{}
+
+typeof d
+"number"
+
+d
+NaN
 ```
 
-![jssummary013](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/jssummary013.jpg)
+##### 2.3.2 加法运算符
 
-上图中的 toPrimitive 就是对象转基本类型。
+![typeConversion003.jpg](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/typeConversion003.jpg)
 
-这里来解析一道题目 [] == ![] // -> true ，下面是这个表达式为何为 true 的步骤
+我们可以看到，5、6 是将左侧的表达式和右侧的表达式都执行了一遍 ToPrimitive
+注意第 7 条，也就是说，如果表达式左侧或者表达式右侧是 String的话，返回 toString()  之后连接而成的字符串
 
 ```js
-// [] 转成 true，然后取反变成 false
-[] == false
-// 根据第 8 条得出
-[] == ToNumber(false)
-[] == 0
-// 根据第 10 条得出
-ToPrimitive([]) == 0
-// [].toString() -> ''
-'' == 0
-// 根据第 6 条得出
-0 == 0 // -> true
+1 + '1'
+"11"
 ```
 
-大家都知道 JS 中在使用运算符号或者对比符时，会自带隐式转换，规则如下:
+#### 2.3.3 == 抽象等运算符
 
-- -、*、/、% ：一律转换成数值后计算
+![typeConversion004.jpg](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/typeConversion004.jpg)
 
-- +：
+主要分为 x 和 y 类型相同和类型不同的情况，类型相同时没有类型转换，类型不同时
 
-  - 数字 + 字符串 = 字符串， 运算顺序是从左到右
+- x, y 为 null、undefined 两者中一个   // 返回true
+- x、y为 Number 和 String 类型时，则转换为 Number 类型比较。
+- 有 Boolean 类型时，Boolean 转化为 Number 类型比较。
+- 一个 Object 类型，一个 String 或 Number 类型，将 Object 类型进行原始转换（ToPrimitive）后，按上面流程进行原始值比较。
 
-  - 数字 + 对象， 优先调用对象的valueOf -> toString
-
-  - 数字 + boolean/null -> 数字
-
-  - 数字 + undefined -> NaN
-
-- [1].toString() === '1'
-
-- {}.toString() === '[object object]'
-
-- NaN !== NaN 、+undefined 为 NaN
-
-### 四、转换为number
-
-#### 4.1 Number([value])
-
-- 字符串转换为数字:空字符串是0，如果字符串中出现任意一个非有效数字字符，结果都是NaN
-
-- 布尔转换为数字:true=>1 false=>0
-
-- null=>0 undefined=>NaN
-
-- symbol不能转换为数字,报错
-
-- bigInt可以转换为数字
-
-- 引用类型(对象或者函数)
-
-- 首先获取它的[Symbol.toPrimitive]属性值
-
-- 如果没有这个属性，其次获取它的valueOf
-
-- 如果还是没有原始值，再转换为字符串toString,然后再转换为数字Number
-
-#### 4.2 parseInt/parseFloat([value])
-
-- 需要保证[value]是一个字符串，如果不是则首先隐式的把其转换为字符串[value].toString()
-
-- 从字符串左侧第一个字符开始向右查找，把找到的的有效数字字符，转换为数字(遇到一个非有效数字字符则停止查找，不论后面是否还有有效数字，都不再查找)
-
-- 如果一个有效数字字符都没有找到，结果都是NaN
-
-### 五、比较运算符转换
-
-如果是对象，就通过 toPrimitive 转换对象
-
-如果是字符串，就通过 unicode 字符索引来比较
-
+![typeConversion005.jpg](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/typeConversion005.jpg)
 
