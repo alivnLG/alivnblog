@@ -1,5 +1,5 @@
 ---
-title: js重点知识-41-axios系列～取消重复请求
+title: js重点知识-42-axios系列～取消重复请求
 date: 2021-01-05 10:26:00
 top: true
 tags:
