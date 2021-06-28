@@ -1,5 +1,5 @@
 ---
-title: js重点知识-51-DOM转换为图片
+title: js-51-DOM转换为图片
 date: 2021-01-05 10:26:22
 top: true
 tags:

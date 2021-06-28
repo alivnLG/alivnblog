@@ -1,5 +1,5 @@
 ---
-title: 前端综合-6-SVG基础知识
+title: web-6-SVG基础知识
 date: 2021-01-05 11:52:58
 tags:
 - SVG

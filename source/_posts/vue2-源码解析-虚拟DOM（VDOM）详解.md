@@ -1,13 +1,12 @@
 ---
-title: 虚拟DOM（VDOM）详解
-date: 2020-06-09 10:23:52
-top: true
+title: vue2-源码解析-虚拟DOM（VDOM）详解
+date: 2020-10-10 14:38:52
 tags:
 - VDOM
 - Diff
 - patch
 categories:
-- Web前端
+- VUE
 ---
 ### 一、vdom是什么？为何使用vdom?
 <!--more-->

@@ -1,5 +1,5 @@
 ---
-title: js重点知识-1-数据类型
+title: js-1-数据类型
 date: 2020-12-21 17:02:00
 top: true
 tags:

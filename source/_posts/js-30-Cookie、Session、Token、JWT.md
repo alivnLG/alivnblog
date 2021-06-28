@@ -1,5 +1,5 @@
 ---
-title: js重点知识-30-Cookie、Session、Token、JWT
+title: js-30-Cookie、Session、Token、JWT
 date: 2021-01-05 10:25:40
 top: true
 tags:

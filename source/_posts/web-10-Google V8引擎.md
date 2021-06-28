@@ -1,10 +1,11 @@
 ---
-title: JavaScript V8引擎
-date: 2020-06-03 15:37:28
+title: web-10-Google V8引擎
+date: 2021-01-05 11:53:02
+top: true
 tags:
 - V8
 categories:
-- Web前端
+- 前端综合
 ---
 JavaScript引擎是执行JavaScript代码的程序或解释器。javaScript引擎可以实现为标准解释器或即时编译器，它以某种形式将JavaScript编译为字节码。
 <!--more-->

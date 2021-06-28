@@ -1,6 +1,7 @@
 ---
-title: web服务器基础知识
-date: 2020-05-28 10:38:57
+title: web-20-服务器基础知识
+date: 2021-01-05 11:53:11
+top: true
 tags:
 - Web服务器
 - Apache
@@ -11,7 +12,7 @@ tags:
 - Linux
 - Windows
 categories:
-- 学习笔记
+- 前端综合
 ---
 #### 一、Web服务器简介
 Web服务器指的是网站服务器，它是建立在Internet之上并且驻留在某种计算机上的程序。Web服务器可以向Web客户端(如浏览器)提供文档或其他服务，只要是遵循HTTP协议而设计的网络应用程序都可以是Web客户端。

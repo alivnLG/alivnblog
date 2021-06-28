@@ -1,5 +1,5 @@
 ---
-title: HTML重点知识-2-应用程序缓存
+title: HTML-2-应用程序缓存
 date: 2021-01-06 15:38:58
 top: true
 tags:

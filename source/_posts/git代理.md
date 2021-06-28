@@ -1,10 +1,11 @@
 ---
-title: Git设置、查看、取消代理
-date: 2020-05-26 10:38:55
+title: git代理
+date: 2020-06-02 14:57:22
+top: true
 tags:
 - proxy
 categories:
-- 学习笔记
+- 版本控制
 ---
 ### 设置代理
 

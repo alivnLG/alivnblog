@@ -1,5 +1,5 @@
 ---
-title: js重点知识-18-call( )和apply( )方法
+title: js-18-call( )和apply( )方法
 date: 2021-01-05 10:24:57
 top: true
 tags:

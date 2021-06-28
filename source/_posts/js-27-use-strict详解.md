@@ -1,5 +1,5 @@
 ---
-title: js重点知识-27-use strict详解
+title: js-27-use strict详解
 date: 2021-01-05 10:25:35
 top: true
 tags:

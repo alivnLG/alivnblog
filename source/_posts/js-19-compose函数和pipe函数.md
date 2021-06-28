@@ -1,5 +1,5 @@
 ---
-title: js重点知识-19-compose函数和pipe函数
+title: js-19-compose函数和pipe函数
 date: 2021-01-05 10:24:59
 top: true
 tags:

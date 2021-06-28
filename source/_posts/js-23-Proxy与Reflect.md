@@ -1,5 +1,5 @@
 ---
-title: js重点知识-23-Proxy与Reflect
+title: js-23-Proxy与Reflect
 date: 2021-01-05 10:25:05
 top: true
 tags:

@@ -1,6 +1,7 @@
 ---
-title: Git命令
+title: git命令详解
 date: 2020-06-02 14:57:20
+top: true
 tags:
 - Git
 categories:

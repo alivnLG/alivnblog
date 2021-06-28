@@ -1,5 +1,5 @@
 ---
-title: js重点知识-8-闭包
+title: js-8-闭包
 date: 2020-12-22 14:30:52
 top: true
 tags:

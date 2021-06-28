@@ -1,6 +1,6 @@
 ---
-title: 跨域技术
-date: 2020-06-03 15:59:25
+title: web-13-跨域详解
+date: 2021-01-05 11:53:05
 top: true
 tags:
 - 跨域
@@ -10,7 +10,7 @@ tags:
 - Nginx
 - CORS
 categories:
-- Web前端
+- 前端综合
 ---
 ### 一、背景介绍
 #### 1.什么是跨域？

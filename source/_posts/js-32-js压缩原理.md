@@ -1,5 +1,5 @@
 ---
-title: js重点知识-32-js压缩原理
+title: js-32-js压缩原理
 date: 2021-01-05 10:25:42
 top: true
 tags:

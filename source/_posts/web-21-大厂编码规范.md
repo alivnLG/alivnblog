@@ -1,10 +1,11 @@
 ---
-title: 编码规范参考
-date: 2020-11-13 17:07:27
+title: web-21-大厂编码规范
+date: 2021-01-05 11:53:12
+top: true
 tags:
 - 规范
 categories:
-- 学习笔记
+- 前端综合
 ---
 #### 一、腾讯
 [http://tgideas.qq.com/doc/index.html](http://tgideas.qq.com/doc/index.html)

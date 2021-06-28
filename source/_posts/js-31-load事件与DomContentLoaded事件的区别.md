@@ -1,5 +1,5 @@
 ---
-title: js重点知识-31-load事件与DomContentLoaded事件的区别
+title: js-31-load事件与DomContentLoaded事件的区别
 date: 2021-01-05 10:25:41
 top: true
 tags:

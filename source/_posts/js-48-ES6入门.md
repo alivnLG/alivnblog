@@ -1,5 +1,5 @@
 ---
-title: js重点知识-48-ES6入门
+title: js-48-ES6入门
 date: 2021-01-05 10:26:15
 top: true
 tags:

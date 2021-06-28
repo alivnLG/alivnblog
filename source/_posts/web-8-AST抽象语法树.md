@@ -1,10 +1,11 @@
 ---
-title: AST抽象语法树
-date: 2020-06-03 15:24:38
+title: web-8-AST抽象语法树
+date: 2021-01-05 11:53:00
+top: true
 tags:
 - AST
 categories:
-- Web前端
+- 前端综合
 ---
 #### AST抽象语法树
 ##### 定义

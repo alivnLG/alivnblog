@@ -1,10 +1,11 @@
 ---
-title: base64原理解析
-date: 2020-06-03 15:43:54
+title: web-11-base64原理解析
+date: 2021-01-05 11:53:03
+top: true
 tags:
 - base64
 categories:
-- Web前端
+- 前端综合
 ---
 ### 一、Base64编码由来
 

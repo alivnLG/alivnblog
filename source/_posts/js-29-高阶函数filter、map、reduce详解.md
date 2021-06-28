@@ -1,5 +1,5 @@
 ---
-title: js重点知识-29-高阶函数filter、map、reduce详解
+title: js-29-高阶函数filter、map、reduce详解
 date: 2021-01-05 10:25:39
 top: true
 tags: 

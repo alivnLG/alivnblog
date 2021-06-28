@@ -1,5 +1,5 @@
 ---
-title: js重点知识-20-FormData用法
+title: js-20-FormData用法
 date: 2021-01-05 10:25:00
 top: true
 tags:

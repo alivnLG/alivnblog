@@ -1,5 +1,5 @@
 ---
-title: js重点知识-9-内存管理机制
+title: js-9-内存管理机制
 date: 2020-12-22 16:20:02
 top: true
 tags:

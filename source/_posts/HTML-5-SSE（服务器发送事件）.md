@@ -1,5 +1,5 @@
 ---
-title: HTML重点知识-5-SSE（服务器发送事件）
+title: HTML-5-SSE（服务器发送事件）
 date: 2021-01-06 15:58:58
 top: true
 tags:

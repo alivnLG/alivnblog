@@ -1,5 +1,5 @@
 ---
-title: js重点知识-3-变量
+title: js-3-变量
 date: 2020-12-22 09:39:04
 top: true
 tags:

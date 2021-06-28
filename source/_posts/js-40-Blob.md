@@ -1,5 +1,5 @@
 ---
-title: js重点知识-40-Blob
+title: js-40-Blob
 date: 2021-01-05 10:25:58
 top: true
 tags:

@@ -1,5 +1,5 @@
 ---
-title: js重点知识-45-JQuery Ajax
+title: js-45-JQuery Ajax
 date: 2021-01-05 10:26:08
 top: true
 tags:

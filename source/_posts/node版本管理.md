@@ -1,6 +1,7 @@
 ---
-title: nvm node版本管理
-date: 2020-08-13 14:44:25
+title: node版本管理
+date: 2020-06-02 14:57:23
+top: true
 tags:
 - nvm
 categories:

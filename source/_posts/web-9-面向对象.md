@@ -1,10 +1,11 @@
 ---
-title: 面向对象基础知识
-date: 2020-06-03 15:46:57
+title: web-9-面向对象
+date: 2021-01-05 11:53:01
+top: true
 tags:
 - OOP
 categories:
-- Web前端
+- 前端综合
 ---
 ##### 面向对象编程 (OOP : Object Oriented Programming)。
 它的概念就是将世间万物视为对象，并将其分类。

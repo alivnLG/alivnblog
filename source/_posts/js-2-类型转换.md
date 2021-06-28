@@ -1,5 +1,5 @@
 ---
-title: js重点知识-2-类型转换
+title: js-2-类型转换
 date: 2020-12-21 17:35:06
 top: true
 tags:

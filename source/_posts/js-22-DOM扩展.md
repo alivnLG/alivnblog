@@ -1,5 +1,5 @@
 ---
-title: js重点知识-22-DOM扩展
+title: js-22-DOM扩展
 date: 2021-01-05 10:25:03
 top: true
 tags:

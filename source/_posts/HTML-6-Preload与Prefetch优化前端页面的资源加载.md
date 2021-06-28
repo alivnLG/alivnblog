@@ -1,5 +1,5 @@
 ---
-title: HTML重点知识-6-Preload与Prefetch优化前端页面的资源加载
+title: HTML-6-Preload与Prefetch优化前端页面的资源加载
 date: 2021-01-06 16:00:55
 top: true
 tags:

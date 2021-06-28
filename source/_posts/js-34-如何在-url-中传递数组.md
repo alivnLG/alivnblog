@@ -1,5 +1,5 @@
 ---
-title: js重点知识-34-如何在 url 中传递数组
+title: js-34-如何在 url 中传递数组
 date: 2021-01-05 10:25:44
 top: true
 tags:
