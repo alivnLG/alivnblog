@@ -9,7 +9,7 @@ categories:
 ### 一、列表进入详情页的传参问题
 
 例如商品列表页面前往商品详情页面，需要传一个商品id;
-
+<!--more-->
 ```html
 <router-link :to="{path: 'detail', query: {id: 1}}">前往detail页面</router-link>
 ```

@@ -9,8 +9,9 @@ categories:
 - 前端综合
 ---
 ### 一、事件冒泡与捕获
-微软提出了事件冒泡(event bubbling)的事件流，即事件从最内层的元素开始，一层层往上传播，直到document结束。与之相对应的网景提出了名为事件捕获(event capturing)的事件流,即事件从最外层的元素开始也就是从document开始一层层往下传递。
 
+微软提出了事件冒泡(event bubbling)的事件流，即事件从最内层的元素开始，一层层往上传播，直到document结束。与之相对应的网景提出了名为事件捕获(event capturing)的事件流,即事件从最外层的元素开始也就是从document开始一层层往下传递。
+<!--more-->
 在javascript中，使用addEventListener()来给元素绑定事件。
 ```
 EventTarget.addEventListener(type,listener,useCapture)

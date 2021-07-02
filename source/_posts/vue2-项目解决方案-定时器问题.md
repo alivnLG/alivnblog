@@ -7,7 +7,7 @@ categories:
 - VUE
 ---
 ### 一、定时器问题
-
+<!--more-->
 我在a页面写一个定时，让他每秒钟打印一个1，然后跳转到b页面，此时可以看到，定时器依然在执行。这样是非常消耗性能的。如下图所示：
 
 ![vueProject011.jpg](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/vueProject011.jpg)

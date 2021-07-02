@@ -9,7 +9,7 @@ categories:
 ### 一、查看打包后各文件的体积，帮你快速定位大文件
 
 如果你是vue-cli初始化的项目，会默认安装webpack-bundle-analyzer插件，该插件可以帮助我们查看项目的体积结构对比和项目中用到的所有依赖。也可以直观看到各个模块体积在整个项目中的占比。很霸道有木有~~
-
+<!--more-->
 ![vueProject014.gif](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/vueProject014.gif)
 
 ```

@@ -11,7 +11,7 @@ categories:
 ### 一、拦截器实现请求重试的方案
 
 Axios 是一个基于 Promise 的 HTTP 客户端，而 HTTP 协议是基于请求和响应：
-
+<!--more-->
 ![axios005.jpg](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/axios005.jpg)
 
 所以 Axios 提供了 请求拦截器和响应拦截器 来分别处理请求和响应，它们的作用如下：

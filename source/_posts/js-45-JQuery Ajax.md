@@ -9,7 +9,7 @@ categories:
 - JavaScript
 ---
 ### 一、JQuery Ajax
-
+<!--more-->
 - 1.AJAX 是与服务器交换数据的技术，它在不重载全部页面的情况下，实现了对部分网页的更新。
 
 - 2.AJAX = 异步 JavaScript 和 XML（Asynchronous JavaScript and XML）

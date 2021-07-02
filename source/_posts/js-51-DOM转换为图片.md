@@ -8,7 +8,7 @@ categories:
 - JavaScript
 ---
 ### 一、 借助SVG forginObject实现DOM转图片
-
+<!--more-->
 CSS代码：
 
 ```css

@@ -7,7 +7,7 @@ categories:
 - VUE
 ---
 ### 一、打包后文件、图片、背景图资源不存在或者路径错误的问题
-
+<!--more-->
 ![vueProject019.jpg](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/vueProject019.jpg)
 
 先看下项目的config文件夹下的index.js文件，这个配置选项就好使我们打包后的资源公共路径，默认的值为‘/’，即根路径，所以打包后的资源路径为根目录下的static。由此问题来了，如果你打包后的资源没有放在服务器的根目录，而是在根目录下的mobile等文件夹的话，那么打包后的路径和你代码中的路径就会有冲突了，导致资源找不到。

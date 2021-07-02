@@ -7,7 +7,7 @@ categories:
 - VUE
 ---
 ### 一、Hiper性能分析
-
+<!--more-->
 ![vueProject015.jpg](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/vueProject015.jpg)
 
 如上图，是hiper工具的测试结果，从中我们可以看到DNS查询耗时、TCP连接耗时、第一个Byte到达浏览器的用时、页面下载耗时、DOM Ready之后又继续下载资源的耗时、白屏时间、DOM Ready 耗时、页面加载总耗时。在我们的编辑器终端中全局安装：

@@ -10,7 +10,7 @@ categories:
 ### 一、富文本基本原理
 
 #### 1.1 contenteditable 属性
-
+<!--more-->
 ```html
 <div contenteditable="true"></div>
 ```

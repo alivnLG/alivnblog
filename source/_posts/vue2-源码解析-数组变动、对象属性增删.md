@@ -8,7 +8,7 @@ categories:
 ### 一、由于JavaScript限制，Vue 不能检测数组变动、对象属性的增加和删除
 
 #### 1.数组变动
-
+<!--more-->
 不能检测以下数组的变动：
 当你利用索引直接设置一个数组项时，例如：vm.items[indexOfItem] = newValue
 

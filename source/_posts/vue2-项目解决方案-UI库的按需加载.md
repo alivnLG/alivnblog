@@ -9,7 +9,7 @@ categories:
 ### 一、UI库的按需加载
 
 为什么要使用按需加载的方式而不是一次性全部引入，原因就不多说了。这里以vant的按需加载为例，演示vue中ui库怎样进行按需加载：
-
+<!--more-->
 - 安装： cnpm i vant -S
 - 安装babel-plugin-import插件使其按需加载：  cnpm i babel-plugin-import -D
 - 在 .babelrc文件中中添加插件配置 ：

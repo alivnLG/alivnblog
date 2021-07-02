@@ -7,7 +7,7 @@ categories:
 - VUE
 ---
 ### 一、本地开发环境请求服务器接口跨域的问题
-
+<!--more-->
 ![vueProject001.jpg](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/vueProject001.jpg)
 
 上面的这个报错大家都不会陌生，报错是说没有访问权限（跨域问题）。本地开发项目请求服务器接口的时候，因为客户端的同源策略，导致了跨域的问题。

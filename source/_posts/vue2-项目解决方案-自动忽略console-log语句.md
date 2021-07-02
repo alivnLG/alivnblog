@@ -7,7 +7,7 @@ categories:
 - VUE
 ---
 ### 一、自动忽略 console.log 语句
-
+<!--more-->
 ```js
 export function rewirteLog() {
     console.log = (function (log) {

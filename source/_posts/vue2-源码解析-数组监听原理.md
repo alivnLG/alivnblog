@@ -8,7 +8,7 @@ categories:
 ### 一、vue中数组监听原理 
 
 通过建立原型拦截器，首先数组能够修改自身的方法有push,pop,shift,unshift,splice,sort,resverse,通过重新定义上述方法中的内容，来实现调用上述方法时触发依赖，从而通知监听该数组的订阅者执行相应的更新函数。对数据添加属性描述符中的getter与setter存取描述符实现劫持。
-
+<!--more-->
 ```js
 var obj = { __x: 1 };
 Object.defineProperty(obj, "x", {

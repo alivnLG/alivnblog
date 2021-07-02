@@ -9,7 +9,7 @@ categories:
 ### 一、动态菜单
 
 #### 1.1 动态添加路由
-
+<!--more-->
 利用 vue-router 的 addRoutes 方法可以动态添加路由。
 
 先看一下官方介绍：

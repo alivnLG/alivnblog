@@ -8,7 +8,7 @@ categories:
 ### 一、vue-router的两种模式（hash和history）及区别
 
 前端路由的核心，就在于——改变试图的同时不会向后端发出请求。
-
+<!--more-->
 （1）hash - 即地址栏URL中的 # 符号（此hash不是密码学里的散列运算）
 比如这个```URL：http：//www.abc.com/#/hello,hash```的值为#/hello.它的特点在于：hash虽然出现在URL中，但不会被包括在HTTP请求中，对后端完全没有影响，因此改变hash不会重新加载页面。
 

@@ -10,7 +10,7 @@ categories:
 ### 一、前提概要
 
 Axios 是一个基于 Promise 的 HTTP 客户端，同时支持浏览器和 Node.js 环境。它是一个优秀的 HTTP 客户端，被广泛地应用在大量的 Web 项目中。
-
+<!--more-->
 阅读完本文，你将了解以下内容：
 
 - HTTP 拦截器的设计与实现；

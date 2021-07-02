@@ -7,8 +7,9 @@ categories:
 - VUE
 ---
 ### 一、多个请求下 loading 的展示与关闭
-一般情况下，在 vue 中结合 axios 的拦截器控制 loading 展示和关闭，是这样的：
 
+一般情况下，在 vue 中结合 axios 的拦截器控制 loading 展示和关闭，是这样的：
+<!--more-->
 在 App.vue 配置一个全局 loading。
 
 ```html

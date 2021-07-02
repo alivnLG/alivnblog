@@ -7,7 +7,7 @@ categories:
 - JavaScript
 ---
 ### 一、实现原理
-
+<!--more-->
 （1）json 视为字符串，可以利用 DataURL 进行下载
 
 ```

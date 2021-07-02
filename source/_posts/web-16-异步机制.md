@@ -7,7 +7,9 @@ categories:
 - 前端综合
 ---
 ### 一、js异步机制
+
 ####  1.1 同步与异步
+<!--more-->
 ![web001](https://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/web001.jpg)
 *同步*  
 

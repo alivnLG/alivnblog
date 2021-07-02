@@ -9,7 +9,7 @@ categories:
 ### 一、覆盖ui库中组件的样式
 
 首先我们vue文件的样式都是写在<style lang="less" scoped></style>标签中的，加scoped是为了使得样式只在当前页面有效。那么问题来了，看图：
-
+<!--more-->
 ![vueProject009.jpg](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/vueProject009.jpg)
 
 我们正常写的所有样式，都会被加上[data-v-23d425f8]这个属性（如1所示），但是第三方组件内部的标签并没有编译为附带[data-v-23d425f8]这个属性。
