@@ -11,7 +11,7 @@ categories:
 <!--more-->
 在 JavaScript 中, 作用域为可访问变量，对象，函数的集合。
 
-作用域其实可理解为执行上下文中声明的 变量和声明的作用范围。
+作用域其实可理解为执行上下文中声明的变量和声明的作用范围。
 
 ### 二、分类
 
@@ -72,7 +72,5 @@ f1();
 
 ![scopechain001.jpg](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/scopechain001.jpg)
 
-<br/>
 
-参考1：[执行上下文]()
 

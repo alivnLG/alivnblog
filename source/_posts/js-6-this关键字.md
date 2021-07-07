@@ -30,6 +30,3 @@ this：代表对象。就是所在方法所属对象的引用。哪个对象调�
 
 <span style="color:red">类似 call() 和 apply() 方法可以将 this 引用到任何对象。</span>
 
-<br/>
-
-参考1：[call() 函数和 apply() 函数]()
