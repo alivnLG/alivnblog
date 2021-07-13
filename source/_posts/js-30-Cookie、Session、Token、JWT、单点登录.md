@@ -1,5 +1,5 @@
 ---
-title: js-30-Cookie、Session、Token、JWT
+title: js-30-Cookie、Session、Token、JWT、单点登录
 date: 2021-01-05 10:25:40
 top: true
 tags:
@@ -7,6 +7,7 @@ tags:
 - session
 - token
 - jwt
+- 单点登录
 categories:
 - JavaScript
 ---
@@ -18,7 +19,7 @@ categories:
 
 #### 1.2 如何管理会话
 
-随着交互式Web应用的兴起， 像在线购物网站，需要登录的网站等，马上面临一个问题，就是要管理回话，记住那些人登录过系统，哪些人往自己的购物车中放商品，也就是说我必须把每个人区分开。
+随着交互式Web应用的兴起， 像在线购物网站，需要登录的网站等，马上面临一个问题，就是要管理会话，记住那些人登录过系统，哪些人往自己的购物车中放商品，也就是说我必须把每个人区分开。
 
 ### 二、什么是认证（Authentication）
 
@@ -85,13 +86,15 @@ maxAgecookie 失效的时间，单位秒。
 expires过期时间，在设置的某个时间点后该 cookie 就会失效。
 
 一般浏览器的 cookie 都是默认储存的，当关闭浏览器结束这个会话的时候，
-这个 cookie 也就会被删除secure该 cookie 是否仅被使用安全协议传输。
+这个 cookie 也就会被删除。
+
+secure该 cookie 是否仅被使用安全协议传输。
 
 安全协议有 HTTPS，SSL等，在网络上传输数据之前先将数据加密。
 默认为false。当 secure 值为 true 时，cookie 在 HTTP 中是无效，在 HTTPS 中才有效。
 
 httpOnly****如果给某个 cookie 设置了 httpOnly 属性，则无法通过 JS 脚本 读取到该 cookie 的信息，
-但还是能通过 Application 中手动修改 cookie，
+但还是能通过浏览器的 Application 中手动修改 cookie，
 所以只是在一定程度上可以防止 XSS 攻击，不是绝对的安全
 ```
 #### 5.2 如何设置cookie
@@ -118,6 +121,16 @@ expires, domain, path, secure(只有在https协议的网页中, 客户端设置s
 
 
 <span style="color:red">不设置max-age和expires，此cookie就是会话级别的，浏览器关闭就没了</span>
+
+#### 5.3 同域/跨域 ajax请求到底会不会带上cookie?
+
+这个问题与你发起ajax请求的方式有关
+
+fetch在默认情况下, 不管是同域还是跨域ajax请求都不会带上cookie, 只有当设置了 credentials 时才会带上该ajax请求所在域的cookie, 服务端需要设置响应头 Access-Control-Allow-Credentials: true, 否则浏览器会因为安全限制而报错, 拿不到响应。
+
+axios和jQuery在同域ajax请求时会带上cookie, 跨域请求不会, 跨域请求需要设置 withCredentials 和服务端响应头
+
+XMLHttpRequest.withCredentials  跨域请求是否提供凭据信息(cookie、HTTP认证及客户端SSL证明等) 也可以简单的理解为，当前请求为跨域类型时是否在请求中协带cookie。
 
 ### 六、什么是 Session
 
@@ -579,3 +592,126 @@ JWT 适合一次性的命令认证，颁发一个有效期极短的 JWT，即使
 
 
 ##### 在项目中使用 JWT:https://github.com/yjdjiayou/jwt-demo
+
+### 十六、单点登录
+
+#### 16.1 概要
+
+1.同源策略限制了从同一个源加载的文档或脚本如何与来自另一个源的资源进行交互，要求协议，端口和主机都相同。
+
+2.HTTP用于分布式、协作式和超媒体信息系统的应用层协议。HTTP 是无状态协议，所以服务器单从网络连接上无从知道客户身份。
+那要如何才能识别客户端呢？给每个客户端颁发一个通行证，每次访问时都要求带上通行证，这样服务器就可以根据通行证识别客户了。最常见的方案就是 Cookie。
+
+3.Cookie是客户端保存用户信息的一种机制，保存在客户机硬盘上。可以由服务器响应报文Set-Cookie的首部字段信息或者客户端 document.cookie来设置，并随着每次请求发送到服务器。子域名可以获取父级域名 Cookie。
+
+4.Session其实是一个抽象概念，用于跟踪会话，识别多次 HTTP 请求来自同一个客户端。Cookie 只是通用性较好的一种实现方案，通常是设置一个名为 SessionID（名称可自定义，便于描述，本文均使用此名称）的 Cookie，每次请求时携带该 Cookie，后台服务即可依赖此 SessionID 值识别客户端。
+
+#### 16.2 单系统登录
+
+在介绍单点登录之前，我们先来了解一下在浏览器中，访问一个需要登录的应用时主要发生的一系列流程，如下图所示：
+
+![singleLogin001](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/singleLogin001.jpg)
+
+以下为连环画形式，期望能让读者更好的理解：
+
+![singleLogin002](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/singleLogin002.jpg)
+
+![singleLogin003](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/singleLogin003.jpg)
+
+![singleLogin004](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/singleLogin004.jpg)
+
+![singleLogin005](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/singleLogin005.jpg)
+
+![singleLogin006](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/singleLogin006.jpg)
+
+![singleLogin007](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/singleLogin007.jpg)
+
+依赖于登录后设置的 Cookie，之后每次访问时都会携带该 Cookie，从而让后台服务能识别当前登录用户。
+
+后台是如何通过 SessionID 知道是哪个用户呢？
+
+- 数据库存储关联：将 SessionID 与数据信息关联，存储在 Redis、mysql 等数据库中；
+- 数据加密直接存储：比如 JWT 方式，用户数据直接从 SessionID 值解密出来（此方式时 Cookie 名称以 Token 居多）。
+
+#### 16.3 多系统登录
+
+##### 16.3.1 同域名
+
+当访问同域名下的页面时，Cookie 和单系统登录时一样，会正常携带，后台服务即可直接获取到对应的 SessionID 值，后台为单服务还是多服务无差别。
+
+##### 16.3.2 不同子域名
+
+子域名间 Cookie 是不共享的，但各子域名均可获取到父级域名的 Cookie，即app.demo.com与news.demo.com均可以获取 demo.com域名下的 Cookie。所以可以通过将 Cookie 设置在父级域名上，可以达到子域名共享的效果，即当用户在 app.demo.com 域名下登录时，在demo.com域名下设置名为 SessionID 的 Cookie，当用户之后访问news.demo.com时，后台服务也可以获取到该 SessionID，从而识别用户。
+
+##### 16.3.3 完全不同域名
+
+默认情况下，不同域名是无法直接共享 Cookie 的。
+
+##### 16.3.4 前端跨域带 Cookie
+
+如果只是期望异步请求时获取当前用户的登录态，可以通过发送跨域请求到已经登录过的域名，并配置属性：
+
+```
+xhrFields: {
+  withCredentials: true
+}
+```
+
+这样可在请求时携带目标域名的 Cookie，目标域名的服务即可识别当前用户。
+
+但是，这要求目标域名的接口支持 CORS 访问（出于安全考虑，CORS 开启 withCredentials 时，浏览器不支持使用通配符*，需明确设置可跨域访问的域名名单）。
+
+如果只是为了规避浏览器的限制，实现与通配*同样的效果，到达所有域名都可以访问的目的，可根据访问的 Referrer 解析请求来源域名，作为可访问名单。但是出于安全考虑，不推荐使用，请设置明确的可访问域名。
+
+##### 16.3.5 CAS
+
+CAS（Central Authentication Service），即中央认证服务，是 Yale 大学发起的一个开源项目，旨在为 Web 应用系统提供一种可靠的单点登录方法。
+
+既然不能跨域获取，那 CAS 如何做到共享呢？它通过跳转中间域名的方式来实现登录。
+
+页面访问流程如下图：
+
+![singleLogin008](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/singleLogin008.jpg)
+
+以下为连环画形式，期望能让读者更好的理解：
+
+![singleLogin009](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/singleLogin009.jpg)
+
+![singleLogin010](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/singleLogin010.jpg)
+
+![singleLogin011](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/singleLogin011.jpg)
+
+![singleLogin012](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/singleLogin012.jpg)
+
+![singleLogin013](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/singleLogin013.jpg)
+
+![singleLogin014](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/singleLogin014.jpg)
+
+![singleLogin015](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/singleLogin015.jpg)
+
+![singleLogin016](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/singleLogin016.jpg)
+
+![singleLogin017](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/singleLogin017.jpg)
+
+![singleLogin018](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/singleLogin018.jpg)
+
+![singleLogin019](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/singleLogin019.jpg)
+
+![singleLogin020](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/singleLogin020.jpg)
+
+![singleLogin021](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/singleLogin021.jpg)
+
+![singleLogin022](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/singleLogin022.jpg)
+
+![singleLogin023](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/singleLogin023.jpg)
+
+![singleLogin024](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/singleLogin024.jpg)
+
+![singleLogin025](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/singleLogin025.jpg)
+
+![singleLogin026](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/singleLogin026.jpg)
+
+![singleLogin027](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/singleLogin027.jpg)
+
+
+
