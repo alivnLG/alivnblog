@@ -178,7 +178,7 @@ Axios.prototype.request = function request(config) {
 
 ![axios007.jpg](http://alivnram-test.oss-cn-beijing.aliyuncs.com/alivnblog/axios007.jpg)
 
-### 3.4 任务调度
+#### 3.4 任务调度
 
 任务编排完成后，要发起 HTTP 请求，我们还需要按编排后的顺序执行任务调度。在 Axios 中具体的调度方式很简单，具体如下所示：
 
